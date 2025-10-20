@@ -26,6 +26,15 @@ export const Contact = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Helper function to create WhatsApp link
+  const createWhatsAppLink = (phoneNumber: string, message?: string) => {
+    const cleanPhone = phoneNumber.replace(/\s+/g, "").replace(/-/g, "");
+    const encodedMessage = message ? encodeURIComponent(message) : "";
+    return `https://wa.me/${cleanPhone}${
+      encodedMessage ? `?text=${encodedMessage}` : ""
+    }`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí irá la lógica de envío del formulario
@@ -54,6 +63,37 @@ export const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleContactMethodClick = (method: (typeof contactMethods)[0]) => {
+    switch (method.title) {
+      case "WhatsApp": {
+        const whatsappMessage =
+          "¡Hola! Me interesa conocer más sobre Buen Inventario. ¿Podrían darme más información?";
+        const whatsappLink = createWhatsAppLink(
+          method.contact,
+          whatsappMessage
+        );
+        window.open(whatsappLink, "_blank");
+        break;
+      }
+      case "Email": {
+        window.open(
+          `mailto:${method.contact}?subject=Consulta sobre Buen Inventario&body=Hola, me interesa conocer más sobre Buen Inventario. ¿Podrían contactarme?`,
+          "_blank"
+        );
+        break;
+      }
+      case "Videollamada": {
+        // Aquí podrías agregar un link a Calendly o similar
+        alert(
+          "Para agendar una demo personalizada, por favor contáctanos por WhatsApp o email."
+        );
+        break;
+      }
+      default:
+        break;
+    }
   };
 
   const contactMethods = [
@@ -209,7 +249,7 @@ export const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="+54 9 11 2277-5850"
+                      placeholder="+54 9 11 1234-5678"
                     />
                   </div>
                 </div>
@@ -275,7 +315,11 @@ export const Contact = () => {
                             {method.contact}
                           </p>
                         </div>
-                        <Button variant="outline" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleContactMethodClick(method)}
+                        >
                           {method.action}
                         </Button>
                       </div>

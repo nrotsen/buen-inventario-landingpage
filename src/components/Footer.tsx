@@ -9,16 +9,25 @@ import {
   Instagram,
   Linkedin,
   Youtube,
+  MessageSquare,
   Heart,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 
 export const Footer = () => {
+  // Helper function to create WhatsApp link
+  const createWhatsAppLink = (phoneNumber: string, message?: string) => {
+    const cleanPhone = phoneNumber.replace(/\s+/g, "").replace(/-/g, "");
+    const encodedMessage = message ? encodeURIComponent(message) : "";
+    return `https://wa.me/${cleanPhone}${
+      encodedMessage ? `?text=${encodedMessage}` : ""
+    }`;
+  };
+
   const quickLinks = [
     { label: "Inicio", id: "hero" },
     { label: "Características", id: "features" },
     { label: "Beneficios", id: "benefits" },
-    { label: "Precios", id: "pricing" },
     { label: "Contacto", id: "contact" },
   ];
 
@@ -50,6 +59,14 @@ export const Footer = () => {
   ];
 
   const socialLinks = [
+    {
+      icon: MessageSquare,
+      href: createWhatsAppLink(
+        "+54 9 11 2277-5850",
+        "¡Hola! Me interesa conocer más sobre Buen Inventario."
+      ),
+      label: "WhatsApp",
+    },
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Instagram, href: "#", label: "Instagram" },
@@ -87,11 +104,26 @@ export const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+54 9 11 2277-5850</span>
+                <a
+                  href={createWhatsAppLink(
+                    "+54 9 11 2277-5850",
+                    "¡Hola! Me interesa conocer más sobre Buen Inventario."
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary-400 transition-colors cursor-pointer"
+                >
+                  +54 9 11 2277-5850
+                </a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>hola@bueninventario.com</span>
+                <a
+                  href="mailto:hola@bueninventario.com?subject=Consulta sobre Buen Inventario&body=Hola, me interesa conocer más sobre Buen Inventario. ¿Podrían contactarme?"
+                  className="hover:text-primary-400 transition-colors cursor-pointer"
+                >
+                  hola@bueninventario.com
+                </a>
               </div>
             </div>
 
@@ -101,6 +133,8 @@ export const Footer = () => {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-300"
                 >
