@@ -19,7 +19,6 @@ export const Header = () => {
     { label: "Inicio", id: "hero" },
     { label: "Características", id: "features" },
     { label: "Beneficios", id: "benefits" },
-    { label: "Precios", id: "pricing" },
     { label: "Contacto", id: "contact" },
   ];
 

@@ -203,7 +203,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 **Equipo Buen Inventario**
 
 - Email: hola@bueninventario.com
-- WhatsApp: +54 9 11 1234-5678
+- WhatsApp: +54 9 11 2277-5850
 - LinkedIn: [Buen Inventario](https://linkedin.com/company/buen-inventario)
 
 ---

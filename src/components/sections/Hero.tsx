@@ -23,7 +23,7 @@ export const Hero = () => {
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-8 animate-fade-in">
             <Award className="h-4 w-4 text-yellow-300" />
             <span className="text-white text-sm font-medium">
-              #1 en Gestión de Inventarios para PYMES
+              Gestión de Inventarios para PYMES
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export const Hero = () => {
             </div>
             <div className="flex items-center space-x-2 text-white">
               <TrendingUp className="h-5 w-5 text-green-400" />
-              <span className="font-semibold">300% ROI Promedio</span>
+              <span className="font-semibold">Incrementa tu ROI Promedio</span>
             </div>
           </div>
 

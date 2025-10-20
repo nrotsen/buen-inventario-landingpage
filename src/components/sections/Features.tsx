@@ -2,12 +2,9 @@ import {
   Package,
   Globe,
   BarChart3,
-  Smartphone,
   Shield,
   Zap,
   Users,
-  CreditCard,
-  Bell,
   RefreshCw,
   TrendingUp,
   Store,
@@ -44,20 +41,6 @@ export const Features = () => {
       color: "text-green-600",
     },
     {
-      icon: Smartphone,
-      title: "App Móvil Nativa",
-      description:
-        "Gestiona tu inventario desde cualquier lugar con nuestra app móvil. Escanea códigos de barras y actualiza stock al instante.",
-      color: "text-orange-600",
-    },
-    {
-      icon: CreditCard,
-      title: "Pagos Integrados",
-      description:
-        "Acepta pagos con tarjeta, transferencias y efectivo. Integración completa con Mercado Pago y otros procesadores.",
-      color: "text-emerald-600",
-    },
-    {
       icon: Users,
       title: "Multi-usuario",
       description:
@@ -65,17 +48,10 @@ export const Features = () => {
       color: "text-indigo-600",
     },
     {
-      icon: Bell,
-      title: "Notificaciones Inteligentes",
-      description:
-        "Recibe alertas por WhatsApp, email o SMS sobre stock bajo, nuevos pedidos y métricas importantes.",
-      color: "text-red-600",
-    },
-    {
       icon: RefreshCw,
       title: "Sincronización en Tiempo Real",
       description:
-        "Todos tus dispositivos siempre actualizados. Cambios instantáneos entre la app, web y punto de venta.",
+        "Todos tus dispositivos siempre actualizados. Cambios instantáneos entre web, móvil responsive y punto de venta.",
       color: "text-cyan-600",
     },
     {

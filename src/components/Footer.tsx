@@ -87,7 +87,7 @@ export const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+54 9 11 1234-5678</span>
+                <span>+54 9 11 2277-5850</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
@@ -167,7 +167,7 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        {/* <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="lg:w-1/2">
               <h3 className="text-xl font-semibold mb-4 font-heading">
@@ -191,7 +191,7 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
+         </div> */}
       </div>
 
       {/* Bottom Footer */}

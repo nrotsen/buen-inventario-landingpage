@@ -23,7 +23,6 @@ export const Contact = () => {
     company: "",
     phone: "",
     message: "",
-    plan: "professional",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -42,7 +41,6 @@ export const Contact = () => {
         company: "",
         phone: "",
         message: "",
-        plan: "professional",
       });
     }, 3000);
   };
@@ -63,7 +61,7 @@ export const Contact = () => {
       icon: MessageSquare,
       title: "WhatsApp",
       description: "Respuesta inmediata",
-      contact: "+54 9 11 1234-5678",
+      contact: "+54 9 11 2277-5850",
       action: "Chatear ahora",
       color: "from-green-500 to-emerald-500",
     },
@@ -211,27 +209,9 @@ export const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="+54 9 11 1234-5678"
+                      placeholder="+54 9 11 2277-5850"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Plan de interés
-                  </label>
-                  <select
-                    name="plan"
-                    value={formData.plan}
-                    onChange={handleInputChange}
-                    className="w-full h-12 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  >
-                    <option value="starter">Starter - $99/mes</option>
-                    <option value="professional">
-                      Professional - $199/mes
-                    </option>
-                    <option value="enterprise">Enterprise - $399/mes</option>
-                  </select>
                 </div>
 
                 <div>
@@ -346,7 +326,7 @@ export const Contact = () => {
                   <div className="flex items-center space-x-3">
                     <Phone className="h-4 w-4 text-gray-600" />
                     <span className="text-sm text-gray-700">
-                      +54 9 11 1234-5678
+                      +54 9 11 2277 5850
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">

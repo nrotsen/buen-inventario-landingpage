@@ -97,7 +97,7 @@ export const Benefits = () => {
     {
       aspect: "Costo mensual",
       traditional: "$500+ por herramienta",
-      buenInventario: "Todo incluido desde $99",
+      buenInventario: "Todo incluido, precio accesible",
       icon: DollarSign,
     },
     {
