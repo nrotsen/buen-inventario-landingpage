@@ -1,4 +1,6 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import {
   Mail,
   Phone,
@@ -15,7 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-//Deploy
+
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,6 +27,9 @@ export const Contact = () => {
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   // Helper function to create WhatsApp link
   const createWhatsAppLink = (phoneNumber: string, message?: string) => {
@@ -35,15 +40,43 @@ export const Contact = () => {
     }`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí irá la lógica de envío del formulario
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
+    if (!executeRecaptcha) {
+      console.error("ReCAPTCHA no está disponible todavía.");
+      alert("Error al cargar reCAPTCHA. Intenta nuevamente.");
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      // Ejecutar reCAPTCHA
+      const token = await executeRecaptcha("contact_form");
+
+      // Enviar email con EmailJS
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+        {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          message: formData.message,
+          "g-recaptcha-response": token,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
+      );
+
+      console.log("✅ Email enviado correctamente.");
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("❌ Error al enviar el mensaje:", error);
+      alert("Ocurrió un error al enviar el mensaje. Intenta nuevamente.");
+    } finally {
+      setIsSending(false);
       setFormData({
         name: "",
         email: "",
@@ -51,7 +84,7 @@ export const Contact = () => {
         phone: "",
         message: "",
       });
-    }, 3000);
+    }
   };
 
   const handleInputChange = (
@@ -85,7 +118,6 @@ export const Contact = () => {
         break;
       }
       case "Videollamada": {
-        // Aquí podrías agregar un link a Calendly o similar
         alert(
           "Para agendar una demo personalizada, por favor contáctanos por WhatsApp o email."
         );
@@ -176,7 +208,6 @@ export const Contact = () => {
       className="py-20 bg-gradient-to-br from-primary-600 to-accent-500"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-heading">
             ¿Listo para comenzar?
@@ -270,10 +301,17 @@ export const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
+                  disabled={isSending}
                   className="w-full bg-gradient-to-r from-primary-600 to-accent-500"
                 >
-                  <Send className="mr-2 h-5 w-5" />
-                  Comenzar prueba gratuita ahora
+                  {isSending ? (
+                    "Enviando..."
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-5 w-5" />
+                      Comenzar prueba gratuita ahora
+                    </>
+                  )}
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center">
@@ -286,7 +324,6 @@ export const Contact = () => {
 
           {/* Contact Methods & Benefits */}
           <div className="space-y-8">
-            {/* Contact Methods */}
             <div>
               <h3 className="text-2xl font-bold text-white mb-6 font-heading">
                 Otras formas de contacto
