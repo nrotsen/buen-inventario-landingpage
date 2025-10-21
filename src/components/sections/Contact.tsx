@@ -52,6 +52,15 @@ export const Contact = () => {
     setIsSending(true);
 
     try {
+      // Verificar que las variables de entorno estén configuradas
+      if (
+        !import.meta.env.VITE_EMAILJS_SERVICE_ID ||
+        !import.meta.env.VITE_EMAILJS_TEMPLATE_ID ||
+        !import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      ) {
+        throw new Error("Variables de entorno de EmailJS no configuradas");
+      }
+
       // Ejecutar reCAPTCHA
       const token = await executeRecaptcha("contact_form");
 
@@ -72,9 +81,46 @@ export const Contact = () => {
 
       console.log("✅ Email enviado correctamente.");
       setIsSubmitted(true);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("❌ Error al enviar el mensaje:", error);
-      alert("Ocurrió un error al enviar el mensaje. Intenta nuevamente.");
+
+      // Manejo específico de errores de EmailJS
+      let errorMessage =
+        "Ocurrió un error al enviar el mensaje. Intenta nuevamente.";
+
+      if (
+        error instanceof Error &&
+        error.message === "Variables de entorno de EmailJS no configuradas"
+      ) {
+        errorMessage =
+          "Error de configuración: Las variables de entorno no están configuradas. Contacta al administrador.";
+      } else if (
+        typeof error === "object" &&
+        error !== null &&
+        "status" in error
+      ) {
+        const emailjsError = error as { status: number; text?: string };
+        if (emailjsError.status === 400) {
+          if (emailjsError.text?.includes("template ID not found")) {
+            errorMessage =
+              "Error de configuración: Template no encontrado. Contacta al administrador.";
+          } else if (emailjsError.text?.includes("service ID not found")) {
+            errorMessage =
+              "Error de configuración: Servicio no encontrado. Contacta al administrador.";
+          } else if (emailjsError.text?.includes("public key")) {
+            errorMessage =
+              "Error de configuración: Clave pública inválida. Contacta al administrador.";
+          }
+        } else if (emailjsError.status === 429) {
+          errorMessage =
+            "Demasiadas solicitudes. Espera un momento antes de intentar nuevamente.";
+        } else if (emailjsError.status === 500) {
+          errorMessage =
+            "Error del servidor. Intenta nuevamente en unos minutos.";
+        }
+      }
+
+      alert(errorMessage);
     } finally {
       setIsSending(false);
       setFormData({
