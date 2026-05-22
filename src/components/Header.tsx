@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Package, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import { scrollToSection } from "@/lib/utils";
+import { signupUrl } from "@/lib/config";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,7 +84,7 @@ export const Header = () => {
             <Button
               variant="gradient"
               size="default"
-              onClick={() => scrollToSection("contact")}
+              onClick={() => { window.location.href = signupUrl(); }}
             >
               Comenzar Gratis
             </Button>
@@ -126,7 +127,7 @@ export const Header = () => {
                   variant="gradient"
                   size="default"
                   className="w-full"
-                  onClick={() => handleMenuClick("contact")}
+                  onClick={() => { setIsMenuOpen(false); window.location.href = signupUrl(); }}
                 >
                   Comenzar Gratis
                 </Button>

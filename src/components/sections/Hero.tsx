@@ -1,6 +1,7 @@
 import { ArrowRight, Play, Star, Users, Award, TrendingUp } from "lucide-react";
 import { Button } from "../ui/button";
 import { scrollToSection } from "@/lib/utils";
+import { signupUrl } from "@/lib/config";
 
 export const Hero = () => {
   return (
@@ -65,7 +66,7 @@ export const Hero = () => {
               variant="default"
               size="xl"
               className="bg-white text-primary-600 hover:bg-gray-100 shadow-2xl"
-              onClick={() => scrollToSection("contact")}
+              onClick={() => { window.location.href = signupUrl(); }}
             >
               Comenzar Gratis Ahora
               <ArrowRight className="ml-2 h-5 w-5" />
