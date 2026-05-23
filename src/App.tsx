@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/sections/Hero";
 import { Features } from "./components/sections/Features";
 import { Benefits } from "./components/sections/Benefits";
+import { Pricing } from "./components/sections/Pricing";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/Footer";
 
@@ -41,6 +42,7 @@ function App() {
         <Hero />
         <Features />
         <Benefits />
+        <Pricing />
         <Contact />
       </main>
       <Footer />
