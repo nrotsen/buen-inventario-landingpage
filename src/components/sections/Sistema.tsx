@@ -86,8 +86,8 @@ export function Sistema() {
           <Button as="a" href={signupUrl()} variant="inverted" size="lg" className="sm:min-w-[200px]">
             Probalo gratis <span className="font-mono">→</span>
           </Button>
-          <Button as="a" href="#precio" variant="ghost-on-dark" size="lg" className="sm:min-w-[200px]">
-            Ver el precio
+          <Button as="a" href="#faq" variant="ghost-on-dark" size="lg" className="sm:min-w-[200px]">
+            Ver las dudas comunes
           </Button>
         </div>
         <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.06em] text-paper/55">
