@@ -61,7 +61,7 @@ export function Sistema() {
       <div className="mt-20 flex flex-col gap-24">
         {CAPTURES.map((c) => (
           <div key={c.num} className="text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-teal-500">
+            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-teal-500/85">
               {c.num} · {c.label}
             </p>
             <h3 className="editorial-display text-[26px] md:text-[34px] leading-tight mt-2.5 text-paper">
