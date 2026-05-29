@@ -1,141 +1,64 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Package, Zap } from "lucide-react";
-import { Button } from "./ui/button";
-import { scrollToSection } from "@/lib/utils";
-import { signupUrl } from "@/lib/config";
+import { useState } from 'react';
+import { Menu } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { MobileMenu } from '@/components/MobileMenu';
+import { signupUrl } from '@/lib/config';
 
-export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+const NAV = [
+  { label: 'Historia', href: '#historia' },
+  { label: 'Excel',    href: '#excel'    },
+  { label: 'Sistema',  href: '#sistema'  },
+  { label: 'Precio',   href: '#precio'   },
+  { label: 'FAQ',      href: '#faq'      },
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const menuItems = [
-    { label: "Inicio", id: "hero" },
-    { label: "Características", id: "features" },
-    { label: "Beneficios", id: "benefits" },
-    { label: "Contacto", id: "contact" },
-  ];
-
-  const handleMenuClick = (id: string) => {
-    setIsMenuOpen(false);
-    scrollToSection(id);
-  };
+export function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div
-            className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => scrollToSection("hero")}
-          >
-            <div className="relative">
-              <Package
-                className={`h-8 w-8 transition-colors ${
-                  isScrolled ? "text-primary-600" : "text-white"
-                }`}
-              />
-              <Zap
-                className={`h-4 w-4 absolute -top-1 -right-1 transition-colors ${
-                  isScrolled ? "text-accent-500" : "text-primary-300"
-                }`}
-              />
-            </div>
-            <span
-              className={`text-xl font-bold font-heading transition-colors ${
-                isScrolled ? "gradient-text" : "text-white"
-              }`}
-            >
-              Buen Inventario
-            </span>
-          </div>
+    <>
+      <header className="sticky top-0 z-50 bg-paper/92 backdrop-blur border-b-hard border-ink">
+        <div className="max-w-container mx-auto px-6 md:px-10 h-16 md:h-[76px] flex items-center justify-between gap-6">
+          <a href="#hero" className="flex items-center gap-2.5 shrink-0">
+            <img
+              src="/bueninventario-logo.png"
+              alt="Buen Inventario"
+              width="32"
+              height="32"
+              className="w-7 h-7 md:w-8 md:h-8"
+            />
+            <span className="editorial-display text-[18px] md:text-[20px] text-ink">Buen Inventario</span>
+          </a>
 
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleMenuClick(item.id)}
-                className={`font-medium transition-colors hover:text-primary-600 ${
-                  isScrolled ? "text-gray-700" : "text-white"
-                }`}
+          <nav className="hidden md:flex gap-7">
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-body-md text-ink hover:text-teal-700 transition-colors duration-150"
               >
                 {item.label}
-              </button>
+              </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button
-              variant="gradient"
-              size="default"
-              onClick={() => { window.location.href = signupUrl(); }}
-            >
-              Comenzar Gratis
+          <div className="flex items-center gap-2">
+            <Button as="a" href={signupUrl()} variant="primary" size="md" className="!h-9 !px-4 !text-[13px]">
+              Probalo gratis <span className="font-mono">→</span>
             </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-md transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:bg-gray-100"
-                  : "text-white hover:bg-white/10"
-              }`}
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Abrir menú"
+              className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-ink"
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              <Menu className="w-6 h-6" strokeWidth={1.5} />
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-200/50 rounded-b-lg shadow-lg">
-              {menuItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleMenuClick(item.id)}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary-600 font-medium"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <div className="pt-2">
-                <Button
-                  variant="gradient"
-                  size="default"
-                  className="w-full"
-                  onClick={() => { setIsMenuOpen(false); window.location.href = signupUrl(); }}
-                >
-                  Comenzar Gratis
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} items={NAV} />
+    </>
   );
-};
+}
