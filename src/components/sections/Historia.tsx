@@ -32,6 +32,12 @@ export function Historia() {
         <p className="mt-6 editorial-micro">
           Don Néstor Despensa · Almacén de barrio · Argentina
         </p>
+
+        <div className="mx-auto mt-20 md:mt-[100px] w-[60px] h-px bg-teal-700/60" aria-hidden="true" />
+        <p className="mt-6 editorial-micro">También lo usan</p>
+        <p className="mt-3 text-body-sm text-text-muted leading-relaxed max-w-[48ch] mx-auto">
+          Kioscos · Despensas · Ferreterías · Papeleras · Químicas · Regalerías · Comercios multisucursal
+        </p>
       </div>
     </Section>
   );
