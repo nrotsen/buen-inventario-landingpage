@@ -1,59 +1,63 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
-import { cn } from "@/lib/utils";
+type Variant = 'primary' | 'ghost' | 'inverted' | 'ghost-on-dark';
+type Size = 'md' | 'lg';
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
-        destructive: "bg-red-500 text-white hover:bg-red-600",
-        outline:
-          "border-2 border-primary-600 text-primary-600 bg-transparent hover:bg-primary-50",
-        secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        gradient:
-          "bg-gradient-to-r from-primary-600 to-accent-500 text-white hover:from-primary-700 hover:to-accent-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
-      },
-      size: {
-        default: "h-12 px-6 py-3",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-14 rounded-lg px-8 text-base",
-        xl: "h-16 rounded-xl px-10 text-lg",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
+const baseClasses =
+  'inline-flex items-center justify-center gap-2 border-hard rounded-md font-medium transition-colors duration-200 ease-editorial whitespace-nowrap select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:opacity-50 disabled:pointer-events-none';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
+const variantClasses: Record<Variant, string> = {
+  primary:
+    'bg-ink text-paper border-ink hover:bg-teal-500 hover:border-teal-500',
+  ghost:
+    'bg-transparent text-ink border-ink hover:bg-ink hover:text-paper',
+  inverted:
+    'bg-paper text-ink border-paper hover:bg-teal-500 hover:border-teal-500 hover:text-paper',
+  'ghost-on-dark':
+    'bg-transparent text-paper border-paper/40 hover:bg-paper/10 hover:border-paper',
+};
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+const sizeClasses: Record<Size, string> = {
+  md: 'h-11 px-5 text-[14px]',
+  lg: 'h-[52px] px-7 text-[15px]',
+};
+
+type CommonProps = {
+  variant?: Variant;
+  size?: Size;
+  children: ReactNode;
+  className?: string;
+};
+
+type ButtonAsButton = CommonProps & {
+  as?: 'button';
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>;
+
+type ButtonAsAnchor = CommonProps & {
+  as: 'a';
+  href: string;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof CommonProps | 'href'>;
+
+export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
+
+export function Button(props: ButtonProps) {
+  const { variant = 'primary', size = 'md', className, children } = props;
+  const classes = cn(baseClasses, variantClasses[variant], sizeClasses[size], className);
+
+  if (props.as === 'a') {
+    const { as: _as, variant: _v, size: _s, className: _c, children: _ch, ...rest } = props;
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <a {...rest} className={classes}>
+        {children}
+      </a>
     );
   }
-);
-Button.displayName = "Button";
 
-export { Button };
-// export { buttonVariants };
+  const { as: _as, variant: _v, size: _s, className: _c, children: _ch, ...rest } = props;
+  return (
+    <button {...rest} className={classes}>
+      {children}
+    </button>
+  );
+}
