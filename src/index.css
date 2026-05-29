@@ -79,7 +79,7 @@
   .faq-toggle summary { list-style: none; }
   .faq-toggle summary::-webkit-details-marker { display: none; }
   .faq-toggle .faq-icon { transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1); }
-  .faq-toggle[open] .faq-icon { transform: rotate(45deg); }
+  .faq-toggle[open] .faq-icon { transform: rotate(90deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
