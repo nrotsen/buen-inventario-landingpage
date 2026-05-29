@@ -1,49 +1,49 @@
-import { useEffect } from "react";
-import { Header } from "./components/Header";
-import { Hero } from "./components/sections/Hero";
-import { Features } from "./components/sections/Features";
-import { Benefits } from "./components/sections/Benefits";
-import { Pricing } from "./components/sections/Pricing";
-import { Contact } from "./components/sections/Contact";
-import { Footer } from "./components/Footer";
+import { useEffect } from 'react';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { Hero } from '@/components/sections/Hero';
+import { Historia } from '@/components/sections/Historia';
+import { Excel } from '@/components/sections/Excel';
+import { Sistema } from '@/components/sections/Sistema';
+import { Precio } from '@/components/sections/Precio';
+import { Faq } from '@/components/sections/Faq';
 
 function App() {
   useEffect(() => {
-    // Smooth scrolling for the entire document
-    document.documentElement.style.scrollBehavior = "smooth";
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
 
-    // Add intersection observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animate-fade-in-up");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
         }
-      });
-    }, observerOptions);
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
 
-    // Observe all sections
-    const sections = document.querySelectorAll("section");
-    sections.forEach((section) => observer.observe(section));
+    const targets = document.querySelectorAll('section.reveal-on-scroll');
+    targets.forEach((el) => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
 
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper text-ink">
       <Header />
       <main>
         <Hero />
-        <Features />
-        <Benefits />
-        <Pricing />
-        <Contact />
+        <Historia />
+        <Excel />
+        <Sistema />
+        <Precio />
+        <Faq />
       </main>
       <Footer />
     </div>
