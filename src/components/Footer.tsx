@@ -59,7 +59,7 @@ export function Footer() {
                   href={mailtoLink()}
                   className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
-                  hola@bueninventario.com
+                  nestorb@bueninventario.com
                 </a>
               </li>
               <li>
