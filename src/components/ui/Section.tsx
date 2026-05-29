@@ -36,7 +36,11 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn('py-24 md:py-36 px-6 md:px-10', toneClasses[tone], className)}
+      className={cn(
+        'scroll-mt-20 md:scroll-mt-24 py-24 md:py-36 px-6 md:px-10',
+        toneClasses[tone],
+        className
+      )}
     >
       <div className={cn('mx-auto w-full', widthClasses[width], innerClassName)}>
         {children}
