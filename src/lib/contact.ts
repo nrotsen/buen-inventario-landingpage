@@ -1,6 +1,8 @@
 const WHATSAPP_NUMBER = '5491122775850';
 const EMAIL = 'hola@bueninventario.com';
 const INSTAGRAM_HANDLE = 'bueninventario';
+const FACEBOOK_HANDLE = 'bueninventario';
+const TIKTOK_URL = 'https://www.tiktok.com';
 
 export function whatsappLink(message?: string): string {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -20,8 +22,18 @@ export function instagramLink(): string {
   return `https://instagram.com/${INSTAGRAM_HANDLE}`;
 }
 
+export function facebookLink(): string {
+  return `https://facebook.com/${FACEBOOK_HANDLE}`;
+}
+
+export function tiktokLink(): string {
+  return TIKTOK_URL;
+}
+
 export const CONTACT = {
   whatsapp: WHATSAPP_NUMBER,
   email: EMAIL,
   instagram: INSTAGRAM_HANDLE,
+  facebook: FACEBOOK_HANDLE,
+  tiktok: TIKTOK_URL,
 } as const;
