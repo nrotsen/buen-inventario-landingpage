@@ -1,4 +1,4 @@
-import { whatsappLink, mailtoLink, instagramLink } from '@/lib/contact';
+import { whatsappLink, mailtoLink, instagramLink, facebookLink, tiktokLink } from '@/lib/contact';
 
 const PRODUCT_LINKS = [
   { label: 'Cómo funciona',         href: '#sistema'  },
@@ -70,6 +70,26 @@ export function Footer() {
                   className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
                   Instagram @bueninventario
+                </a>
+              </li>
+              <li>
+                <a
+                  href={facebookLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
+                >
+                  Facebook /bueninventario
+                </a>
+              </li>
+              <li>
+                <a
+                  href={tiktokLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
+                >
+                  TikTok (próximamente)
                 </a>
               </li>
             </ul>
