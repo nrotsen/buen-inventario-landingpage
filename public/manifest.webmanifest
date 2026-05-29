@@ -1,0 +1,21 @@
+{
+  "name": "Buen Inventario",
+  "short_name": "Buen Inventario",
+  "description": "Sistema de gestión para almacenes y comercios chicos de Argentina.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fafaf7",
+  "theme_color": "#fafaf7",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/bueninventario-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
