@@ -46,12 +46,8 @@ export function ExcelComparison() {
     <Section id="comparativa" tone="paper" width="editorial">
       <div className="max-w-[720px]">
         <EditorialMicro>La diferencia</EditorialMicro>
-        <DisplayHeading
-          level={2}
-          italicAccent={<>no alcanza</>}
-          className="mt-5 max-w-[18ch]"
-        >
-          ¿Por qué
+        <DisplayHeading level={2} className="mt-5 max-w-[20ch]">
+          ¿Por qué <em className="editorial-italic text-teal-500">no alcanza</em> con Excel?
         </DisplayHeading>
         <p className="mt-6 text-body-lg text-ink/75 max-w-[56ch] leading-relaxed">
           Lo mismo que ya hacés a mano, hecho una sola vez y bien — sin discusión, sin recalcular, sin perderte cosas en el camino.
