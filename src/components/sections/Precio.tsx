@@ -3,55 +3,45 @@ import { Button } from '@/components/ui/Button';
 import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
 import { signupUrl } from '@/lib/config';
-
-const FEATURES = [
-  'Stock + Caja + Clientes + Proveedores',
-  'Multi-user (admins, managers, empleados)',
-  'Mi Web — tienda online incluida',
-  'Analíticas + Métricas',
-  'Aceptás Mercado Pago en tu comercio',
-  'Soporte por email y WhatsApp',
-];
+import { whatsappLink } from '@/lib/contact';
 
 export function Precio() {
   return (
     <Section id="precio" tone="paper" width="reading" innerClassName="text-center">
-      <EditorialMicro>Plan único</EditorialMicro>
-      <DisplayHeading level={2} italicAccent={<>todo incluido.</>} className="mt-5">
-        Un precio,
+      <EditorialMicro>El precio</EditorialMicro>
+      <DisplayHeading
+        level={2}
+        italicAccent={<>de plata.</>}
+        className="mt-5 max-w-[18ch] mx-auto"
+      >
+        Cuando estés convencido,
+        <br />
+        hablamos
       </DisplayHeading>
-      <p className="mt-6 text-body-lg text-ink/75 max-w-[44ch] mx-auto leading-relaxed">
-        Sin tiers, sin add-ons, sin sorpresas en el resumen de la tarjeta. Lo que ves es lo que pagás.
+
+      <p className="mt-8 text-body-lg text-ink/75 max-w-[52ch] mx-auto leading-relaxed">
+        Tenés 30 días para probar todo. Sin tarjeta, sin compromiso, sin letra chica. Si te sirve, te paso el precio. Si no te sirve, no te debo nada y se acabó.
       </p>
 
-      <div className="mt-16 mx-auto max-w-[440px] bg-surface border-hard border-ink rounded-md shadow-offset-md p-10">
-        <div className="pb-7 border-b-hard border-ink">
-          <EditorialMicro>Plan Standard</EditorialMicro>
-          <p className="editorial-display text-[64px] md:text-[76px] leading-none tracking-[-0.02em] mt-3">
-            $14.900<span className="font-mono text-[22px] text-text-muted tracking-normal"> / mes</span>
-          </p>
-          <EditorialMicro className="mt-3">ARS · Renueva automáticamente</EditorialMicro>
-        </div>
-
-        <ul className="mt-7 space-y-2 text-left">
-          {FEATURES.map((f) => (
-            <li key={f} className="flex items-start gap-3 text-body-md text-ink/85 leading-relaxed">
-              <span className="font-mono text-teal-700 font-medium mt-0.5">✓</span>
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-
-        <Button as="a" href={signupUrl()} variant="primary" size="lg" className="mt-9 w-full">
-          Empezá 30 días gratis <span className="font-mono">→</span>
+      <div className="mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4 sm:justify-center">
+        <Button as="a" href={signupUrl()} variant="primary" size="lg" className="sm:min-w-[200px]">
+          Probalo gratis <span className="font-mono">→</span>
         </Button>
-        <p className="mt-3.5 font-mono text-[11px] uppercase tracking-[0.06em] text-text-muted">
-          Sin tarjeta · Cancelás cuando quieras
-        </p>
+        <Button
+          as="a"
+          href={whatsappLink('Hola Néstor, quiero saber el precio de Buen Inventario.')}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="ghost"
+          size="lg"
+          className="sm:min-w-[200px]"
+        >
+          Escribime por WhatsApp
+        </Button>
       </div>
 
-      <p className="mt-10 text-body-sm text-text-muted max-w-[40ch] mx-auto leading-relaxed">
-        Sin contrato, sin permanencia. Cancelás desde el panel y se acabó.
+      <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.06em] text-text-muted">
+        Sin tarjeta · Sin compromiso · Sin letra chica
       </p>
     </Section>
   );
