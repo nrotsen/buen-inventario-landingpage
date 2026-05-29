@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = '5491122775850';
-const EMAIL = 'hola@bueninventario.com';
+const EMAIL = 'nestorb@bueninventario.com';
 const INSTAGRAM_HANDLE = 'bueninventario';
 const FACEBOOK_HANDLE = 'bueninventario';
 const TIKTOK_URL = 'https://www.tiktok.com';
