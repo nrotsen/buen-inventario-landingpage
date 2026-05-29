@@ -5,11 +5,11 @@ import { MobileMenu } from '@/components/MobileMenu';
 import { signupUrl } from '@/lib/config';
 
 const NAV = [
-  { label: 'Historia', href: '#historia' },
-  { label: 'Excel',    href: '#excel'    },
-  { label: 'Sistema',  href: '#sistema'  },
-  { label: 'Precio',   href: '#precio'   },
-  { label: 'FAQ',      href: '#faq'      },
+  { label: 'Historia',    href: '#historia'    },
+  { label: 'Diagnóstico', href: '#diagnostico' },
+  { label: 'Sistema',     href: '#sistema'     },
+  { label: 'Precio',      href: '#precio'      },
+  { label: 'FAQ',         href: '#faq'         },
 ];
 
 export function Header() {
