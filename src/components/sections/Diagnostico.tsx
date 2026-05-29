@@ -50,9 +50,9 @@ const ITEMS: Item[] = [
   },
 ];
 
-export function Excel() {
+export function Diagnostico() {
   return (
-    <Section id="excel" tone="paper" width="editorial">
+    <Section id="diagnostico" tone="paper" width="editorial">
       <EditorialMicro>El diagnóstico</EditorialMicro>
       <DisplayHeading level={2} italicAccent={<>no te puede decir.</>} className="mt-5 max-w-[16ch]">
         Lo que el Excel

@@ -3,7 +3,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Historia } from '@/components/sections/Historia';
-import { Excel } from '@/components/sections/Excel';
+import { Diagnostico } from '@/components/sections/Diagnostico';
 import { Sistema } from '@/components/sections/Sistema';
 import { Precio } from '@/components/sections/Precio';
 import { Faq } from '@/components/sections/Faq';
@@ -40,7 +40,7 @@ function App() {
       <main>
         <Hero />
         <Historia />
-        <Excel />
+        <Diagnostico />
         <Sistema />
         <Precio />
         <Faq />
