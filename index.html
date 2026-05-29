@@ -2,42 +2,90 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fafaf7" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preload" href="/fonts/dmserif-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <title>Buen Inventario — Recuperá el control de tu comercio</title>
     <meta
       name="description"
-      content="Buen Inventario - La plataforma todo-en-uno que transforma la gestión de inventario de las PYMES. Control de stock, tienda online y más."
+      content="Sistema de gestión para almacenes y comercios chicos de Argentina. Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
     />
     <meta
       name="keywords"
-      content="inventario, gestión, PYMES, tienda online, control de stock, Argentina"
+      content="sistema gestion almacen, software comercio argentina, control stock argentina, gestion kiosco, sistema despensa"
     />
     <meta name="author" content="Buen Inventario" />
+    <link rel="canonical" href="https://www.bueninventario.com" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Buen Inventario - Gestión de Inventario para PYMES"
-    />
+    <meta property="og:url" content="https://www.bueninventario.com" />
+    <meta property="og:title" content="Buen Inventario — Recuperá el control de tu comercio" />
     <meta
       property="og:description"
-      content="La plataforma todo-en-uno que transforma la gestión de inventario de las PYMES. Control de stock, tienda online y más."
+      content="Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
     />
+    <meta property="og:image" content="https://www.bueninventario.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
     <meta property="og:site_name" content="Buen Inventario" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.bueninventario.com" />
+    <meta name="twitter:title" content="Buen Inventario — Recuperá el control de tu comercio" />
     <meta
-      property="twitter:title"
-      content="Buen Inventario - Gestión de Inventario para PYMES"
+      name="twitter:description"
+      content="Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
     />
-    <meta
-      property="twitter:description"
-      content="La plataforma todo-en-uno que transforma la gestión de inventario de las PYMES. Control de stock, tienda online y más."
-    />
+    <meta name="twitter:image" content="https://www.bueninventario.com/og-image.png" />
 
-    <title>Buen Inventario - Gestión de Inventario para PYMES</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Buen Inventario",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Sistema de gestión para almacenes y comercios chicos de Argentina.",
+        "offers": {
+          "@type": "Offer",
+          "price": "14900",
+          "priceCurrency": "ARS",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Buen Inventario",
+        "url": "https://www.bueninventario.com",
+        "logo": "https://www.bueninventario.com/bueninventario-logo.png",
+        "sameAs": ["https://instagram.com/bueninventario"]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "GroceryStore",
+        "name": "Don Néstor Despensa",
+        "description": "Almacén de barrio en Argentina donde se usa Buen Inventario todos los días.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "AR"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
