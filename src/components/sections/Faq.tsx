@@ -27,6 +27,10 @@ const QAS: Qa[] = [
     q: '¿Funciona si se cae internet?',
     a: 'Sigue funcionando en el navegador con los últimos datos cargados. Cuando vuelve internet, sincroniza solo.',
   },
+  {
+    q: '¿Sirve solo para almacenes y kioscos?',
+    a: 'No. Lo armé para mi almacén pero hoy lo usan también ferreterías, papeleras, químicas, regalerías y cualquier comercio chico que venda productos por unidad. También funciona para multisucursal (feature en desarrollo). Si tu negocio maneja stock, ventas y cuentas, te sirve.',
+  },
 ];
 
 export function Faq() {
