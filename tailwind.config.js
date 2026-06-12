@@ -41,6 +41,7 @@ export default {
         "offset-lg": "8px 8px 0 0 #14b8a6",
         "offset-md": "6px 6px 0 0 #14b8a6",
         "offset-sm": "4px 4px 0 0 #14b8a6",
+        "offset-xs": "2px 2px 0 0 #14b8a6",
       },
       borderRadius: {
         sm: "2px",
