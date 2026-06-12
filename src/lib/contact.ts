@@ -30,6 +30,15 @@ export function tiktokLink(): string {
   return TIKTOK_URL;
 }
 
+/**
+ * Mensaje canónico para el botón "Solicitar demo" del Hero. Vive acá (no
+ * inline en el componente) porque el copy de mensajes pre-poblados es
+ * single-source-of-truth — si mañana se agrega el CTA en otra sección,
+ * referenciar esta constante en vez de duplicar.
+ */
+export const DEMO_REQUEST_MESSAGE =
+  'Hola Néstor, quiero agendar una demo de Buen Inventario. Me contás cómo es?';
+
 export const CONTACT = {
   whatsapp: WHATSAPP_NUMBER,
   email: EMAIL,

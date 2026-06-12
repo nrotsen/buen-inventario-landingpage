@@ -5,6 +5,7 @@ import { EditorialMicro } from '@/components/ui/EditorialMicro';
 import { BrowserFrame } from '@/components/ui/BrowserFrame';
 import { AnalyticsFakeScreen } from '@/components/ui/fake-screens/AnalyticsFakeScreen';
 import { signupUrl } from '@/lib/config';
+import { whatsappLink, DEMO_REQUEST_MESSAGE } from '@/lib/contact';
 
 export function Hero() {
   return (
@@ -22,8 +23,16 @@ export function Hero() {
             <Button as="a" href={signupUrl()} variant="primary" size="lg">
               Probalo gratis <span className="font-mono">→</span>
             </Button>
-            <Button as="a" href="#sistema" variant="ghost" size="lg">
-              Ver cómo funciona
+            <Button
+              as="a"
+              href={whatsappLink(DEMO_REQUEST_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="ghost"
+              size="lg"
+              aria-label="Solicitar demo por WhatsApp"
+            >
+              Solicitar demo
             </Button>
           </div>
           <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.06em] text-text-muted leading-relaxed">
