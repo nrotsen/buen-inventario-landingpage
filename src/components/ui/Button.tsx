@@ -1,15 +1,20 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type Variant = 'primary' | 'ghost' | 'inverted' | 'ghost-on-dark';
+type Variant = 'primary' | 'ghost' | 'ghost-accent' | 'inverted' | 'ghost-on-dark';
 type Size = 'md' | 'lg';
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 border-hard rounded-md font-medium transition-colors duration-200 ease-editorial whitespace-nowrap select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50';
+  'inline-flex items-center justify-center gap-2 border-hard rounded-md font-medium transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-editorial whitespace-nowrap select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50';
 
 const variantClasses: Record<Variant, string> = {
   primary: 'bg-ink text-paper border-ink hover:bg-teal-500 hover:border-teal-500',
   ghost: 'bg-transparent text-ink border-ink hover:bg-ink hover:text-paper',
+  'ghost-accent':
+    'bg-transparent text-ink border-ink shadow-offset-sm -translate-x-0.5 -translate-y-0.5 ' +
+    'hover:bg-ink hover:text-paper hover:translate-x-0 hover:translate-y-0 hover:shadow-offset-xs ' +
+    'active:bg-ink active:text-paper active:translate-x-0 active:translate-y-0 active:shadow-offset-xs ' +
+    'motion-reduce:transition-none',
   inverted: 'bg-paper text-ink border-paper hover:bg-teal-500 hover:border-teal-500 hover:text-paper',
   'ghost-on-dark': 'bg-transparent text-paper border-paper/40 hover:bg-paper/10 hover:border-paper',
 };
