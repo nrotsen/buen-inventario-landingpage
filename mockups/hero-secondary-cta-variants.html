@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hero Secondary CTA — variantes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #fafaf7;
+    --cream: #f4f1e8;
+    --surface: #ffffff;
+    --teal-50: #effbf9;
+    --teal-500: #14b8a6;
+    --teal-600: #0d9488;
+    --teal-700: #0f766e;
+    --text-muted: #6b6b66;
+    --border-subtle: #e8e6dd;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 32px 120px;
+  }
+  .page-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 28px;
+    margin: 0 0 8px;
+  }
+  .page-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+
+  /* Hero card — replica del Hero real con cada variante */
+  .hero {
+    background: var(--paper);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 56px 56px 48px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .variant-tag {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    background: var(--cream);
+    border: 1px solid var(--border-subtle);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .variant-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teal-700);
+    margin-bottom: 4px;
+  }
+  .variant-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .editorial-micro {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  h1.display {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 56px;
+    line-height: 60px;
+    letter-spacing: -0.01em;
+    margin: 20px 0 0;
+    font-weight: 400;
+  }
+  h1.display em {
+    font-style: italic;
+    color: var(--teal-700);
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(10,10,10,0.80);
+    margin: 28px 0 0;
+    max-width: 44ch;
+  }
+  .ctas {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .micro-foot {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 32px;
+  }
+  .micro-foot .dot { color: var(--teal-600); }
+
+  /* Botones — basados en Button.tsx */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1.5px solid;
+    border-radius: 4px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    height: 52px;
+    padding: 0 28px;
+    font-size: 15px;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+  }
+  .btn .mono { font-family: 'JetBrains Mono', monospace; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .btn-primary:hover {
+    background: var(--teal-500);
+    border-color: var(--teal-500);
+  }
+
+  /* V0 — actual ghost */
+  .btn-ghost {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* V1 — ghost + offset shadow teal */
+  .btn-ghost-shadow {
+    color: var(--ink);
+    border-color: var(--ink);
+    box-shadow: 4px 4px 0 0 var(--teal-500);
+    transform: translate(-2px, -2px);
+  }
+  .btn-ghost-shadow:hover {
+    box-shadow: 2px 2px 0 0 var(--teal-500);
+    transform: translate(0, 0);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* V2 — soft cream fill + border ink + glyph teal */
+  .btn-cream {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-cream:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-cream .wa {
+    color: var(--teal-600);
+  }
+
+  /* V3 — ghost + WA glyph teal + arrow (mínima) */
+  .btn-ghost-icon {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-ghost-icon:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-ghost-icon:hover .wa { color: var(--paper); }
+  .wa { color: var(--teal-600); display: inline-flex; }
+
+  /* V4 — ghost shadow + glyph + caption (máximo signal) */
+  .cta-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .cta-stack .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    padding-left: 4px;
+  }
+  .cta-stack .caption .dot { color: var(--teal-600); }
+
+  /* Fake right column — placeholder de BrowserFrame */
+  .fake-frame {
+    aspect-ratio: 16/10;
+    background: var(--surface);
+    border: 1.5px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: 8px 8px 0 0 var(--teal-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 56px 0 24px;
+    padding: 24px;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+  }
+  .legend h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .legend p {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+    color: rgba(10,10,10,0.78);
+  }
+  .legend code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(20,184,166,0.10);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--teal-700);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1 class="page-title">Hero — CTA secundario "Solicitar demo"</h1>
+  <div class="page-sub">Variantes contra el Hero actual · 12-jun-2026</div>
+
+  <!-- V0 — ACTUAL -->
+  <section class="hero">
+    <span class="variant-tag">V0 · actual</span>
+    <div class="hero-grid">
+      <div>
+        <div class="variant-name">Baseline (lo que está hoy)</div>
+        <div class="variant-note">Ghost transparente + outline ink. El primary se come la atención y el secundario se lee como link.</div>
+        <span class="editorial-micro">Sistema de gestión · Almacenes y comercios chicos</span>
+        <h1 class="display">Recuperá el control <em>de tu comercio.</em></h1>
+        <p class="lede">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. Probá 30 días gratis, sin tarjeta.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#">Probalo gratis <span class="mono">→</span></a>
+          <a class="btn btn-ghost" href="#">Solicitar demo</a>
+        </div>
+        <p class="micro-foot">Sin tarjeta <span class="dot">·</span> Cancelás cuando quieras <span class="dot">·</span> Hecho desde un almacén real</p>
+      </div>
+      <div class="fake-frame">[BrowserFrame · AnalyticsFakeScreen]</div>
+    </div>
+  </section>
+
+  <!-- V1 — GHOST + OFFSET SHADOW TEAL -->
+  <section class="hero">
+    <span class="variant-tag">V1 · recomendada</span>
+    <div class="hero-grid">
+      <div>
+        <div class="variant-name">Ghost + offset shadow teal</div>
+        <div class="variant-note">Mantiene outline ink. Suma <code>shadow-offset-sm</code> (la misma firma editorial de BrowserFrame/PhotoFrame/MobileMenu). Hover: shadow se acerca + filled-ink.</div>
+        <span class="editorial-micro">Sistema de gestión · Almacenes y comercios chicos</span>
+        <h1 class="display">Recuperá el control <em>de tu comercio.</em></h1>
+        <p class="lede">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. Probá 30 días gratis, sin tarjeta.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#">Probalo gratis <span class="mono">→</span></a>
+          <a class="btn btn-ghost-shadow" href="#">Solicitar demo</a>
+        </div>
+        <p class="micro-foot">Sin tarjeta <span class="dot">·</span> Cancelás cuando quieras <span class="dot">·</span> Hecho desde un almacén real</p>
+      </div>
+      <div class="fake-frame">[BrowserFrame · AnalyticsFakeScreen]</div>
+    </div>
+  </section>
+
+  <!-- V2 — SOFT CREAM FILL + WA GLYPH -->
+  <section class="hero">
+    <span class="variant-tag">V2</span>
+    <div class="hero-grid">
+      <div>
+        <div class="variant-name">Soft cream fill + glifo WhatsApp teal</div>
+        <div class="variant-note">Fill <code>bg-cream</code> con border ink. Glifo WhatsApp en teal-600. Sube weight sin filled-ink, pero introduce un canal visual nuevo (cream filled botton no existe hoy).</div>
+        <span class="editorial-micro">Sistema de gestión · Almacenes y comercios chicos</span>
+        <h1 class="display">Recuperá el control <em>de tu comercio.</em></h1>
+        <p class="lede">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. Probá 30 días gratis, sin tarjeta.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#">Probalo gratis <span class="mono">→</span></a>
+          <a class="btn btn-cream" href="#">
+            <svg class="wa" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.6 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+            </svg>
+            Solicitar demo
+          </a>
+        </div>
+        <p class="micro-foot">Sin tarjeta <span class="dot">·</span> Cancelás cuando quieras <span class="dot">·</span> Hecho desde un almacén real</p>
+      </div>
+      <div class="fake-frame">[BrowserFrame · AnalyticsFakeScreen]</div>
+    </div>
+  </section>
+
+  <!-- V3 — GHOST + WA GLYPH + ARROW (MÍNIMA) -->
+  <section class="hero">
+    <span class="variant-tag">V3</span>
+    <div class="hero-grid">
+      <div>
+        <div class="variant-name">Ghost minimal + glifo WhatsApp + arrow</div>
+        <div class="variant-note">El menos invasivo: ghost igual a hoy + ícono WhatsApp en teal + arrow mono. Suma signal de canal humano sin pelearle peso al primary.</div>
+        <span class="editorial-micro">Sistema de gestión · Almacenes y comercios chicos</span>
+        <h1 class="display">Recuperá el control <em>de tu comercio.</em></h1>
+        <p class="lede">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. Probá 30 días gratis, sin tarjeta.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#">Probalo gratis <span class="mono">→</span></a>
+          <a class="btn btn-ghost-icon" href="#">
+            <svg class="wa" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.6 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+            </svg>
+            Solicitar demo <span class="mono">→</span>
+          </a>
+        </div>
+        <p class="micro-foot">Sin tarjeta <span class="dot">·</span> Cancelás cuando quieras <span class="dot">·</span> Hecho desde un almacén real</p>
+      </div>
+      <div class="fake-frame">[BrowserFrame · AnalyticsFakeScreen]</div>
+    </div>
+  </section>
+
+  <!-- V4 — V1 + GLYPH + CAPTION MONO -->
+  <section class="hero">
+    <span class="variant-tag">V4 · máximo signal</span>
+    <div class="hero-grid">
+      <div>
+        <div class="variant-name">V1 + glifo WhatsApp + caption editorial</div>
+        <div class="variant-note">Ghost + offset shadow + glifo + caption mono debajo (<code>"Por WhatsApp · responde Néstor"</code>). Máxima confianza/humanidad. Riesgo: empata el peso con el primary.</div>
+        <span class="editorial-micro">Sistema de gestión · Almacenes y comercios chicos</span>
+        <h1 class="display">Recuperá el control <em>de tu comercio.</em></h1>
+        <p class="lede">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. Probá 30 días gratis, sin tarjeta.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#">Probalo gratis <span class="mono">→</span></a>
+          <span class="cta-stack">
+            <a class="btn btn-ghost-shadow" href="#">
+              <svg class="wa" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.6 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+              </svg>
+              Solicitar demo
+            </a>
+            <span class="caption">Por WhatsApp <span class="dot">·</span> responde Néstor</span>
+          </span>
+        </div>
+        <p class="micro-foot">Sin tarjeta <span class="dot">·</span> Cancelás cuando quieras <span class="dot">·</span> Hecho desde un almacén real</p>
+      </div>
+      <div class="fake-frame">[BrowserFrame · AnalyticsFakeScreen]</div>
+    </div>
+  </section>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div>
+      <h3>Decisión 1 — Scope</h3>
+      <p>El mismo CTA secundario existe en <code>Precio.tsx</code> ("Escribime por WhatsApp"). Cualquier variante elegida se puede aplicar solo al Hero, o también a Precio para coherencia.</p>
+    </div>
+    <div>
+      <h3>Decisión 2 — Variant local o global</h3>
+      <p>Podemos crear una nueva variant en <code>Button.tsx</code> (ej. <code>ghost-accent</code>) reusable, o aplicar las clases solo en el Hero. La nueva variant es más decoupled.</p>
+    </div>
+    <div>
+      <h3>Tokens usados</h3>
+      <p><code>shadow-offset-sm</code> ya existe (BrowserFrame, PhotoFrame, MobileMenu). <code>bg-cream</code> y <code>teal-600</code> ya están en el palette. Cero token nuevo necesario para V1, V3, V4.</p>
+    </div>
+    <div>
+      <h3>Próximo paso</h3>
+      <p>Elegir variante (V1/V2/V3/V4) + scope (solo Hero o también Precio) + estrategia de variant (local o nueva variant en Button). Después escribo el design spec.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
