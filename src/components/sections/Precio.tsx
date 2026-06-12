@@ -32,7 +32,7 @@ export function Precio() {
           href={whatsappLink('Hola Néstor, quiero saber el precio de Buen Inventario.')}
           target="_blank"
           rel="noopener noreferrer"
-          variant="ghost"
+          variant="ghost-accent"
           size="lg"
           className="sm:min-w-[200px]"
         >

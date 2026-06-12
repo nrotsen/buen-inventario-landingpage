@@ -28,7 +28,7 @@ export function Hero() {
               href={whatsappLink(DEMO_REQUEST_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              variant="ghost"
+              variant="ghost-accent"
               size="lg"
               aria-label="Solicitar demo por WhatsApp"
             >
