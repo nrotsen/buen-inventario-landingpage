@@ -40,11 +40,13 @@ Investigación completa: fuentes primarias Google Search Central, web.dev, MDN, 
 
 ---
 
+> **Update 2026-08-01:** F1 (favicon set) + F2 (OG image) **resueltos**. Ver `docs/plans/2026-08-01-favicon-og-redesign-plan.md` y branch `feat/favicon-og-redesign`. Pipeline reproducible en `scripts/generate-assets.ts` — corre con `pnpm run generate:assets`. Task 12 (Vercel deploy + external validators) pendiente.
+
 ## Findings priorizados por severidad
 
 ### P0 — Rompen presencia visible o son user-flagged
 
-**F1. Favicon obsoleto — no matchea el logo nuevo** (user-flagged)
+**~~F1. Favicon obsoleto — no matchea el logo nuevo~~** (resuelto 2026-08-01)
 - **Qué ES:** `public/favicon.svg` (Sep 2025, 3.1KB) es un ícono abstracto turquesa multi-path que **predates el editorial redesign** (todos los otros assets son May 28 2026). No coincide con el logo canónico (cajas apiladas con flecha subiendo).
 - **Peor:** `public/apple-touch-icon.png` es OTRA marca distinta (una carretilla con caja) — no es el logo actual **ni** el favicon actual. Es lo que aparece en iOS home screen cuando alguien guarda la landing.
 - **Qué DEBERÍA SER:** Set completo de favicons derivados del logo nuevo (cajas + flecha):
@@ -55,7 +57,7 @@ Investigación completa: fuentes primarias Google Search Central, web.dev, MDN, 
 - **Files afectados:** `public/favicon.svg`, `public/apple-touch-icon.png`, `public/manifest.webmanifest`, `index.html:8-10`
 - **Effort:** S (asset generation via https://realfavicongenerator.net desde el PNG logo, o script con `sharp` + `svgo`)
 
-**F2. OG image cuadrado 500×500 en lugar de 1200×630** (crítico — previews rotos)
+**~~F2. OG image cuadrado 500×500 en lugar de 1200×630~~** (resuelto 2026-08-01 — ahora 1200×630, 140.8KB, layout V4 editorial + fake UI cierre de caja)
 - **Qué ES:** `public/og-image.png` es un PNG **500×500 cuadrado** (byte-idéntico a `bueninventario-logo.png`, mismo md5). `index.html:36-37` declara `og:image:width=1200` y `og:image:height=630`. **La declaración miente**: WhatsApp/Facebook/LinkedIn/X/Discord/Slack detectan el tamaño real y aplican fallback (preview chico, crop feo, o no preview en algunos casos).
 - **Qué DEBERÍA SER:** Imagen dedicada 1200×630 PNG (< 1MB idealmente < 200KB), con:
   - Wordmark "Buen Inventario" + tagline "Recuperá el control de tu comercio"
