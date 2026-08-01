@@ -12,7 +12,7 @@ export function Historia() {
           level={2}
           className="mt-7 text-[44px] md:text-[64px] leading-[1.04] tracking-[-0.015em]"
         >
-          Yo también tengo un almacén.
+          Yo también tengo un comercio.
         </DisplayHeading>
 
         <p className="editorial-italic text-[28px] md:text-[36px] leading-snug text-teal-700 mt-4 md:mt-5">

@@ -24,7 +24,7 @@ export function Footer() {
               <span className="editorial-display text-[22px] text-paper">Buen Inventario</span>
             </div>
             <p className="mt-3.5 text-body-sm text-paper/65 leading-relaxed max-w-[40ch]">
-              Sistema de gestión para almacenes y comercios chicos de Argentina. Hecho desde Don Néstor Despensa.
+              Sistema de gestión para comercios chicos de Argentina. Hecho desde Don Néstor Despensa.
             </p>
           </div>
 
