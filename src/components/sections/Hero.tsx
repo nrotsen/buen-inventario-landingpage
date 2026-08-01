@@ -12,7 +12,7 @@ export function Hero() {
     <Section id="hero" tone="paper" className="pt-32 md:pt-40 pb-24 md:pb-32">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
         <div className="md:col-span-5 max-w-[540px]">
-          <EditorialMicro>Sistema de gestión · Comercios chicos</EditorialMicro>
+          <EditorialMicro>Sistema de gestión · Comercios</EditorialMicro>
           <DisplayHeading level={1} italicAccent={<>de tu comercio.</>} className="mt-5">
             Recuperá el control
           </DisplayHeading>
