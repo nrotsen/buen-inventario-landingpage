@@ -29,7 +29,7 @@ function gradientSvg(size: number): Buffer {
 }
 
 function paperLogoSvg(source: string): string {
-  return source.replace(/fill="#38B5AF"/gi, `fill="${PAPER}"`);
+  return source.replace(new RegExp(`fill="${TEAL}"`, "gi"), `fill="${PAPER}"`);
 }
 
 export async function buildAppIcons(): Promise<{ files: { path: string; bytes: number }[] }> {
