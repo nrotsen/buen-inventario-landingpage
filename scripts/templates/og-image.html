@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; background: #F7F4EC; color: #0E1116; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .canvas { width: 1200px; height: 630px; display: flex; }
+    .left { flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; }
+    .brand-mark { display: flex; align-items: center; gap: 20px; }
+    .brand-mark .logo { width: 68px; height: 68px; }
+    .brand-mark .brand-text { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 36px; letter-spacing: -0.01em; }
+    .display { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 72px; line-height: 1.05; letter-spacing: -0.02em; }
+    .italic { font-style: italic; color: #1F857F; }
+    .sub { font-family: 'Inter', sans-serif; font-size: 20px; color: #4A4A45; line-height: 1.5; max-width: 480px; margin-top: 20px; }
+    .foot { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #6B6B66; letter-spacing: 0.04em; }
+    .right { flex: 0 0 520px; background: linear-gradient(135deg, #EFEBDD 0%, #F7F4EC 100%); padding: 60px 0 60px 40px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .fake-ui { width: 500px; height: 480px; background: #FFFFFF; border-radius: 6px 0 0 6px; box-shadow: -20px 20px 40px rgba(14,17,22,0.15); padding: 28px 32px; font-family: 'Inter', sans-serif; }
+    .ui-title { font-family: 'DM Serif Display', serif; font-size: 26px; margin: 0 0 6px; }
+    .ui-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: #6B6B66; margin-bottom: 24px; }
+    .metric { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(14,17,22,0.08); }
+    .metric:last-child { border: none; }
+    .m-lbl { font-size: 14px; color: #6B6B66; }
+    .m-val { font-family: 'DM Serif Display', serif; font-size: 26px; color: #0E1116; }
+    .m-val.pos { color: #1F857F; }
+    .m-val.neg { color: #C64545; }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="left">
+      <div class="brand-mark">
+        <img class="logo" src="__LOGO_DATA_URI__" alt="">
+        <div class="brand-text">Buen Inventario</div>
+      </div>
+      <div>
+        <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+        <div class="sub">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+      </div>
+      <div class="foot">bueninventario.com · 30 días gratis</div>
+    </div>
+    <div class="right">
+      <div class="fake-ui">
+        <div class="ui-title">Cierre de caja</div>
+        <div class="ui-sub">Hoy · lunes 04 · 20:34</div>
+        <div class="metric"><span class="m-lbl">Ventas</span><span class="m-val">$ 284.500</span></div>
+        <div class="metric"><span class="m-lbl">Efectivo</span><span class="m-val">$ 142.300</span></div>
+        <div class="metric"><span class="m-lbl">Transferencia</span><span class="m-val">$ 87.200</span></div>
+        <div class="metric"><span class="m-lbl">Fiado</span><span class="m-val neg">$ 55.000</span></div>
+        <div class="metric"><span class="m-lbl">Ganancia bruta</span><span class="m-val pos">$ 84.750</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
