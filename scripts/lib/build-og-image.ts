@@ -26,7 +26,7 @@ export async function buildOgImage(): Promise<{ bytes: number }> {
 
     const optimized = await sharp(raw)
       .resize(OG_WIDTH, OG_HEIGHT, { fit: "contain" })
-      .png({ compressionLevel: 9, palette: true, quality: 90 })
+      .png({ compressionLevel: 9 })
       .toBuffer();
 
     writeFileSync(PATHS.outOgImage, optimized);
