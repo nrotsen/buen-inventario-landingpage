@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple-touch + PWA maskable — Buen Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4EC;
+    --ink: #0E1116;
+    --muted: #6B6B66;
+    --teal: #38B5AF;
+    --teal-deep: #1F857F;
+    --line: rgba(14,17,22,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 40px; }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  header .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  header p { color: var(--muted); max-width: 780px; margin: 12px 0 0; line-height: 1.55; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 48px 0 6px;
+  }
+  .sec-desc { color: var(--muted); margin: 0 0 24px; max-width: 720px; line-height: 1.55; font-size: 14px; }
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 900px) { .options { grid-template-columns: repeat(2, 1fr); } }
+
+  .option {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 16px 18px;
+    text-align: center;
+  }
+  .option .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    background: rgba(56,181,175,0.10);
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .option h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .option .note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 6px 0 16px;
+    min-height: 54px;
+  }
+
+  /* iOS home screen tile — 60x60 with rounded corners (iOS 26 style: continuous corners ~28% radius) */
+  .ios-tile {
+    width: 120px;
+    height: 120px;
+    border-radius: 27px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+    overflow: hidden;
+    position: relative;
+  }
+  .ios-tile img, .ios-tile object { display: block; }
+
+  /* Bg variants */
+  .bg-paper { background: #F7F4EC; }
+  .bg-teal { background: #38B5AF; }
+  .bg-ink { background: #0E1116; }
+  .bg-white { background: white; }
+  .bg-gradient { background: linear-gradient(135deg, #38B5AF 0%, #1F857F 100%); }
+
+  .ios-tile.paper-logo::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; }
+  .ios-tile.teal-white { position: relative; }
+  .ios-tile.teal-white::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; filter: brightness(0) invert(1); opacity: 0.95; }
+  .ios-tile.ink-teal::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; }
+  .ios-tile.gradient-white::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; filter: brightness(0) invert(1); opacity: 0.95; }
+
+  /* Home screen mockup context */
+  .home-context {
+    margin-top: 56px;
+    background: linear-gradient(180deg, #4a5b6b 0%, #2a3540 50%, #1a2028 100%);
+    border-radius: 32px;
+    padding: 32px 24px 20px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .home-context .status-bar { color: white; font-size: 14px; font-weight: 600; text-align: center; margin-bottom: 20px; }
+  .home-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 16px; }
+  .home-app { text-align: center; }
+  .home-app .app-icon { width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .home-app .app-name { color: white; font-size: 11px; font-weight: 500; line-height: 1.2; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+  .app-safari { background: linear-gradient(180deg, #33aef4, #0e7cd3); font-size: 30px; color: white; }
+  .app-camera { background: #333; font-size: 22px; }
+  .app-notes { background: linear-gradient(180deg, #ffe97a, #ffcf47); font-size: 24px; }
+  .app-whatsapp { background: #25d366; color: white; font-size: 26px; }
+  .app-mercadopago { background: #009ee3; color: white; font-size: 18px; font-weight: 700; }
+  .app-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .app-mail { background: linear-gradient(180deg, #a3e0ff, #62b8ff); font-size: 24px; color: white; }
+  .app-tiendanube { background: white; color: #007c8f; font-size: 18px; font-weight: 900; }
+
+  .app-bi-a { background: #F7F4EC; position: relative; border: 1px solid rgba(0,0,0,0.05); }
+  .app-bi-a::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; }
+  .app-bi-b { background: #38B5AF; position: relative; }
+  .app-bi-b::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; filter: brightness(0) invert(1); opacity: 0.95; }
+  .app-bi-c { background: #0E1116; position: relative; }
+  .app-bi-c::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; }
+  .app-bi-d { background: linear-gradient(135deg, #38B5AF 0%, #1F857F 100%); position: relative; }
+  .app-bi-d::before { content: ""; position: absolute; inset: 0; background: url("logo-vectorized.svg") center/62% no-repeat; filter: brightness(0) invert(1); opacity: 0.95; }
+
+  /* PWA maskable safe zone visualization */
+  .maskable-frame {
+    width: 180px;
+    height: 180px;
+    background: repeating-conic-gradient(rgba(255,0,0,0.06) 0% 25%, rgba(255,0,0,0.02) 0% 50%);
+    border: 1px dashed rgba(255,0,0,0.3);
+    position: relative;
+    margin: 0 auto 12px;
+  }
+  .maskable-frame::before {
+    content: "SAFE ZONE 40%";
+    position: absolute;
+    left: 50%;
+    top: -18px;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 9px;
+    color: rgba(255,0,0,0.6);
+    background: white;
+    padding: 1px 6px;
+  }
+  .maskable-frame > .inner {
+    position: absolute;
+    inset: 18%;
+    border: 1px solid rgba(0,180,175,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .maskable-frame > .inner::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    background: url("logo-vectorized.svg") center/contain no-repeat;
+  }
+  .maskable-frame.filled { background: #38B5AF; border-color: rgba(56,181,175,0.6); }
+  .maskable-frame.filled::before { color: rgba(255,255,255,0.6); background: transparent; }
+  .maskable-frame.filled > .inner { border-color: rgba(255,255,255,0.3); }
+  .maskable-frame.filled > .inner::before { filter: brightness(0) invert(1); opacity: 0.95; }
+
+  .mask-shapes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .mask-shape {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .mask-shape.circle { border-radius: 50%; }
+  .mask-shape.square { border-radius: 8px; }
+  .mask-shape.squircle { border-radius: 25%; }
+  .mask-shape.teardrop { border-radius: 50% 50% 50% 20%; }
+  .mask-shape > .fill { position: absolute; inset: 0; background: #38B5AF; }
+  .mask-shape > .fill::before { content: ""; position: absolute; inset: 20%; background: url("logo-vectorized.svg") center/contain no-repeat; filter: brightness(0) invert(1); opacity: 0.95; }
+  .mask-lbl { font-family: monospace; font-size: 10px; color: var(--muted); text-align: center; margin-top: 6px; }
+
+  .recommendation {
+    margin-top: 56px;
+    padding: 24px 28px;
+    background: rgba(56,181,175,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+  }
+  .recommendation h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 10px;
+  }
+  .recommendation p { margin: 0 0 8px; line-height: 1.6; }
+  .recommendation code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: rgba(14,17,22,0.06); padding: 2px 6px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="meta">Design Exploration · Apple-touch + PWA maskable</div>
+    <h1>¿Qué background usa el ícono cuando lo instalan como app?</h1>
+    <p>iOS aplica rounded-corners al <code>apple-touch-icon.png</code> (180×180). Si el fondo es transparente, se ve raro (mezcla con el wallpaper). Android + PWA usan el ícono "maskable" que puede ser croppeado a distintos shapes (círculo, squircle, teardrop) — necesita safe-zone 40% central. Cuatro opciones de fondo:</p>
+  </header>
+
+  <h2>Opciones de background</h2>
+  <p class="sec-desc">Preview del icon a 120×120px (aprox tamaño real en iOS home screen con Retina).</p>
+
+  <div class="options">
+    <div class="option">
+      <span class="tag">Opción A</span>
+      <div class="ios-tile bg-paper paper-logo"></div>
+      <h3>Paper (#F7F4EC)</h3>
+      <p class="note">Fondo del sistema editorial. Logo teal directo sobre paper cálido — muy "brand consistent" con la landing y el aesthetic.</p>
+    </div>
+    <div class="option">
+      <span class="tag">Opción B</span>
+      <div class="ios-tile bg-teal teal-white"></div>
+      <h3>Teal sólido</h3>
+      <p class="note">Fondo teal (#38B5AF), logo en paper/white. Máxima intensidad visual, se distingue en un home screen. Choice más "app-like" — como WhatsApp o Instagram.</p>
+    </div>
+    <div class="option">
+      <span class="tag">Opción C</span>
+      <div class="ios-tile bg-ink ink-teal"></div>
+      <h3>Ink (#0E1116)</h3>
+      <p class="note">Fondo dark, logo teal. Dramático, moody, muy diferente del típico app icon. Se puede confundir con "modo dark" si el user cambia sistema.</p>
+    </div>
+    <div class="option">
+      <span class="tag">Opción D</span>
+      <div class="ios-tile bg-gradient gradient-white"></div>
+      <h3>Gradient teal → deep</h3>
+      <p class="note">Fondo con gradiente teal claro a deep. Look más "premium" o "tech modern" (tipo Linear, Stripe). Menos alineado al aesthetic editorial que ya tenemos.</p>
+    </div>
+  </div>
+
+  <h2>Contexto real: home screen iOS</h2>
+  <p class="sec-desc">Las cuatro opciones ubicadas en un home screen con otros apps competidores (WhatsApp, Instagram, Mercado Pago, Tiendanube). Filtro real: ¿se distingue? ¿se ve "propio" del ecosystem BI?</p>
+
+  <div class="home-context">
+    <div class="status-bar">15:24</div>
+    <div class="home-grid">
+      <div class="home-app"><div class="app-icon app-safari">🧭</div><div class="app-name">Safari</div></div>
+      <div class="home-app"><div class="app-icon app-camera">📷</div><div class="app-name">Cámara</div></div>
+      <div class="home-app"><div class="app-icon app-notes">📝</div><div class="app-name">Notas</div></div>
+      <div class="home-app"><div class="app-icon app-mail">✉️</div><div class="app-name">Mail</div></div>
+      <div class="home-app"><div class="app-icon app-whatsapp">💬</div><div class="app-name">WhatsApp</div></div>
+      <div class="home-app"><div class="app-icon app-instagram">📷</div><div class="app-name">Instagram</div></div>
+      <div class="home-app"><div class="app-icon app-mercadopago">MP</div><div class="app-name">Mercado Pago</div></div>
+      <div class="home-app"><div class="app-icon app-tiendanube">TN</div><div class="app-name">Tiendanube</div></div>
+      <div class="home-app"><div class="app-icon app-bi-a"></div><div class="app-name">BI · paper</div></div>
+      <div class="home-app"><div class="app-icon app-bi-b"></div><div class="app-name">BI · teal</div></div>
+      <div class="home-app"><div class="app-icon app-bi-c"></div><div class="app-name">BI · ink</div></div>
+      <div class="home-app"><div class="app-icon app-bi-d"></div><div class="app-name">BI · grad.</div></div>
+    </div>
+  </div>
+
+  <h2>PWA maskable · safe zone 40%</h2>
+  <p class="sec-desc">Android puede croppear el ícono a distintos shapes según el launcher del user. El logo tiene que estar dentro del <strong>40% central</strong> para sobrevivir todos los crops. Preview con el ícono contenido correctamente + demo de shapes.</p>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+    <div style="text-align:center;">
+      <div style="font-family:monospace; font-size:11px; color:var(--muted); margin-bottom:8px; letter-spacing:0.08em; text-transform:uppercase;">Safe zone visualization</div>
+      <div class="maskable-frame filled"><div class="inner"></div></div>
+      <p style="color:var(--muted); font-size:12px; margin:16px auto 0; max-width:280px;">El logo ocupa ~60% del canvas para que quepa cómodo. Fondo teal ocupa 100%.</p>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-family:monospace; font-size:11px; color:var(--muted); margin-bottom:8px; letter-spacing:0.08em; text-transform:uppercase;">Shapes que Android puede aplicar</div>
+      <div class="mask-shapes">
+        <div><div class="mask-shape circle"><div class="fill"></div></div><div class="mask-lbl">circle</div></div>
+        <div><div class="mask-shape squircle"><div class="fill"></div></div><div class="mask-lbl">squircle</div></div>
+        <div><div class="mask-shape square"><div class="fill"></div></div><div class="mask-lbl">rounded</div></div>
+        <div><div class="mask-shape teardrop"><div class="fill"></div></div><div class="mask-lbl">teardrop</div></div>
+      </div>
+      <p style="color:var(--muted); font-size:12px; margin:16px auto 0; max-width:280px;">El logo se mantiene visible en todos los shapes gracias al safe zone.</p>
+    </div>
+  </div>
+
+  <div class="recommendation">
+    <h3>Mi recomendación</h3>
+    <p><strong>Apple-touch: Opción B (teal sólido, logo paper/white).</strong> Es la que más se distingue en un home screen mixto, se lee bien a distancia, y comunica "app" claramente. Paper (A) es más "editorial" pero se puede confundir con un widget de notas — no es lo que querés en el home screen.</p>
+    <p><strong>PWA maskable: mismo teal sólido con safe zone.</strong> Same story, y sobrevive cualquier crop de Android.</p>
+    <p style="margin-top:12px;">Alternativa razonable: Opción A (paper) si querés reforzar máxima consistencia con la landing. Ambas son defendibles — es cuestión de cuánto pesa "editorial coherence" vs "brand-forward distinctiveness".</p>
+  </div>
+</div>
+</body>
+</html>

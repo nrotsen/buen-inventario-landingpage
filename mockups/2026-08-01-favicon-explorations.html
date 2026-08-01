@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Favicon explorations v2 — Buen Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4EC;
+    --ink: #0E1116;
+    --muted: #6B6B66;
+    --teal: #38B5AF;
+    --teal-deep: #1F857F;
+    --line: rgba(14,17,22,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 40px; }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  header .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  header p { color: var(--muted); max-width: 780px; margin: 16px 0 0; line-height: 1.55; }
+
+  .callout {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(56,181,175,0.08);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .variant {
+    margin: 56px 0;
+    padding-top: 32px;
+    border-top: 1px dashed var(--line);
+  }
+  .variant:first-of-type { border-top: none; padding-top: 0; }
+  .variant-title {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .variant-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    background: rgba(56,181,175,0.10);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .variant-title h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .variant-note { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 780px; margin: 8px 0 24px; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .canvas {
+    border-radius: 12px;
+    padding: 28px 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .canvas.light { background: var(--paper); border: 1px solid var(--line); }
+  .canvas.dark { background: var(--ink); color: #E9E7DE; }
+  .canvas.dark .size-label { color: rgba(255,255,255,0.55); }
+  .canvas-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .canvas.dark .canvas-label { color: rgba(255,255,255,0.5); }
+
+  .sizes {
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .size {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .size-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .icon-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-slot img { image-rendering: -webkit-optimize-contrast; }
+  .icon-slot svg { display: block; shape-rendering: geometricPrecision; }
+
+  /* Browser tab simulation */
+  .tab-sim {
+    margin-top: 24px;
+    background: rgba(14,17,22,0.03);
+    border-radius: 8px 8px 0 0;
+    padding: 8px 12px 8px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-bottom: none;
+  }
+  .canvas.dark .tab-sim {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.65);
+  }
+  .tab-sim img, .tab-sim svg { flex: none; }
+
+  /* Homescreen simulation (iOS) */
+  .homescreen-sim {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .home-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .home-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.3;
+    max-width: 100px;
+  }
+  .canvas.dark .home-label { color: rgba(255,255,255,0.7); }
+
+  .decision {
+    margin-top: 72px;
+    padding: 28px 32px;
+    background: rgba(56,181,175,0.06);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+  }
+  .decision h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .decision p { margin: 0 0 8px; line-height: 1.6; }
+  .decision ul { margin: 8px 0; padding-left: 22px; line-height: 1.7; }
+  .decision code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: rgba(14,17,22,0.06);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="meta">Design Exploration v2 · Favicon Set 2026</div>
+    <h1>Cómo se comporta el logo real a cada tamaño</h1>
+    <p>Los mockups anteriores fueron dibujos aproximados y salieron deformes — perdón. Esta vez uso el <strong>PNG real</strong> del logo (<code>bueninventario-logo.png</code>, 500×500) renderizado a cada tamaño, más una variante monograma <strong>“BI” mayúsculas</strong> corregida. El objetivo: ver honestamente qué funciona a 16px y decidir la estrategia.</p>
+    <div class="callout">
+      <strong>Nota importante:</strong> no tenemos SVG del logo (solo PNG). Ver "Decisión de vectorización" al final. Para el mockup, el logo se escala desde el PNG raster — es exactamente cómo se vería si generamos favicons PNG directos del source.
+    </div>
+  </header>
+
+  <!-- ============ VARIANT 1: Logo real PNG escalado ============ -->
+  <section class="variant">
+    <div class="variant-title">
+      <span class="variant-tag">Variante 1</span>
+      <h2>Logo oficial completo (PNG escalado)</h2>
+    </div>
+    <p class="variant-note">El logo tal cual. Máxima fidelidad y consistencia con el resto del branding (videos, header de la landing, OG image). A 180+ px se ve perfecto. A 32 y 16 el detalle fino (líneas de la caja superior, punta de la flecha) empieza a colapsar visualmente. Sinceridad primero: mirá bien las columnas de 16 y 32.</p>
+
+    <div class="row">
+      <div class="canvas light">
+        <div class="canvas-label">Fondo paper · #F7F4EC</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <img src="../public/bueninventario-logo.png" width="16" height="16" alt="logo 16">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <img src="../public/bueninventario-logo.png" width="32" height="32" alt="logo 32">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <img src="../public/bueninventario-logo.png" width="64" height="64" alt="logo 64">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <img src="../public/bueninventario-logo.png" width="180" height="180" alt="logo 180">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <img src="../public/bueninventario-logo.png" width="220" height="220" alt="logo 512 preview">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-sim">
+          <img src="../public/bueninventario-logo.png" width="14" height="14" alt="tab">
+          bueninventario.com — Recuperá el control...
+        </div>
+
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: white;">
+            <img src="../public/bueninventario-logo.png" width="52" height="52" alt="home">
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+
+      <div class="canvas dark">
+        <div class="canvas-label">Fondo ink · #0E1116</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <img src="../public/bueninventario-logo.png" width="16" height="16" alt="logo 16">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <img src="../public/bueninventario-logo.png" width="32" height="32" alt="logo 32">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <img src="../public/bueninventario-logo.png" width="64" height="64" alt="logo 64">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <img src="../public/bueninventario-logo.png" width="180" height="180" alt="logo 180">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <img src="../public/bueninventario-logo.png" width="220" height="220" alt="logo 512">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-sim">
+          <img src="../public/bueninventario-logo.png" width="14" height="14" alt="tab">
+          bueninventario.com — Recuperá el control...
+        </div>
+
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: white;">
+            <img src="../public/bueninventario-logo.png" width="52" height="52" alt="home">
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VARIANT 2: Monograma "BI" mayúsculas DM Serif ============ -->
+  <section class="variant">
+    <div class="variant-title">
+      <span class="variant-tag">Variante 2</span>
+      <h2>Monograma "BI" mayúsculas (DM Serif Display)</h2>
+    </div>
+    <p class="variant-note">Corregido con mayúsculas. Dos letras siempre se leen a 16px. Alineado al editorial aesthetic de la landing (mismo font que los headings). Sirve como <strong>favicon standalone</strong> o como <strong>fallback</strong> a tamaños chicos (16/32) mientras el logo real se usa a tamaños grandes (180/512/OG). Mostrado en dos versiones: teal sobre paper, y outline / inverso.</p>
+
+    <div class="row">
+      <div class="canvas light">
+        <div class="canvas-label">Fondo paper · #F7F4EC · teal fill</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <svg width="16" height="16" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <svg width="32" height="32" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <svg width="64" height="64" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <svg width="180" height="180" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <svg width="220" height="220" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+        </div>
+        <div class="tab-sim">
+          <svg width="14" height="14" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          bueninventario.com — Recuperá el control...
+        </div>
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: #38B5AF;">
+            <svg width="42" height="42" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#F7F4EC" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+
+      <div class="canvas dark">
+        <div class="canvas-label">Fondo ink · #0E1116 · teal fill</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <svg width="16" height="16" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <svg width="32" height="32" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <svg width="64" height="64" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <svg width="180" height="180" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <svg width="220" height="220" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+        </div>
+        <div class="tab-sim">
+          <svg width="14" height="14" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          bueninventario.com — Recuperá el control...
+        </div>
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: #38B5AF;">
+            <svg width="42" height="42" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#F7F4EC" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VARIANT 3: Hybrid — logo grande + BI chico ============ -->
+  <section class="variant">
+    <div class="variant-title">
+      <span class="variant-tag">Variante 3 · Híbrida</span>
+      <h2>Logo real a 180+, monograma "BI" a 16/32 (recomendación)</h2>
+    </div>
+    <p class="variant-note">Estrategia dual: aprovecha lo mejor de ambas. El favicon de pestaña (16/32) usa el monograma <strong>BI</strong> nítido; el apple-touch-icon (180), PWA icons (192/512) y OG image usan el <strong>logo real</strong>. Google/Safari cargan el ícono correcto según el contexto vía múltiples <code>&lt;link rel="icon"&gt;</code>. Es lo que hace Stripe (S en tab, marca completa en install), Notion (N en tab, logo en install).</p>
+
+    <div class="row">
+      <div class="canvas light">
+        <div class="canvas-label">Fondo paper · Hybrid</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16 (BI)</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <svg width="16" height="16" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32 (BI)</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <svg width="32" height="32" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64 (logo)</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <img src="../public/bueninventario-logo.png" width="64" height="64" alt="logo 64">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180 (logo)</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <img src="../public/bueninventario-logo.png" width="180" height="180" alt="logo 180">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512 (logo)</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <img src="../public/bueninventario-logo.png" width="220" height="220" alt="logo 512">
+            </div>
+          </div>
+        </div>
+        <div class="tab-sim">
+          <svg width="14" height="14" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          bueninventario.com — Recuperá el control...
+        </div>
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: white;">
+            <img src="../public/bueninventario-logo.png" width="52" height="52" alt="home">
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+
+      <div class="canvas dark">
+        <div class="canvas-label">Fondo ink · Hybrid</div>
+        <div class="sizes">
+          <div class="size"><span class="size-label">16 (BI)</span>
+            <div class="icon-slot" style="width:16px;height:16px;">
+              <svg width="16" height="16" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">32 (BI)</span>
+            <div class="icon-slot" style="width:32px;height:32px;">
+              <svg width="32" height="32" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+            </div>
+          </div>
+          <div class="size"><span class="size-label">64 (logo)</span>
+            <div class="icon-slot" style="width:64px;height:64px;">
+              <img src="../public/bueninventario-logo.png" width="64" height="64" alt="logo 64">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">180 (logo)</span>
+            <div class="icon-slot" style="width:180px;height:180px;">
+              <img src="../public/bueninventario-logo.png" width="180" height="180" alt="logo 180">
+            </div>
+          </div>
+          <div class="size"><span class="size-label">512 (logo)</span>
+            <div class="icon-slot" style="width:220px;height:220px;">
+              <img src="../public/bueninventario-logo.png" width="220" height="220" alt="logo 512">
+            </div>
+          </div>
+        </div>
+        <div class="tab-sim">
+          <svg width="14" height="14" viewBox="0 0 32 32"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="'DM Serif Display', serif" font-size="20" fill="#38B5AF" font-weight="400" letter-spacing="-0.5">BI</text></svg>
+          bueninventario.com — Recuperá el control...
+        </div>
+        <div class="homescreen-sim">
+          <div class="home-icon" style="background: white;">
+            <img src="../public/bueninventario-logo.png" width="52" height="52" alt="home">
+          </div>
+          <div class="home-label">Buen Inventario</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="decision">
+    <h3>Decisión de vectorización (paralela)</h3>
+    <p>Sea cual sea la variante ganadora, para que el logo funcione bien como SVG scalable (necesario para <code>favicon.svg</code>, para el header de la landing en HiDPI, y para futuros usos) hay que <strong>vectorizarlo</strong>. Tres caminos:</p>
+    <ul>
+      <li><strong>Auto-trace</strong> con <code>vtracer</code> o <code>potrace</code> desde el PNG. Rápido (~10 min), quality decente pero puede quedar con curvas rugosas; requiere cleanup manual en Illustrator/Figma.</li>
+      <li><strong>Rehacer a mano</strong> en Figma/Illustrator (~1-2 hs) — pixel perfect, curvas limpias, ready para cualquier uso. Es la vía profesional.</li>
+      <li><strong>Contratar un ilustrador</strong> para vectorizar + entregar sistema (icon, apple-touch cropeado, PWA maskable con safe zone, PDF vectorial para print) por USD 40-80.</li>
+    </ul>
+    <p>Recomendación: opción 2 o 3. El logo es asset de marca — no vale la pena vivir con auto-trace rugoso los próximos años.</p>
+  </div>
+
+  <div class="decision" style="background: rgba(14,17,22,0.04); border-left-color: var(--ink); margin-top: 20px;">
+    <h3>Cómo elegir</h3>
+    <p><strong>Prueba de fuego:</strong> abrí este HTML, poné el browser al 100% zoom, y compará las tres columnas de 16px. La que te "salta a la vista" en la pestaña — ganó. Después chequeá 32px (Retina display muestra 32 en lugar de 16). Después las simulaciones de tab y homescreen.</p>
+  </div>
+</div>
+</body>
+</html>

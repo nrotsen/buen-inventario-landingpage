@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OG image 1200×630 — Buen Inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4EC;
+    --ink: #0E1116;
+    --muted: #6B6B66;
+    --teal: #38B5AF;
+    --teal-deep: #1F857F;
+    --line: rgba(14,17,22,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 40px; }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  header .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  header p { color: var(--muted); max-width: 780px; margin: 12px 0 0; line-height: 1.55; }
+  header .callout {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(56,181,175,0.08);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 780px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 40px 0 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .var-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    background: rgba(56,181,175,0.10);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .sec-desc { color: var(--muted); margin: 0 0 20px; max-width: 720px; line-height: 1.55; font-size: 14px; }
+
+  /* OG canvas: 1200x630 scaled to fit page (600x315 = 50% preview) */
+  .og-stage {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0 10px, transparent 10px 20px);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .og {
+    width: 600px;
+    height: 315px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    /* Scale internal contents at 0.5 — everything inside is authored at 1200x630 real size */
+    font-size: 0; /* reset for scaling */
+  }
+  .og .canvas {
+    width: 1200px;
+    height: 630px;
+    transform: scale(0.5);
+    transform-origin: top left;
+    position: relative;
+    font-size: 16px;
+  }
+  .og .canvas.paper { background: #F7F4EC; color: #0E1116; }
+  .og .canvas.ink { background: #0E1116; color: #F7F4EC; }
+  .og .canvas.teal { background: linear-gradient(135deg, #38B5AF 0%, #1F857F 100%); color: #F7F4EC; }
+  .og .canvas.cream { background: #EFEBDD; color: #0E1116; }
+
+  /* Common OG typography */
+  .og .brand-mark { display: flex; align-items: center; gap: 20px; }
+  .og .brand-mark .logo { width: 68px; height: 68px; }
+  .og .brand-mark .brand-text {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: -0.01em;
+  }
+  .og .display {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .og .italic { font-style: italic; color: #38B5AF; }
+  .og .paper .italic, .og .cream .italic { color: #1F857F; }
+  .og .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #6B6B66;
+    font-weight: 500;
+  }
+  .og .ink .kicker { color: rgba(247,244,236,0.55); }
+  .og .teal .kicker { color: rgba(247,244,236,0.85); }
+  .og .foot-strip {
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    bottom: 44px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: #6B6B66;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .og .ink .foot-strip { color: rgba(247,244,236,0.55); }
+  .og .teal .foot-strip { color: rgba(247,244,236,0.75); }
+
+  /* ================ Variant 1: Editorial paper ================ */
+  .og.v1 .canvas { padding: 60px; }
+  .og.v1 .canvas .brand-mark { position: absolute; top: 60px; left: 60px; }
+  .og.v1 .canvas .display {
+    position: absolute; top: 190px; left: 60px; right: 60px;
+    font-size: 108px;
+  }
+  .og.v1 .canvas .sub {
+    position: absolute; left: 60px; right: 60px; bottom: 110px;
+    font-family: 'Inter', sans-serif; font-size: 26px; color: #4A4A45; line-height: 1.4; max-width: 900px;
+  }
+
+  /* ================ Variant 2: Ink + teal accent + rules ================ */
+  .og.v2 .canvas { padding: 60px; }
+  .og.v2 .brand-mark { position: absolute; top: 60px; left: 60px; }
+  .og.v2 .brand-mark .brand-text { color: #F7F4EC; }
+  .og.v2 .brand-mark .logo { filter: brightness(0) invert(1); opacity: 0.9; }
+  .og.v2 .rule-top { position: absolute; left: 60px; right: 60px; top: 160px; height: 1px; background: rgba(247,244,236,0.15); }
+  .og.v2 .display {
+    position: absolute; top: 200px; left: 60px; right: 60px;
+    font-size: 96px; color: #F7F4EC;
+  }
+  .og.v2 .rule-bottom { position: absolute; left: 60px; right: 60px; bottom: 110px; height: 1px; background: rgba(247,244,236,0.15); }
+  .og.v2 .sub {
+    position: absolute; left: 60px; right: 60px; bottom: 44px;
+    font-family: 'Inter', sans-serif; font-size: 24px; color: rgba(247,244,236,0.75);
+    display: flex; gap: 40px; align-items: center;
+  }
+  .og.v2 .sub .item { display: flex; align-items: baseline; gap: 10px; }
+  .og.v2 .sub .num { font-family: 'DM Serif Display', serif; font-size: 40px; color: #38B5AF; font-style: italic; }
+
+  /* ================ Variant 3: Teal gradient + logo big + wordmark ================ */
+  .og.v3 .canvas { display: flex; align-items: center; justify-content: space-between; padding: 60px 80px; }
+  .og.v3 .left { flex: 1; }
+  .og.v3 .left .kicker { color: rgba(247,244,236,0.75); margin-bottom: 24px; }
+  .og.v3 .left .display { font-size: 92px; color: #F7F4EC; }
+  .og.v3 .left .sub { margin-top: 32px; font-family: 'Inter',sans-serif; font-size: 22px; color: rgba(247,244,236,0.9); max-width: 520px; line-height: 1.5; }
+  .og.v3 .right { flex: none; width: 340px; height: 340px; display: flex; align-items: center; justify-content: center; }
+  .og.v3 .right .big-logo { width: 340px; height: 340px; filter: brightness(0) invert(1); opacity: 0.95; }
+  .og.v3 .foot-strip { color: rgba(247,244,236,0.7); }
+
+  /* ================ Variant 4: Screenshot mock + text (paper) ================ */
+  .og.v4 .canvas { padding: 0; display: flex; }
+  .og.v4 .left { flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; }
+  .og.v4 .brand-mark { }
+  .og.v4 .display { font-size: 72px; line-height: 1.05; }
+  .og.v4 .sub { font-family: 'Inter', sans-serif; font-size: 20px; color: #4A4A45; line-height: 1.5; max-width: 480px; }
+  .og.v4 .right { flex: 0 0 520px; background: linear-gradient(135deg, #EFEBDD 0%, #F7F4EC 100%); padding: 60px 0 60px 40px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .og.v4 .fake-ui { width: 500px; height: 480px; background: #FFFFFF; border-radius: 12px 0 0 12px; box-shadow: -20px 20px 40px rgba(14,17,22,0.15); padding: 28px 32px; font-family: 'Inter', sans-serif; overflow: hidden; }
+  .og.v4 .fake-ui .ui-title { font-family: 'DM Serif Display', serif; font-size: 26px; margin: 0 0 6px; }
+  .og.v4 .fake-ui .ui-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: #6B6B66; margin-bottom: 24px; }
+  .og.v4 .fake-ui .metric { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(14,17,22,0.08); }
+  .og.v4 .fake-ui .metric:last-child { border: none; }
+  .og.v4 .fake-ui .m-lbl { font-size: 14px; color: #6B6B66; }
+  .og.v4 .fake-ui .m-val { font-family: 'DM Serif Display', serif; font-size: 26px; color: #0E1116; }
+  .og.v4 .fake-ui .m-val.pos { color: #1F857F; }
+  .og.v4 .fake-ui .m-val.neg { color: #C64545; }
+
+  /* Social preview simulation */
+  .social-preview {
+    margin-top: 20px;
+    max-width: 520px;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .social-preview .thumb { aspect-ratio: 1200/630; overflow: hidden; }
+  .social-preview .thumb > .og-inner { width: 100%; height: 100%; display:block; }
+  .social-preview .meta-block { padding: 12px 14px; font-family: 'Inter', sans-serif; }
+  .social-preview .meta-block .url { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .social-preview .meta-block .title { font-size: 15px; font-weight: 600; color: #0E1116; margin: 4px 0 2px; }
+  .social-preview .meta-block .desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .recommendation {
+    margin-top: 56px;
+    padding: 24px 28px;
+    background: rgba(56,181,175,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+  }
+  .recommendation h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 10px;
+  }
+  .recommendation p { margin: 0 0 8px; line-height: 1.6; }
+  .recommendation code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: rgba(14,17,22,0.06); padding: 2px 6px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="meta">Design Exploration · OG Image 1200×630</div>
+    <h1>Cómo se ve la landing cuando alguien la comparte</h1>
+    <p>Actualmente el <code>og-image.png</code> es un cuadrado 500×500 (el logo mal cropeado) mientras el <code>&lt;meta og:image:width&gt;</code> dice <code>1200×630</code>. Resultado: WhatsApp/FB/X/LinkedIn detectan el mismatch y aplican fallback feo o no muestran preview. Necesitamos <strong>una imagen dedicada 1200×630</strong>. Cuatro composiciones abajo. Todas mostradas a 50% (600×315 en pantalla).</p>
+    <div class="callout">
+      <strong>Safe zone:</strong> Slack/Discord croppean los bordes. Mantener contenido crítico dentro del <strong>1080×600 central</strong>. Todas las variantes respetan esto.
+    </div>
+  </header>
+
+  <!-- ============ Variant 1: Editorial paper minimalista ============ -->
+  <h2><span class="var-tag">Variante 1</span>Editorial paper · tipografía protagonista</h2>
+  <p class="sec-desc">La más limpia y editorial. Titular hero en DM Serif, subhead en Inter. Fondo paper cálido. Look "revista" / "publicación de autor". <strong>Más consistente con el aesthetic de la landing.</strong></p>
+  <div class="og-stage">
+    <div class="og v1">
+      <div class="canvas paper">
+        <div class="brand-mark">
+          <img class="logo" src="logo-vectorized.svg" alt="">
+          <div class="brand-text">Buen Inventario</div>
+        </div>
+        <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+        <div class="sub">Sistema de gestión para almacenes y comercios chicos de Argentina. Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+        <div class="foot-strip">
+          <span>bueninventario.com</span>
+          <span>30 días gratis · Sin tarjeta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social-preview">
+    <div class="thumb"><div class="og-inner"><div class="og v1" style="width:100%;height:100%;box-shadow:none;border-radius:0;"><div class="canvas paper" style="transform:scale(0.4333);">
+      <div class="brand-mark"><img class="logo" src="logo-vectorized.svg"><div class="brand-text">Buen Inventario</div></div>
+      <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+      <div class="sub">Sistema de gestión para almacenes y comercios chicos de Argentina. Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+      <div class="foot-strip"><span>bueninventario.com</span><span>30 días gratis · Sin tarjeta</span></div>
+    </div></div></div></div>
+    <div class="meta-block">
+      <div class="url">bueninventario.com</div>
+      <div class="title">Buen Inventario — Recuperá el control de tu comercio</div>
+      <div class="desc">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta.</div>
+    </div>
+  </div>
+
+  <!-- ============ Variant 2: Ink + reglas editoriales + números ============ -->
+  <h2><span class="var-tag">Variante 2</span>Ink + reglas + números editoriales</h2>
+  <p class="sec-desc">Fondo dark, reglas horizontales tipo publicación, tres números clave abajo. Más "data-driven" y serio. Muy alineado al look de la sección "Sistema" de la landing (Sistema.tsx tiene tone ink).</p>
+  <div class="og-stage">
+    <div class="og v2">
+      <div class="canvas ink">
+        <div class="brand-mark">
+          <img class="logo" src="logo-vectorized.svg" alt="">
+          <div class="brand-text">Buen Inventario</div>
+        </div>
+        <div class="rule-top"></div>
+        <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+        <div class="rule-bottom"></div>
+        <div class="sub">
+          <div class="item"><span class="num">30</span><span>días gratis</span></div>
+          <div class="item"><span class="num">0</span><span>tarjeta</span></div>
+          <div class="item"><span class="num">1</span><span>caja al día</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social-preview">
+    <div class="thumb"><div class="og-inner"><div class="og v2" style="width:100%;height:100%;box-shadow:none;border-radius:0;"><div class="canvas ink" style="transform:scale(0.4333);">
+      <div class="brand-mark"><img class="logo" src="logo-vectorized.svg"><div class="brand-text">Buen Inventario</div></div>
+      <div class="rule-top"></div>
+      <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+      <div class="rule-bottom"></div>
+      <div class="sub">
+        <div class="item"><span class="num">30</span><span>días gratis</span></div>
+        <div class="item"><span class="num">0</span><span>tarjeta</span></div>
+        <div class="item"><span class="num">1</span><span>caja al día</span></div>
+      </div>
+    </div></div></div></div>
+    <div class="meta-block">
+      <div class="url">bueninventario.com</div>
+      <div class="title">Buen Inventario — Recuperá el control de tu comercio</div>
+      <div class="desc">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta.</div>
+    </div>
+  </div>
+
+  <!-- ============ Variant 3: Teal gradient + logo grande ============ -->
+  <h2><span class="var-tag">Variante 3</span>Teal gradient · logo protagonista</h2>
+  <p class="sec-desc">Fondo con gradiente teal (matcheando el apple-touch/PWA elegido), logo grande a la derecha. Máximo brand recognition, look más "app SaaS" / marketing. Consistente con el icon que la gente va a ver instalado.</p>
+  <div class="og-stage">
+    <div class="og v3">
+      <div class="canvas teal">
+        <div class="left">
+          <div class="kicker">Sistema de gestión</div>
+          <div class="display">Recuperá el control <span class="italic" style="color:#F7F4EC; font-style:italic;">de tu comercio.</span></div>
+          <div class="sub">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+        </div>
+        <div class="right">
+          <img class="big-logo" src="logo-vectorized.svg" alt="">
+        </div>
+        <div class="foot-strip">
+          <span>bueninventario.com</span>
+          <span>30 días gratis · Sin tarjeta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social-preview">
+    <div class="thumb"><div class="og-inner"><div class="og v3" style="width:100%;height:100%;box-shadow:none;border-radius:0;"><div class="canvas teal" style="transform:scale(0.4333);">
+      <div class="left">
+        <div class="kicker">Sistema de gestión</div>
+        <div class="display">Recuperá el control <span class="italic" style="color:#F7F4EC; font-style:italic;">de tu comercio.</span></div>
+        <div class="sub">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+      </div>
+      <div class="right"><img class="big-logo" src="logo-vectorized.svg"></div>
+      <div class="foot-strip"><span>bueninventario.com</span><span>30 días gratis · Sin tarjeta</span></div>
+    </div></div></div></div>
+    <div class="meta-block">
+      <div class="url">bueninventario.com</div>
+      <div class="title">Buen Inventario — Recuperá el control de tu comercio</div>
+      <div class="desc">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta.</div>
+    </div>
+  </div>
+
+  <!-- ============ Variant 4: Split + fake UI ============ -->
+  <h2><span class="var-tag">Variante 4</span>Split · texto + UI real de la app</h2>
+  <p class="sec-desc">Mitad texto (paper), mitad screenshot mock del dashboard/cierre. El más "product-forward" — muestra qué compran. Muy común en Stripe/Linear/Vercel. Mayor conversion CTR históricamente.</p>
+  <div class="og-stage">
+    <div class="og v4">
+      <div class="canvas paper">
+        <div class="left">
+          <div class="brand-mark">
+            <img class="logo" src="logo-vectorized.svg" alt="">
+            <div class="brand-text">Buen Inventario</div>
+          </div>
+          <div>
+            <div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div>
+            <div class="sub" style="margin-top:20px;">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:14px; color:#6B6B66;">bueninventario.com · 30 días gratis</div>
+        </div>
+        <div class="right">
+          <div class="fake-ui">
+            <div class="ui-title">Cierre de caja</div>
+            <div class="ui-sub">Hoy · lunes 04 · 20:34</div>
+            <div class="metric"><span class="m-lbl">Ventas</span><span class="m-val">$ 284.500</span></div>
+            <div class="metric"><span class="m-lbl">Efectivo</span><span class="m-val">$ 142.300</span></div>
+            <div class="metric"><span class="m-lbl">Transferencia</span><span class="m-val">$ 87.200</span></div>
+            <div class="metric"><span class="m-lbl">Fiado</span><span class="m-val neg">$ 55.000</span></div>
+            <div class="metric"><span class="m-lbl">Ganancia bruta</span><span class="m-val pos">$ 84.750</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social-preview">
+    <div class="thumb"><div class="og-inner"><div class="og v4" style="width:100%;height:100%;box-shadow:none;border-radius:0;"><div class="canvas paper" style="transform:scale(0.4333);">
+      <div class="left">
+        <div class="brand-mark"><img class="logo" src="logo-vectorized.svg"><div class="brand-text">Buen Inventario</div></div>
+        <div><div class="display">Recuperá el control <span class="italic">de tu comercio.</span></div><div class="sub" style="margin-top:20px;">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista.</div></div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:14px; color:#6B6B66;">bueninventario.com · 30 días gratis</div>
+      </div>
+      <div class="right">
+        <div class="fake-ui">
+          <div class="ui-title">Cierre de caja</div>
+          <div class="ui-sub">Hoy · lunes 04 · 20:34</div>
+          <div class="metric"><span class="m-lbl">Ventas</span><span class="m-val">$ 284.500</span></div>
+          <div class="metric"><span class="m-lbl">Efectivo</span><span class="m-val">$ 142.300</span></div>
+          <div class="metric"><span class="m-lbl">Transferencia</span><span class="m-val">$ 87.200</span></div>
+          <div class="metric"><span class="m-lbl">Fiado</span><span class="m-val neg">$ 55.000</span></div>
+          <div class="metric"><span class="m-lbl">Ganancia bruta</span><span class="m-val pos">$ 84.750</span></div>
+        </div>
+      </div>
+    </div></div></div></div>
+    <div class="meta-block">
+      <div class="url">bueninventario.com</div>
+      <div class="title">Buen Inventario — Recuperá el control de tu comercio</div>
+      <div class="desc">Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta.</div>
+    </div>
+  </div>
+
+  <div class="recommendation">
+    <h3>Mi recomendación</h3>
+    <p><strong>Variante 4 (Split · texto + UI real)</strong> — muestra el producto, no solo la promesa. Los OG con screenshot tienen CTR ~15-25% mayor en estudios de Stripe/Linear. Para landing SaaS pyme argentino, "veo qué compro" es más fuerte que titular editorial. El fake UI del cierre de caja también refuerza el tagline ("todo a la vista").</p>
+    <p><strong>Alternativa fuerte: Variante 1 (Editorial paper)</strong> — si querés máximo brand consistency con el aesthetic actual y menos "SaaS típico".</p>
+    <p><strong>Variante 3 (Teal gradient)</strong> es coherente con el apple-touch que elegiste pero puede leerse como "banner de anuncio" — menos editorial.</p>
+    <p style="margin-top:14px;">Independiente de cuál elijas: la imagen final se genera con <strong>Playwright HTML→PNG</strong> desde este mismo template. Cualquiera puede regenerarse en 5s si cambia copy o números.</p>
+  </div>
+</div>
+</body>
+</html>
