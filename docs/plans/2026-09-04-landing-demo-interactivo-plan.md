@@ -450,7 +450,7 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
 
 - [ ] **Step 4: Verificar**
   ```bash
-  pnpm run test -- src/lib/pricing.test.ts
+  pnpm vitest run src/lib/pricing.test.ts
   ```
 
 - [ ] **Commit:** `git commit -m "feat(landing): fuente única de precio y datos verificables"`
@@ -664,7 +664,7 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
 
 - [ ] **Step 3: Verificar**
   ```bash
-  pnpm run test -- src/demo/data.test.ts
+  pnpm vitest run src/demo/data.test.ts
   ```
   Los 5 tests pasan. El de "vende por encima del costo" protege contra un margen negativo publicado por error.
 
@@ -786,7 +786,7 @@ Toda la lógica del capítulo 01. **Se escribe el test antes que la implementaci
 
 - [ ] **Step 2: Correr los tests y verificar que FALLAN**
   ```bash
-  pnpm run test -- src/demo/useSale.test.ts
+  pnpm vitest run src/demo/useSale.test.ts
   ```
   Deben fallar por módulo inexistente. Si pasan, algo está mal.
 
@@ -865,7 +865,7 @@ Toda la lógica del capítulo 01. **Se escribe el test antes que la implementaci
 
 - [ ] **Step 4: Correr los tests y verificar que PASAN**
   ```bash
-  pnpm run test -- src/demo/useSale.test.ts
+  pnpm vitest run src/demo/useSale.test.ts
   ```
   Los 10 tests en verde.
 
@@ -1678,7 +1678,7 @@ Toda la lógica del capítulo 01. **Se escribe el test antes que la implementaci
 
 - [ ] **Step 4: Verificar**
   ```bash
-  pnpm run test -- src/demo/DemoWidget.test.tsx
+  pnpm vitest run src/demo/DemoWidget.test.tsx
   ```
   Los 7 tests pasan. El de la ganancia es el que protege el número que la landing publica como su momento de valor.
 
