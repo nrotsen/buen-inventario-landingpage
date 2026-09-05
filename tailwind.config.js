@@ -57,6 +57,15 @@ export default {
         editorial: "880px",
         prose: "60ch",
       },
+      keyframes: {
+        'demo-nudge': {
+          '0%, 100%': { boxShadow: '3px 3px 0 0 #14b8a6' },
+          '50%':      { boxShadow: '3px 3px 0 0 rgba(20,184,166,0.25)' },
+        },
+      },
+      animation: {
+        'demo-nudge': 'demo-nudge 1.6s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

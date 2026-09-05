@@ -1,47 +1,44 @@
-import type { ReactNode } from 'react';
 import { Section } from '@/components/ui/Section';
-import { Button } from '@/components/ui/Button';
 import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
-import { BrowserFrame } from '@/components/ui/BrowserFrame';
-import { ProductsFakeScreen } from '@/components/ui/fake-screens/ProductsFakeScreen';
-import { LedgerFakeScreen } from '@/components/ui/fake-screens/LedgerFakeScreen';
-import { CajaFakeScreen } from '@/components/ui/fake-screens/CajaFakeScreen';
-import { signupUrl } from '@/lib/config';
+import { PhoneRow } from './sistema/PhoneRow';
 
-type Capture = {
-  num: string;
-  label: string;
-  headline: string;
+interface Capability {
+  tag: string;
+  title: string;
   body: string;
-  url: string;
-  screen: ReactNode;
-};
+}
 
-const CAPTURES: Capture[] = [
+const CAPABILITIES: Capability[] = [
   {
-    num: '01',
-    label: 'Productos',
-    headline: 'El capital durmiendo en tu depósito.',
-    body: 'Cada producto con stock, costo, margen y días sin venta. Los que duermen se ven solos.',
-    url: 'bueninventario.com/admin/productos',
-    screen: <ProductsFakeScreen />,
+    tag: 'Catálogo',
+    title: 'Tu rubro ya viene cargado',
+    body: 'Casi 30.000 productos con código de barras, marca y presentación, listos para usar. Kiosco, ferretería, carnicería, verdulería, pescadería, indumentaria. Escaneás y aparece.',
   },
   {
-    num: '02',
-    label: 'Cuentas corrientes',
-    headline: 'Quién te debe qué.',
-    body: 'La cuenta de cada cliente con saldo, último movimiento y detalle de cada compra. Cero discusión.',
-    url: 'bueninventario.com/admin/clientes/marcos-lopez',
-    screen: <LedgerFakeScreen />,
+    tag: 'Facturación',
+    title: 'ARCA, cuando vos quieras',
+    body: 'Facturación electrónica integrada, homologada. Vos decidís venta por venta si facturás o no. El sistema no te controla ni te denuncia.',
   },
   {
-    num: '03',
-    label: 'Cierre de caja',
-    headline: 'El día cerrado en 30 segundos.',
-    body: 'Total por método de pago, diferencias, próxima apertura. Lo que antes te llevaba una hora a mano.',
-    url: 'bueninventario.com/admin/caja/cierre',
-    screen: <CajaFakeScreen />,
+    tag: 'Sucursales',
+    title: 'Más de un local',
+    body: 'Stock, caja y precios por sucursal, con la vista consolidada arriba. Si abrís el segundo, no empezás un sistema nuevo.',
+  },
+  {
+    tag: 'Tienda web',
+    title: 'Tu comercio online, sin programar',
+    body: 'Tienda propia conectada al mismo stock. Los pedidos web entran a la misma caja. Elegís el diseño y sale publicada.',
+  },
+  {
+    tag: 'Migración',
+    title: 'Subís tus archivos Excel y se cargan solos',
+    body: 'Importación masiva de productos, clientes y proveedores. No hay que tipear nada de nuevo.',
+  },
+  {
+    tag: 'Rotación',
+    title: 'Qué se vende y qué duerme',
+    body: 'Días sin venta por producto, margen real y capital inmovilizado. Sabés qué dejar de comprar antes de comprarlo.',
   },
 ];
 
@@ -49,51 +46,35 @@ export function Sistema() {
   return (
     <Section id="sistema" tone="ink" className="py-28 md:py-44">
       <div className="max-w-[760px]">
-        <EditorialMicro className="!text-paper/55">El sistema</EditorialMicro>
-        <DisplayHeading level={2} italicAccent={<>abrir todos los días.</>} className="mt-5 !text-paper">
-          Esto es lo que vas a
+        <EditorialMicro className="!text-paper/55">Lo que hay debajo</EditorialMicro>
+        <DisplayHeading level={2} italicAccent={<>Abajo hay bastante más.</>} className="mt-5 !text-paper">
+          Recién usaste la caja.
         </DisplayHeading>
-        <p className="mt-6 text-body-lg text-paper/70 max-w-[55ch] leading-relaxed">
-          Tres pantallas. Las que más usás. Las que muestran lo que el Excel te ocultaba.
+        <p className="mt-6 max-w-[55ch] text-body-lg leading-relaxed text-paper/70">
+          No es una app de inventario. Es el sistema completo de un comercio — y está construido para bancar el
+          tuyo cuando crezca.
         </p>
       </div>
 
-      <div className="mt-20 flex flex-col gap-24">
-        {CAPTURES.map((c) => (
-          <div key={c.num} className="text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-teal-500/85">
-              {c.num} · {c.label}
-            </p>
-            <h3 className="editorial-display text-[26px] md:text-[34px] leading-tight mt-2.5 text-paper">
-              {c.headline}
-            </h3>
-            <p className="mt-3 text-body-md text-paper/65 max-w-[48ch] mx-auto leading-relaxed">
-              {c.body}
-            </p>
-            <div className="mt-9 max-w-[920px] mx-auto">
-              <BrowserFrame url={c.url}>{c.screen}</BrowserFrame>
+      <div className="mt-16 grid grid-cols-1 border-t-hard border-paper md:grid-cols-2">
+        {CAPABILITIES.map((capability, i) => {
+          const isLeftColumn = i % 2 === 0;
+          return (
+            <div
+              key={capability.tag}
+              className={`border-b border-dashed border-paper/20 py-6 ${
+                isLeftColumn ? 'md:border-r md:pr-8' : 'md:pl-8'
+              }`}
+            >
+              <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-teal-500">{capability.tag}</p>
+              <h3 className="editorial-display mt-1.5 text-[22px] leading-snug text-paper">{capability.title}</h3>
+              <p className="mt-2.5 text-[14.5px] leading-relaxed text-paper/65">{capability.body}</p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <div className="mt-24 max-w-[640px] mx-auto text-center">
-        <p className="editorial-display text-[24px] md:text-[32px] leading-snug text-paper">
-          Cargás tus productos en una tarde.{' '}
-          <em className="editorial-italic text-teal-500">Empezás a operar mañana.</em>
-        </p>
-        <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4 sm:justify-center">
-          <Button as="a" href={signupUrl()} variant="inverted" size="lg" className="sm:min-w-[200px]">
-            Probalo gratis <span className="font-mono">→</span>
-          </Button>
-          <Button as="a" href="#faq" variant="ghost-on-dark" size="lg" className="sm:min-w-[200px]">
-            Ver las dudas comunes
-          </Button>
-        </div>
-        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.06em] text-paper/55">
-          Sin tarjeta · 30 días de prueba · Cancelás cuando quieras
-        </p>
-      </div>
+      <PhoneRow />
     </Section>
   );
 }

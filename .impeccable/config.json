@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-05T12:10:00.000Z",
+        "reason": "User confirmed Inter is intentional — cuerpo del trío editorial aprobado (DM Serif Display + JetBrains Mono + Inter). Decisión del design spec 2026-05-28, que evaluó Fraunces y la descartó. Inter no carga el peso expresivo: la personalidad la ponen DM Serif en los títulos y JetBrains Mono en micro-labels y números. Cambiarla desalinearía la landing del producto vivo (buen-carrito-frontend usa el mismo trío), y el visitante que se registra entraría a una app que se ve de otra marca. Duplica el waiver de la raíz del workspace, que el hook no encuentra porque este subrepo es su propio repo git."
+      }
+    ]
+  }
+}

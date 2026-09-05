@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
 import { whatsappLink } from '@/lib/contact';
+import { track } from '@/lib/analytics';
 
 type Qa = { q: string; a: string };
 
@@ -25,11 +26,15 @@ const QAS: Qa[] = [
   },
   {
     q: '¿Funciona si se cae internet?',
-    a: 'Sigue funcionando en el navegador con los últimos datos cargados. Cuando vuelve internet, sincroniza solo.',
+    a: 'Hoy necesitás conexión para operar. Como tus datos no viven en la computadora del local sino en la nube, si se corta podés seguir vendiendo desde el celular con datos móviles, o desde cualquier otro equipo. Estoy trabajando para que funcione sin internet, pero todavía no lo prometo.',
   },
   {
     q: '¿Sirve solo para almacenes y kioscos?',
-    a: 'No. Lo armé para mi almacén pero hoy lo usan también ferreterías, papeleras, químicas, regalerías y cualquier comercio chico que venda productos por unidad. También funciona para multisucursal (feature en desarrollo). Si tu negocio maneja stock, ventas y cuentas, te sirve.',
+    a: 'No. Lo armé para mi almacén, pero el sistema no sabe qué vendés: maneja productos, stock, precios y cuentas. El catálogo viene precargado por rubro — ferretería, carnicería, verdulería, pescadería, indumentaria — y si vendés ropa tenés talles y colores. También funciona si tenés más de un local. Si tu negocio maneja stock, ventas y cuentas, te sirve.',
+  },
+  {
+    q: '¿Dónde están mis datos y qué pasa si se rompe algo?',
+    a: 'Tus datos no están en la computadora del local: están en la nube, en servidores de Amazon. Si se te rompe la PC, se te moja o te la roban, tus datos siguen ahí — entrás desde otro equipo y seguís trabajando. Y los exportás a Excel cuando quieras.',
   },
 ];
 
@@ -69,6 +74,7 @@ export function Faq() {
           href={whatsappLink('Hola Néstor, tengo una pregunta sobre Buen Inventario.')}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track('cta_whatsapp_clicked', { section: 'faq' })}
           className="text-teal-700 underline underline-offset-[3px] hover:text-ink transition-colors"
         >
           Escribime por WhatsApp →

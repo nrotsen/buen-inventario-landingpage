@@ -21,22 +21,16 @@ export function Historia() {
 
         <div className="mt-14 md:mt-[72px] text-left md:text-center space-y-5 md:space-y-6">
           <p className="text-body-lg md:text-[19px] text-ink/85 leading-relaxed max-w-[56ch] mx-auto">
-            Soy Néstor. Tengo Don Néstor Despensa, un almacén de barrio con un empleado. Durante años trabajé "a ojo" — no sabía qué se vendía más, cuánto me robaban, ni cuánto ganaba de verdad.
+            Soy comerciante. Tengo un almacén de barrio con un empleado, y durante años trabajé "a ojo" — no sabía qué se vendía más, cuánto me robaban, ni cuánto ganaba de verdad.
           </p>
           <p className="text-body-lg md:text-[19px] text-ink/85 leading-relaxed max-w-[56ch] mx-auto">
-            Buen Inventario lo armé para resolver eso en mi propio negocio. Hoy lo uso todos los días, y lo comparto con otros comerciantes que también quieran dejar de adivinar.
+            Buen Inventario lo armé para resolver eso en mi propio negocio. Lo uso todos los días detrás del mostrador, así que sé bien lo que te pasa. Y lo abrí para cualquier comerciante que también quiera dejar de adivinar.
           </p>
         </div>
 
         <div className="mx-auto mt-16 md:mt-[88px] w-20 h-px bg-teal-700/60" aria-hidden="true" />
         <p className="mt-6 editorial-micro">
-          Don Néstor Despensa · Almacén de barrio · Argentina
-        </p>
-
-        <div className="mx-auto mt-20 md:mt-[100px] w-[60px] h-px bg-teal-700/60" aria-hidden="true" />
-        <p className="mt-6 editorial-micro">También lo usan</p>
-        <p className="mt-3 text-body-sm text-text-muted leading-relaxed max-w-[48ch] mx-auto">
-          Kioscos · Despensas · Ferreterías · Papeleras · Químicas · Regalerías · Comercios multisucursal
+          Comerciante · Almacén de barrio · Argentina
         </p>
       </div>
     </Section>

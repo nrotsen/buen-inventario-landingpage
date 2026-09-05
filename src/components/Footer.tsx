@@ -1,10 +1,12 @@
 import { whatsappLink, mailtoLink, instagramLink, facebookLink, tiktokLink } from '@/lib/contact';
+import { track } from '@/lib/analytics';
 
 const PRODUCT_LINKS = [
-  { label: 'Cómo funciona',         href: '#sistema'  },
-  { label: 'Precio',                href: '#precio'   },
-  { label: 'Historia',              href: '#historia' },
-  { label: 'Preguntas frecuentes',  href: '#faq'      },
+  { label: 'Probalo',               href: '#demo'       },
+  { label: 'Cómo funciona',         href: '#sistema'    },
+  { label: 'Cómo arrancás',         href: '#arrancar'   },
+  { label: 'Precio',                href: '#precio'     },
+  { label: 'Preguntas frecuentes',  href: '#faq'        },
 ];
 
 export function Footer() {
@@ -24,7 +26,7 @@ export function Footer() {
               <span className="editorial-display text-[22px] text-paper">Buen Inventario</span>
             </div>
             <p className="mt-3.5 text-body-sm text-paper/65 leading-relaxed max-w-[40ch]">
-              Sistema de gestión para comercios de Argentina. Hecho desde Don Néstor Despensa.
+              Sistema de gestión para comercios de Argentina. Hecho por un comerciante que lo usa todos los días en su almacén.
             </p>
           </div>
 
@@ -49,6 +51,7 @@ export function Footer() {
                   href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('cta_whatsapp_clicked', { section: 'footer' })}
                   className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
                   WhatsApp
@@ -57,7 +60,7 @@ export function Footer() {
               <li>
                 <a
                   href={mailtoLink()}
-                  className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
+                  className="break-all text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
                   nestorb@bueninventario.com
                 </a>
@@ -98,10 +101,6 @@ export function Footer() {
 
         <div className="mt-12 pt-7 border-t border-paper/15 flex flex-col md:flex-row items-center md:justify-between gap-3 text-body-sm text-paper/55">
           <p>© 2026 Buen Inventario · Argentina</p>
-          <div className="flex gap-6">
-            <a href="/terminos" className="hover:text-paper transition-colors">Términos</a>
-            <a href="/privacidad" className="hover:text-paper transition-colors">Privacidad</a>
-          </div>
         </div>
       </div>
     </footer>

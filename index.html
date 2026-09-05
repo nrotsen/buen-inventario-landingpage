@@ -13,25 +13,21 @@
     <link rel="preload" href="/fonts/dmserif-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <title>Buen Inventario — Recuperá el control de tu comercio</title>
+    <title>Buen Inventario — Sistema de gestión para comercios. Probalo sin registrarte</title>
     <meta
       name="description"
-      content="Sistema de gestión para comercios de Argentina. Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
+      content="Hacé una venta, fiale a un cliente y cerrá la caja en el demo, sin registrarte. Stock, caja, cuentas corrientes y facturación ARCA para comercios de Argentina. 30 días gratis, sin tarjeta."
     />
-    <meta
-      name="keywords"
-      content="sistema gestion almacen, software comercio argentina, control stock argentina, gestion kiosco, sistema despensa, sistema ferreteria, software papelera, gestion quimica, sistema regaleria, gestion multisucursal"
-    />
-    <meta name="author" content="Buen Inventario" />
+<meta name="author" content="Buen Inventario" />
     <link rel="canonical" href="https://www.bueninventario.com" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.bueninventario.com" />
-    <meta property="og:title" content="Buen Inventario — Recuperá el control de tu comercio" />
+    <meta property="og:title" content="Buen Inventario — Sistema de gestión para comercios. Probalo sin registrarte" />
     <meta
       property="og:description"
-      content="Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
+      content="Probá el sistema acá mismo, sin registrarte: hacé una venta, fiá y cerrá la caja. 30 días gratis, sin tarjeta."
     />
     <meta property="og:image" content="https://www.bueninventario.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -42,51 +38,22 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.bueninventario.com" />
-    <meta name="twitter:title" content="Buen Inventario — Recuperá el control de tu comercio" />
+    <meta name="twitter:title" content="Buen Inventario — Sistema de gestión para comercios. Probalo sin registrarte" />
     <meta
       name="twitter:description"
-      content="Stock, caja, ganancias reales y cuánto te debe cada cliente — todo a la vista. 30 días gratis, sin tarjeta."
+      content="Probá el sistema acá mismo, sin registrarte: hacé una venta, fiá y cerrá la caja. 30 días gratis, sin tarjeta."
     />
     <meta name="twitter:image" content="https://www.bueninventario.com/og-image.png" />
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Buen Inventario",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "description": "Sistema de gestión para comercios de Argentina.",
-        "offers": {
-          "@type": "Offer",
-          "price": "14900",
-          "priceCurrency": "ARS",
-          "availability": "https://schema.org/InStock"
-        }
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Buen Inventario",
-        "url": "https://www.bueninventario.com",
-        "logo": "https://www.bueninventario.com/bueninventario-logo.png",
-        "sameAs": ["https://instagram.com/bueninventario"]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "GroceryStore",
-        "name": "Don Néstor Despensa",
-        "description": "Almacén de barrio en Argentina donde se usa Buen Inventario todos los días.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "AR"
-        }
-      }
-    </script>
+    <!--
+      El JSON-LD no va acá: lo inyecta scripts/prerender.ts al cerrar el head,
+      generándolo desde src/lib/pricing.ts, para que el precio del schema y el
+      de la card de precio no puedan divergir.
+
+      Ojo: ni este comentario ni ningún otro puede contener el texto de cierre
+      del head. Vite inyecta el bundle antes de la PRIMERA aparición, así que
+      escribirlo acá dejaría el script y el CSS del sitio dentro del comentario.
+    -->
   </head>
   <body>
     <div id="root"></div>

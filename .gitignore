@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# cache de sesión del hook de diseño — no versionar
+.impeccable/hook.cache.json

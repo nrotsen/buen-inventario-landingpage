@@ -1,14 +1,390 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
   <head>
+    <!-- Pendiente de lectura del titular: no indexar ni seguir hasta que se apruebe. -->
+    <meta name="robots" content="noindex, nofollow" />
     <meta charset="UTF-8" />
-    <title>Términos · Buen Inventario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F7F4EC" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preload" href="/fonts/dmserif-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <title>Términos del servicio · Buen Inventario</title>
+    <meta
+      name="description"
+      content="Términos y condiciones del servicio Buen Inventario: prueba gratuita de 30 días, precio, facturación vía Mercado Pago, cancelación, propiedad de tus datos y ley aplicable."
+    />
+    <meta name="author" content="Buen Inventario" />
+    <link rel="canonical" href="https://www.bueninventario.com/terminos" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.bueninventario.com/terminos" />
+    <meta property="og:title" content="Términos del servicio · Buen Inventario" />
+    <meta
+      property="og:description"
+      content="Prueba gratuita de 30 días, precio, facturación vía Mercado Pago, cancelación, propiedad de tus datos y ley aplicable."
+    />
+    <meta property="og:image" content="https://www.bueninventario.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Buen Inventario" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.bueninventario.com/terminos" />
+    <meta name="twitter:title" content="Términos del servicio · Buen Inventario" />
+    <meta
+      name="twitter:description"
+      content="Prueba gratuita de 30 días, precio, facturación vía Mercado Pago, cancelación y propiedad de tus datos."
+    />
+    <meta name="twitter:image" content="https://www.bueninventario.com/og-image.png" />
+
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/inter-latin.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'DM Serif Display';
+        src: url('/fonts/dmserif-400-latin.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('/fonts/jetbrainsmono-400-latin.woff2') format('woff2');
+        font-weight: 400 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: #fafaf7;
+        color: #0a0a0a;
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::selection { background: #14b8a6; color: #fafaf7; }
+
+      .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 96px; }
+
+      .back {
+        display: inline-block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0f766e;
+        text-decoration: none;
+      }
+      .back:hover { text-decoration: underline; }
+
+      .eyebrow {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6b6b66;
+        margin: 32px 0 12px;
+      }
+
+      h1 {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 1.15;
+        margin: 0 0 20px;
+      }
+
+      .meta {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 12px;
+        color: #6b6b66;
+        border-bottom: 1.5px solid #0a0a0a;
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+      }
+
+      .lead {
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      nav.toc {
+        background: #f4f1e8;
+        border: 1.5px solid #0a0a0a;
+        padding: 20px 24px;
+        margin-bottom: 48px;
+      }
+      nav.toc p {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6b6b66;
+        margin: 0 0 12px;
+      }
+      nav.toc ol {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        line-height: 1.9;
+      }
+      nav.toc a { color: #0a0a0a; text-decoration: none; }
+      nav.toc a:hover { color: #0f766e; text-decoration: underline; }
+
+      section { margin-bottom: 40px; scroll-margin-top: 24px; }
+      section h2 {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-weight: 400;
+        font-size: 24px;
+        margin: 0 0 16px;
+        padding-top: 24px;
+        border-top: 1.5px solid #e8e6dd;
+      }
+      section:first-of-type h2 { border-top: none; padding-top: 0; }
+
+      p { font-size: 15px; line-height: 1.7; margin: 0 0 16px; overflow-wrap: break-word; }
+      ul, ol.body-list { margin: 0 0 16px; padding-left: 20px; font-size: 15px; line-height: 1.7; }
+      li { margin-bottom: 8px; }
+      strong { font-weight: 600; }
+      a { color: #0f766e; }
+
+      .callout {
+        background: #f4f1e8;
+        border: 1.5px solid #0a0a0a;
+        padding: 20px 24px;
+        margin: 24px 0;
+      }
+      .callout p:last-child { margin-bottom: 0; }
+
+      footer { border-top: 1.5px solid #0a0a0a; margin-top: 64px; padding-top: 32px; }
+      footer .contact {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 2;
+      }
+      footer .cross { margin-top: 24px; font-size: 13px; }
+
+      @media (max-width: 480px) {
+        h1 { font-size: 30px; }
+        section h2 { font-size: 20px; }
+      }
+    </style>
   </head>
-  <body style="font-family: system-ui; max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; color: #0a0a0a; background: #fafaf7;">
-    <p style="font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b66;">Documento legal</p>
-    <h1 style="font-family: Georgia, serif; font-size: 32px; margin-top: 0.5rem;">Términos del servicio</h1>
-    <p style="margin-top: 2rem; line-height: 1.6;">Este documento se completará antes de la puesta en producción del servicio comercial. Para consultas legales mientras tanto, escribinos a <a href="mailto:hola@bueninventario.com" style="color: #0f766e;">hola@bueninventario.com</a>.</p>
-    <p style="margin-top: 2rem;"><a href="/" style="color: #0f766e;">← Volver al inicio</a></p>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← Volver al inicio</a>
+
+      <p class="eyebrow">Documento legal</p>
+      <h1>Términos del servicio</h1>
+      <p class="meta">Última actualización: 5 de septiembre de 2026</p>
+
+      <p class="lead">
+        Estos términos rigen el uso de Buen Inventario, el sistema de gestión para comercios de
+        <strong>www.bueninventario.com</strong>. Al crear una cuenta o usar el servicio, los aceptás. Leelos
+        junto con nuestra <a href="/privacidad">Política de privacidad</a>.
+      </p>
+
+      <nav class="toc" aria-label="Índice">
+        <p>Índice</p>
+        <ol>
+          <li><a href="#aceptacion">Aceptación de estos términos</a></li>
+          <li><a href="#servicio">Qué es Buen Inventario</a></li>
+          <li><a href="#cuenta">Tu cuenta</a></li>
+          <li><a href="#prueba">Prueba gratuita de 30 días</a></li>
+          <li><a href="#precio">Precio y facturación</a></li>
+          <li><a href="#cancelacion">Cancelación</a></li>
+          <li><a href="#uso">Uso aceptable</a></li>
+          <li><a href="#tus-datos">Tus datos: propiedad y exportación</a></li>
+          <li><a href="#arca">Facturación electrónica (ARCA)</a></li>
+          <li><a href="#disponibilidad">Disponibilidad del servicio</a></li>
+          <li><a href="#responsabilidad">Limitación de responsabilidad</a></li>
+          <li><a href="#propiedad-intelectual">Propiedad intelectual</a></li>
+          <li><a href="#suspension">Suspensión y cierre de cuenta</a></li>
+          <li><a href="#cambios">Cambios a estos términos</a></li>
+          <li><a href="#ley">Ley aplicable y jurisdicción</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ol>
+      </nav>
+
+      <section id="aceptacion">
+        <h2>1. Aceptación de estos términos</h2>
+        <p>
+          Estos términos constituyen un acuerdo entre vos y <strong>Néstor B.</strong>, titular de Buen Inventario, con domicilio electrónico de contacto en <a href="mailto:nestorb@bueninventario.com">nestorb@bueninventario.com</a>.
+          Al crear una cuenta, iniciar la prueba
+          gratuita o usar el sistema de cualquier forma, aceptás quedar obligado por estos términos y por
+          nuestra <a href="/privacidad">Política de privacidad</a>.
+        </p>
+      </section>
+
+      <section id="servicio">
+        <h2>2. Qué es Buen Inventario</h2>
+        <p>
+          Buen Inventario es un sistema de gestión pensado para comercios chicos de Argentina. Incluye ventas,
+          control de stock, caja, cuentas corrientes de clientes, importación masiva de datos desde Excel,
+          gestión multi-sucursal, tienda web propia y facturación electrónica opcional a través de ARCA.
+        </p>
+      </section>
+
+      <section id="cuenta">
+        <h2>3. Tu cuenta</h2>
+        <p>
+          Sos responsable de mantener la confidencialidad de tu contraseña y de toda la actividad que ocurra
+          bajo tu cuenta. Avisanos de inmediato si sospechás un uso no autorizado. La cuenta es para uso de tu
+          comercio y no es transferible a otro negocio sin nuestro acuerdo.
+        </p>
+      </section>
+
+      <section id="prueba">
+        <h2>4. Prueba gratuita de 30 días</h2>
+        <p>
+          Podés probar Buen Inventario gratis durante <strong>30 días</strong>, sin cargar tarjeta ni ningún
+          medio de pago. Al terminar la prueba, si querés seguir usando el sistema, activás el plan pago
+          cargando tu medio de pago en Mercado Pago. Si no lo hacés, no se te cobra nada.
+        </p>
+      </section>
+
+      <section id="precio">
+        <h2>5. Precio y facturación</h2>
+        <p>
+          El plan único cuesta <strong>$24.900 ARS por mes</strong>. Ese es el importe que se debita:
+          no hay cargos adicionales, ni costos de habilitación, ni por cantidad de usuarios o sucursales.
+          El cobro se procesa a través de <strong>Mercado Pago</strong>, mediante una suscripción con débito
+          automático (<em>preapproval</em>): al activar el plan, autorizás a Mercado Pago a debitar el importe
+          mensual de tu medio de pago de forma recurrente, hasta que canceles. Buen Inventario no almacena los
+          datos de tu tarjeta — esa información la gestiona Mercado Pago conforme a sus propias políticas.
+        </p>
+      </section>
+
+      <section id="cancelacion">
+        <h2>6. Cancelación</h2>
+        <p>
+          Podés cancelar tu suscripción en cualquier momento, sin penalidad. La cancelación no genera reembolsos
+          por el período ya abonado: seguís teniendo acceso al sistema hasta el final del ciclo de facturación
+          que ya pagaste, y no se te cobra el período siguiente.
+        </p>
+      </section>
+
+      <section id="uso">
+        <h2>7. Uso aceptable</h2>
+        <p>Al usar Buen Inventario, te comprometés a no:</p>
+        <ul>
+          <li>Usar el sistema para fines ilícitos o fraudulentos.</li>
+          <li>Intentar vulnerar la seguridad del sistema o acceder a datos de otras cuentas sin autorización.</li>
+          <li>Revender o sublicenciar el acceso al sistema sin nuestro acuerdo previo.</li>
+        </ul>
+      </section>
+
+      <section id="tus-datos">
+        <h2>8. Tus datos: propiedad y exportación</h2>
+        <p>
+          Los datos que cargás en Buen Inventario — productos, stock, ventas, caja, clientes, proveedores — son
+          <strong>tuyos</strong>. No los usamos para fines propios más allá de operar el servicio para vos, y no
+          los vendemos. Podés exportarlos a Excel/CSV desde el sistema cuando quieras. Te recomendamos exportar
+          periódicamente los datos que sean críticos para tu negocio, como respaldo propio.
+        </p>
+      </section>
+
+      <section id="arca">
+        <h2>9. Facturación electrónica (ARCA)</h2>
+        <p>
+          La emisión de comprobantes electrónicos a través de ARCA (ex AFIP) es <strong>opcional y por
+          venta</strong>: el sistema no se conecta con ARCA salvo que vos lo actives explícitamente para una
+          operación puntual. Sos responsable de que los datos fiscales que cargás sean correctos y de tus
+          obligaciones impositivas frente a ARCA.
+        </p>
+      </section>
+
+      <section id="disponibilidad">
+        <h2>10. Disponibilidad del servicio</h2>
+        <p>
+          Trabajamos para mantener el sistema disponible, pero no garantizamos un porcentaje de disponibilidad
+          comprometido contractualmente (SLA). Puede haber interrupciones por mantenimiento programado, fallas
+          de proveedores de infraestructura (AWS, Vercel, Mercado Pago) o causas fuera de nuestro control.
+        </p>
+      </section>
+
+      <section id="responsabilidad">
+        <h2>11. Limitación de responsabilidad</h2>
+        <p>
+          En la medida que lo permita la ley aplicable, Buen Inventario no será responsable por daños
+          indirectos, lucro cesante, pérdida de ventas o pérdida de datos derivados del uso o la imposibilidad
+          de uso del servicio, salvo dolo o culpa grave. Como se indica en la sección 8, sos responsable de
+          exportar y resguardar por tu cuenta la información crítica de tu negocio.
+        </p>
+      </section>
+
+      <section id="propiedad-intelectual">
+        <h2>12. Propiedad intelectual</h2>
+        <p>
+          El software, el diseño, la marca "Buen Inventario" y el código del sistema son propiedad de su
+          titular. Estos términos te otorgan una licencia de uso personal, no exclusiva e intransferible del
+          sistema mientras tu cuenta esté activa. No adquirís ningún derecho de propiedad sobre el software.
+        </p>
+      </section>
+
+      <section id="suspension">
+        <h2>13. Suspensión y cierre de cuenta</h2>
+        <p>
+          Podemos suspender o cerrar tu cuenta si incumplís estos términos, si hacés un uso indebido del
+          sistema, o por falta de pago tras haberte avisado. Vos podés cerrar tu cuenta cuando quieras siguiendo
+          el procedimiento de cancelación de la sección 6.
+        </p>
+      </section>
+
+      <section id="cambios">
+        <h2>14. Cambios a estos términos</h2>
+        <p>
+          Podemos actualizar estos términos cuando cambie el producto o la normativa aplicable. Vamos a publicar
+          la versión vigente en esta misma página, con la fecha de última actualización arriba. Si el cambio es
+          significativo, te lo vamos a avisar por correo electrónico o dentro del sistema. Si seguís usando el
+          servicio después de un cambio, se entiende que lo aceptás.
+        </p>
+      </section>
+
+      <section id="ley">
+        <h2>15. Ley aplicable y jurisdicción</h2>
+        <p>
+          Estos términos se rigen por las leyes de la <strong>República Argentina</strong>. Para cualquier
+          controversia derivada de estos términos, las partes se someten a la competencia de los tribunales
+          ordinarios competentes de la República Argentina.
+        </p>
+      </section>
+
+      <section id="contacto">
+        <h2>16. Contacto</h2>
+        <div class="callout">
+          <p>
+            Néstor B. — <a href="mailto:nestorb@bueninventario.com">nestorb@bueninventario.com</a><br />
+            WhatsApp: <a href="https://wa.me/5491122775850">+54 9 11 2277-5850</a>
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="contact">
+          <a href="/">← Volver al inicio</a>
+        </p>
+        <p class="cross"><a href="/privacidad">Ver también la Política de privacidad →</a></p>
+      </footer>
+    </div>
   </body>
 </html>
