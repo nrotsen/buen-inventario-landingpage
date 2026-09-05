@@ -24,7 +24,7 @@ export function Historia() {
             Soy Néstor. Tengo Don Néstor Despensa, un almacén de barrio con un empleado. Durante años trabajé "a ojo" — no sabía qué se vendía más, cuánto me robaban, ni cuánto ganaba de verdad.
           </p>
           <p className="text-body-lg md:text-[19px] text-ink/85 leading-relaxed max-w-[56ch] mx-auto">
-            Buen Inventario lo armé para resolver eso en mi propio negocio. Hoy lo uso todos los días, y lo comparto con otros comerciantes que también quieran dejar de adivinar.
+            Buen Inventario lo armé para resolver eso en mi propio negocio. Hoy lo uso todos los días, y lo abrí para cualquier comerciante que también quiera dejar de adivinar.
           </p>
         </div>
 
