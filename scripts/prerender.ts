@@ -9,6 +9,21 @@ const DIST_HTML = resolve(import.meta.dirname, "../dist/index.html");
 const ROOT_MARKER = '<div id="root"></div>';
 const HEAD_MARKER = "</head>";
 
+/**
+ * Centinela del demo: un fragmento que solo existe DENTRO del boundary de
+ * `<Suspense>` del demo (la barra de capítulos de `DemoWidget`).
+ *
+ * Tiene que estar adentro del boundary. Si un componente del demo tira, React
+ * emite el `DemoFrameFallback` en su lugar y sigue como si nada — el `<h1>`
+ * del Hero, que está afuera del boundary, se renderiza igual. Verificar
+ * contra el `<h1>` (o contra cualquier cosa de afuera) da verde con un demo
+ * que nunca se renderizó.
+ *
+ * Es un atributo de accesibilidad y no una frase de copy a propósito:
+ * `role="tablist"` no se cambia en una pasada de redacción, un título sí.
+ */
+const DEMO_SENTINEL = 'role="tablist"';
+
 interface EntryServerModule {
   AppShell: ComponentType;
 }
@@ -51,8 +66,36 @@ async function main(): Promise<void> {
   const started = Date.now();
 
   const AppShell = await loadAppShell();
-  const { prelude } = await prerenderToNodeStream(createElement(AppShell));
+
+  // `prerenderToNodeStream` NO rechaza cuando un componente tira: React
+  // recupera en el boundary de Suspense más cercano, escribe el fallback y
+  // resuelve normal. Sin este `onError` el build salía 0 con un `dist/` que
+  // servía el esqueleto en `animate-pulse` en lugar del demo.
+  let renderError: unknown = null;
+  const { prelude } = await prerenderToNodeStream(createElement(AppShell), {
+    onError(error) {
+      if (renderError === null) renderError = error;
+    },
+  });
   const appHtml = await streamToString(prelude);
+
+  // Después de consumir el stream: los errores de un boundary aparecen
+  // mientras React sigue renderizando, no antes de devolver el prelude.
+  if (renderError !== null) {
+    throw new Error(
+      "[prerender] React tiró durante el render estático — el HTML quedaría con " +
+        "el fallback de Suspense en vez del contenido. Ver el error de abajo.",
+      { cause: renderError },
+    );
+  }
+
+  if (!appHtml.includes(DEMO_SENTINEL)) {
+    throw new Error(
+      `[prerender] El HTML renderizado no contiene el centinela del demo (${DEMO_SENTINEL}): ` +
+        "quedó el fallback de Suspense en vez del demo, o el demo cambió de estructura. " +
+        "Si cambió a propósito, actualizar DEMO_SENTINEL y el grep del §10 de STANDARDS.",
+    );
+  }
 
   let html = await readFile(DIST_HTML, "utf8");
 
