@@ -1776,6 +1776,8 @@ Reemplaza la idea de assets generados con IA: texto nítido, datos coherentes co
 
 **Constraints:**
 - **El demo se importa con `lazy()` y se envuelve en `<Suspense>`** con `DemoFrameFallback`. No puede estar en el chunk inicial.
+- 🚩 **Defecto de layout detectado al ejecutar la Task 11 — hay que resolverlo acá.** Entre 1024px y 1150px de viewport, la columna `minmax(0,1fr)` de este grid aprieta el demo a ~468px de ancho: la grilla de productos queda con columnas de **39px** y los tiles crecen a 124px de alto. Es el rango de laptops chicas y tablets en horizontal. Medido con Playwright, no estimado.
+  El grid propuesto (`lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]`) reparte mal en ese rango porque la columna de copy no cede. Opciones: subir el breakpoint de split a `xl` (1280px) para que abajo de eso el demo vaya a ancho completo apilado; o darle a la columna de copy un `minmax` que ceda (`minmax(0,380px)`); o `lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)]`. **Verificar con Playwright a 1024, 1100 y 1150px antes de dar la task por cerrada** — no aceptar "compila" como verificación.
 - H1 único en toda la página.
 - El CTA emite `cta_signup_clicked` con `section: 'hero'` vía `track()`.
 - Mobile: el demo tiene que quedar visible sin scroll en un viewport de 640px de alto. El H1 baja a 40px y la lede se acorta.
@@ -2387,6 +2389,8 @@ Cierra **F3 del audit SEO 2026-07-31**. Hoy el HTML servido es `<div id="root"><
   pnpm run preview
   ```
   Abrir la consola: **no debe haber warnings de hydration mismatch**. El demo tiene que quedar interactivo.
+
+  ⚠️ **Revisar si el fallback sigue haciendo falta.** La Task 11 midió el widget con Playwright y ajustó `DemoFrameFallback` a alturas por breakpoint para lograr CLS 0. Pero si el prerender resuelve el boundary de Suspense (ver abajo), el HTML estático ya trae el demo renderizado y **el fallback nunca se muestra en producción**. Confirmar cuál de los dos casos ocurre: si el demo aparece en `dist/index.html`, el fallback queda como seguro contra una falla del prerender y sus alturas dejan de ser críticas; documentarlo en el comentario del componente en vez de mantener números que van a driftear.
 
   ⚠️ **Caso a vigilar:** `prerenderToNodeStream` espera a que resuelvan los boundaries de Suspense, así que el HTML estático probablemente contenga el demo ya renderizado (no el fallback). Eso es bueno — CLS 0 y contenido visible sin JS. En el cliente, React mantiene el HTML del servidor hasta que baja el chunk del demo, así que no debería haber mismatch. **Si aparecen warnings**, agregar `<link rel="modulepreload">` al chunk del demo en `index.html` para que baje en paralelo. No silenciar el warning con `suppressHydrationWarning`.
 
