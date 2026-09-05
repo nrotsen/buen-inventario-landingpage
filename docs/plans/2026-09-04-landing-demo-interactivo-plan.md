@@ -2132,6 +2132,14 @@ El spec pedía renderizar `ExcelComparison` dentro de `Diagnostico`, lo que ser�
 
 - [ ] **Step 3: Historia — quitar el bloque final** `También lo usan · Kioscos · Despensas · Ferreterías…` junto con su separador y su `EditorialMicro`. Roza la insinuación de adopción que la restricción de honestidad prohíbe, y la cobertura por rubro ya se comunica en Sistema como capacidad verificable.
 
+- [ ] **Step 3-bis: 🚩 Arreglar el desborde horizontal del Header (bug preexistente)**
+
+  Medido con Playwright al ejecutar la Task 13: `document.documentElement.scrollWidth` da **401px en viewports de 320/360/375px** y **787px en 768px** — o sea que la página entera scrollea de costado en mobile. El culpable es el propio bloque derecho del Header (`div.flex.items-center.gap-2` con el CTA "Probalo gratis" + el botón hamburguesa): su borde derecho cae en 393px dentro de un viewport de 375px, y la hamburguesa se ve recortada.
+
+  No lo introduce este rediseño — está vivo en producción. Se arregla acá porque esta task ya toca el Header.
+
+  Verificar con Playwright a 320/360/375/414/768px que `scrollWidth === innerWidth` (sin desborde) y que la hamburguesa queda completa dentro del viewport. Chequear también que el CTA del header no se superponga con el logo en el ancho más chico.
+
 - [ ] **Step 4: Header — nav nuevo**
   ```ts
   const NAV = [
