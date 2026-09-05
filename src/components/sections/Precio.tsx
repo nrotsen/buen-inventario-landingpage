@@ -4,7 +4,7 @@ import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
 import { signupUrl } from '@/lib/config';
 import { track } from '@/lib/analytics';
-import { PLAN_PRICE_ARS, TRIAL_DAYS, COMPETITOR_FLOOR_ARS, COMPETITOR_TRIAL_DAYS, formatArs } from '@/lib/pricing';
+import { PLAN_PRICE_ARS, TRIAL_DAYS, formatArs } from '@/lib/pricing';
 
 const FEATURES = [
   'Ventas, stock, caja y cuentas corrientes',
@@ -61,8 +61,9 @@ export function Precio() {
       </div>
 
       <p className="mx-auto mt-6 max-w-[46ch] text-body-sm leading-relaxed text-text-muted">
-        Para comparar: los sistemas de gestión más conocidos del país arrancan arriba de{' '}
-        {formatArs(COMPETITOR_FLOOR_ARS)} por mes y te dan {COMPETITOR_TRIAL_DAYS} días de prueba.
+        Un solo precio, sin tiers ni sorpresas. No hay versión recortada que después
+        tenés que actualizar, ni módulos que se cobran aparte, ni permanencia mínima.
+        Si no te sirve, cancelás y no me debés nada.
       </p>
     </Section>
   );

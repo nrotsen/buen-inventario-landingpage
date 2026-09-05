@@ -10,14 +10,24 @@
 export const PLAN_PRICE_ARS = 24900;
 export const TRIAL_DAYS = 30;
 
-/**
- * Piso de la competencia, verificado en xubio.com/ar el 2026-09-04
- * (Empresa Básico $47.450/mes con 50% OFF promocional, 14 días de prueba).
- * Se usa en la línea de comparación de la sección Precio.
- * Re-verificar antes de cada publicación: los competidores ajustan seguido.
+/*
+ * NO hay constantes de competencia acá, a propósito.
+ *
+ * El spec original planeaba una línea "los sistemas más conocidos arrancan
+ * arriba de $47.000". Al verificar xubio.com/ar el 2026-09-05 resultó FALSA:
+ * tienen un plan Emprendedor Estándar a $23.100 promocional y hasta tiers
+ * gratuitos. El $47.450 es solo su plan Empresa Básico, y encima promocional
+ * (lista $123.100), y todos sus precios son + IVA.
+ *
+ * Una comparación honesta necesitaría aclarar tier, promoción e IVA — más
+ * letra chica de la que la sección puede cargar, en una página cuyo argumento
+ * central es justamente no tener letra chica. Y afirmar algo sobre "los
+ * sistemas más conocidos" en plural exigiría verificar varios: Contabilium
+ * estaba caído (HTTP 522) al momento de chequear.
+ *
+ * Si alguna vez se reintroduce, que sea con el tier equivalente nombrado,
+ * la fecha de verificación y el tratamiento de IVA explícito.
  */
-export const COMPETITOR_FLOOR_ARS = 47000;
-export const COMPETITOR_TRIAL_DAYS = 14;
 
 const formatter = new Intl.NumberFormat('es-AR', {
   style: 'currency',
