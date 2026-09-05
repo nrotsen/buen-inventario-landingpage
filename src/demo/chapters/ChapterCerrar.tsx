@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatArs } from '@/lib/pricing';
 import { CIERRE_DATE, CIERRE_ROWS, CIERRE_PROFIT, CIERRE_UNITS, cierreTotal } from '../data';
@@ -20,7 +21,10 @@ export function ChapterCerrar() {
 
   return (
     <div>
-      <HintBar>🌙 <b className="font-semibold">Son las 21:00.</b> Así se cierra el día.</HintBar>
+      <HintBar>
+          <Moon className="mr-1.5 -mt-0.5 inline-block size-4 shrink-0 align-middle text-teal-700" strokeWidth={1.5} aria-hidden="true" />
+          <b className="font-semibold">Son las 21:00.</b> Así se cierra el día.
+        </HintBar>
 
       <div className="px-4 py-5">
         <p className="editorial-micro">Caja del {CIERRE_DATE}</p>

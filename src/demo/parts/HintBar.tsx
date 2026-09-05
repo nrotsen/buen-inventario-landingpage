@@ -6,12 +6,19 @@ interface HintBarProps {
   className?: string;
 }
 
-/** Barra de guía del demo. Le dice al visitante qué hacer sin obligarlo. */
+/**
+ * Barra de guía del demo. Le dice al visitante qué hacer sin obligarlo.
+ *
+ * Es un bloque con contenido inline, NO un flex: con `flex items-center` el
+ * texto en negrita y el resto de la frase se convierten en dos ítems flex
+ * separados, y en mobile quedan con baselines distintas — la frase se parte
+ * visualmente en dos columnas. Como párrafo normal fluye como una sola frase.
+ */
 export function HintBar({ children, className }: HintBarProps) {
   return (
     <p
       className={cn(
-        'flex items-center gap-2 border-b border-border-subtle bg-teal-50 px-4 py-2.5 text-body-sm text-teal-700',
+        'border-b border-border-subtle bg-teal-50 px-4 py-2.5 text-body-sm leading-snug text-teal-700',
         className,
       )}
     >

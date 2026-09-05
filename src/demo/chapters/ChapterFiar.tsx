@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Receipt } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatArs } from '@/lib/pricing';
 import {
@@ -32,7 +33,10 @@ export function ChapterFiar() {
 
   return (
     <div>
-      <HintBar>🧾 <b className="font-semibold">Marcos se lo lleva anotado.</b> Esto es lo que queda registrado.</HintBar>
+      <HintBar>
+          <Receipt className="mr-1.5 -mt-0.5 inline-block size-4 shrink-0 align-middle text-teal-700" strokeWidth={1.5} aria-hidden="true" />
+          <b className="font-semibold">Marcos se lo lleva anotado.</b> Esto es lo que queda registrado.
+        </HintBar>
 
       <div className="px-4 py-5">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b-hard border-ink pb-3.5">
