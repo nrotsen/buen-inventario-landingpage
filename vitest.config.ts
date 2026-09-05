@@ -18,10 +18,6 @@ export default mergeConfig(
       environment: 'happy-dom',
       setupFiles: ['./src/test/setup.ts'],
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
-      // Necesario solo mientras no exista ningún test. La Task 2 agrega el
-      // primero y lo remueve: dejarlo haría que un glob roto pase en verde
-      // con cero tests corridos.
-      passWithNoTests: true,
     },
   }),
 );
