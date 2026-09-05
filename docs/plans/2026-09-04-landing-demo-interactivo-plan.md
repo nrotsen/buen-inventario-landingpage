@@ -335,11 +335,17 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
   }
   ```
 
-- [ ] **Step 3: Verificar**
+- [ ] **Step 3: Remover `passWithNoTests: true` de `vitest.config.ts`**
+
+  La Task 1 lo agregó porque Vitest 5 sale con exit 1 cuando no encuentra tests, y el repo no tenía ninguno. **Este es el primer test real, así que el flag ya no hace falta — y dejarlo es peligroso:** si mañana alguien rompe el glob de `include` o mueve los tests de directorio, `pnpm run test` termina en verde con cero tests corridos. Es la misma familia de bug que el `npx tsc --noEmit` que el STANDARDS de `buen-carrito-frontend` documenta como no-op silencioso.
+
+  Borrar la línea `passWithNoTests: true,` y su comentario del bloque `test`.
+
+- [ ] **Step 4: Verificar**
   ```bash
-  pnpm run test -- src/lib/analytics.test.ts
+  pnpm run test
   ```
-  Los 3 tests pasan.
+  Los 3 tests pasan — y ahora pasan **porque existen**, no porque un flag lo permita. Confirmar además que un glob roto falla: cambiar temporalmente `include` a `src/**/*.noexiste.ts`, correr `pnpm run test`, verificar que sale con exit 1, y revertir.
 
 - [ ] **Commit:** `git commit -m "feat(landing): adapter de analytics con sink inyectable"`
 
