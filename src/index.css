@@ -65,17 +65,6 @@
     font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 
-  /* Fade-in al scroll — clase agregada por IntersectionObserver en App.tsx */
-  .reveal {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .reveal.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
   .faq-toggle summary { list-style: none; }
   .faq-toggle summary::-webkit-details-marker { display: none; }
   .faq-toggle .faq-icon { transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1); }
@@ -88,6 +77,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
