@@ -3,6 +3,16 @@
  * que el widget montado — si cambia la altura del demo, cambiar acá también,
  * o el CLS deja de ser 0.
  *
+ * Sigue estando en el camino crítico después del prerender. Verificado sobre
+ * `dist/index.html`: `prerenderToNodeStream` espera a que resuelva el `lazy()`
+ * del demo, pero emite el boundary fuera de orden — deja este fallback en el
+ * lugar del demo con un marcador `<!--$?-->`, escribe el widget real en un
+ * `<div hidden id="S:0">` al final del body y lo intercambia con el script
+ * `$RC` que React inyecta. O sea: el visitante ve ESTE bloque durante los
+ * primeros frames de cada carga, no solo si falla el prerender. Las alturas
+ * de abajo siguen siendo las que sostienen el CLS 0 — medido en 0 sobre el
+ * build prerenderizado.
+ *
  * Las alturas están MEDIDAS con Playwright sobre el widget real dentro del
  * layout del Hero, barriendo el viewport de 320px a 800px de a 1px. El demo
  * cambia de alto en siete escalones y cada uno tiene su banda:

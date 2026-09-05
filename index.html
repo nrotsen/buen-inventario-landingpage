@@ -49,44 +49,15 @@
     />
     <meta name="twitter:image" content="https://www.bueninventario.com/og-image.png" />
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Buen Inventario",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "description": "Sistema de gestión para comercios de Argentina.",
-        "offers": {
-          "@type": "Offer",
-          "price": "14900",
-          "priceCurrency": "ARS",
-          "availability": "https://schema.org/InStock"
-        }
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Buen Inventario",
-        "url": "https://www.bueninventario.com",
-        "logo": "https://www.bueninventario.com/bueninventario-logo.png",
-        "sameAs": ["https://instagram.com/bueninventario"]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "GroceryStore",
-        "name": "Don Néstor Despensa",
-        "description": "Almacén de barrio en Argentina donde se usa Buen Inventario todos los días.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "AR"
-        }
-      }
-    </script>
+    <!--
+      El JSON-LD no va acá: lo inyecta scripts/prerender.ts al cerrar el head,
+      generándolo desde src/lib/pricing.ts, para que el precio del schema y el
+      de la card de precio no puedan divergir.
+
+      Ojo: ni este comentario ni ningún otro puede contener el texto de cierre
+      del head. Vite inyecta el bundle antes de la PRIMERA aparición, así que
+      escribirlo acá dejaría el script y el CSS del sitio dentro del comentario.
+    -->
   </head>
   <body>
     <div id="root"></div>
