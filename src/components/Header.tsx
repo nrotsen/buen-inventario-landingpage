@@ -3,6 +3,7 @@ import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { MobileMenu } from '@/components/MobileMenu';
 import { signupUrl } from '@/lib/config';
+import { track } from '@/lib/analytics';
 
 const NAV = [
   { label: 'Probalo',       href: '#demo'        },
@@ -61,7 +62,14 @@ export function Header() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <Button as="a" href={signupUrl()} variant="primary" size="md" className="!h-9 !px-4 !text-[13px]">
+            <Button
+              as="a"
+              href={signupUrl()}
+              variant="primary"
+              size="md"
+              className="!h-9 !px-4 !text-[13px]"
+              onClick={() => track('cta_signup_clicked', { section: 'header' })}
+            >
               Probalo gratis <span className="font-mono">→</span>
             </Button>
             <button
