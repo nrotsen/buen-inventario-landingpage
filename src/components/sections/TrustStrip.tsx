@@ -16,7 +16,7 @@ const SIGNALS: Signal[] = [
   { key: 'trial',    big: <>{TRIAL_DAYS} días</>,                                    small: 'gratis, sin tarjeta. Cancelás cuando quieras.' },
   { key: 'catalog',  big: <>{formatApprox(CATALOG_ITEMS)}</>,                        small: 'productos de tu rubro ya cargados. No arrancás de cero.' },
   { key: 'data',     big: <>Tus datos<br />son tuyos</>,                             small: 'Los exportás a Excel cuando quieras. Si te vas, te los llevás.' },
-  { key: 'founder',  big: <em className="editorial-italic text-teal-700">Un almacén<br />de verdad</em>, small: 'Hecho en Don Néstor Despensa. Usado todos los días.' },
+  { key: 'founder',  big: <em className="editorial-italic text-teal-700">Hecho por un<br />comerciante</em>, small: 'No por una empresa de software. Lo uso todos los días en mi propio mostrador.' },
 ];
 
 export function TrustStrip() {

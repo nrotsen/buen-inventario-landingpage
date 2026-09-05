@@ -92,7 +92,7 @@ export function Hero() {
           <p className="mt-4 font-mono text-[11px] uppercase leading-relaxed tracking-[0.06em] text-text-muted md:mt-7">
             Sin tarjeta <span className="text-teal-600">·</span> Cancelás cuando quieras
             <br />
-            Hecho en un almacén real<span className="hidden md:inline">, usado todos los días</span>
+            Hecho por un comerciante<span className="hidden md:inline">, usado todos los días en su almacén</span>
           </p>
         </div>
 
