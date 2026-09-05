@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  /terminos y /privacidad existen en el repo pero NO se listan acá a
+  propósito: están pendientes de la lectura del titular. Cuando los
+  apruebe, sumar las dos URLs con su <lastmod> y sacarles el noindex.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.bueninventario.com/</loc><lastmod>2026-09-05</lastmod></url>
-  <url><loc>https://www.bueninventario.com/privacidad</loc><lastmod>2026-09-05</lastmod></url>
-  <url><loc>https://www.bueninventario.com/terminos</loc><lastmod>2026-09-05</lastmod></url>
 </urlset>

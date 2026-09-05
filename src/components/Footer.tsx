@@ -101,10 +101,6 @@ export function Footer() {
 
         <div className="mt-12 pt-7 border-t border-paper/15 flex flex-col md:flex-row items-center md:justify-between gap-3 text-body-sm text-paper/55">
           <p>© 2026 Buen Inventario · Argentina</p>
-          <div className="flex gap-6">
-            <a href="/terminos" className="hover:text-paper transition-colors">Términos</a>
-            <a href="/privacidad" className="hover:text-paper transition-colors">Privacidad</a>
-          </div>
         </div>
       </div>
     </footer>
