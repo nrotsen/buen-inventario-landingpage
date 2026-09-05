@@ -30,10 +30,22 @@ de ser una muestra de uno.
 Antes de mergear cualquier cambio a esta landing, correr:
 
 ```bash
-grep -rniE "clientes usan|\+[0-9]+ (empresas|comercios|negocios)|testimonio|reseña|★" src/ public/*.html
+grep -rniE "clientes usan|lo usan|usan también|nos usan|\+[0-9]+ (empresas|comercios|negocios)|comerciantes|cientos|miles de|confían|testimonio|reseña|★" src/ public/*.html \
+  | grep -vE "^[^:]+:[0-9]+: *(\*|//|/\*)"
 ```
 
-Debe devolver vacío. Si un cambio necesita "prueba social", la respuesta
+Debe devolver vacío. El segundo `grep` descarta las líneas de comentario:
+la restricción es sobre el copy que ve un visitante, no sobre cómo se
+documenta el código.
+
+**El patrón cubre las formas indirectas, no solo los contadores.** La
+versión anterior de este grep solo buscaba cifras ("+N comercios") y daba
+verde con la frase *"hoy lo usan también ferreterías, papeleras y kioscos de
+todo el país"* viva en `Historia.tsx` — una afirmación de adopción sin un
+solo número. Una afirmación de adopción rara vez llega en forma de cifra;
+llega como "lo usan", "cientos de", "comerciantes que confían". Si aparece
+una forma nueva que el patrón no cubre, se agrega al patrón en el mismo
+cambio que la borra del copy. Si un cambio necesita "prueba social", la respuesta
 correcta es más señales de **producto** (el demo interactivo, capturas
 reales), **proceso** (qué pasa si algo falla, tiempos de onboarding) o
 **fundador** — nunca una cifra de adopción que no es real o que describe una
@@ -74,21 +86,22 @@ src/
 │   ├── Header.tsx, Footer.tsx, MobileMenu.tsx    # chrome de la página
 │   ├── ui/                         # primitives reusables, sin lógica de negocio
 │   │   ├── Button.tsx, Section.tsx, DisplayHeading.tsx, EditorialMicro.tsx, PhoneFrame.tsx
-│   │   └── phone-screens/          # mocks de pantallas del producto real (datos de ejemplo)
+│   │   └── phone-screens/          # mocks de pantallas del producto (datos de @/lib/showcase-data)
 │   └── sections/                   # una sección de la landing por archivo
 │       ├── Hero.tsx, TrustStrip.tsx, Historia.tsx, Sistema.tsx, ComoArrancas.tsx, Precio.tsx, Faq.tsx
 │       ├── diagnostico/            # sub-bloque propio de Diagnostico
 │       └── sistema/                # sub-bloque propio de Sistema (PhoneRow)
-├── demo/                           # el demo interactivo, módulo autocontenido
+├── demo/                           # el demo interactivo — hoja borrable (ver abajo)
 │   ├── DemoWidget.tsx              # orquestador, cargado con lazy() + Suspense
 │   ├── DemoFrameFallback.tsx       # fallback del Suspense, mismas medidas que el widget (CLS 0)
 │   ├── useSale.ts                  # hook de estado de la venta (data, no UI)
-│   ├── data.ts                     # catálogo y contenido fijo del demo
+│   ├── data.ts                     # SOLO lo que nadie fuera de demo/ importa
 │   ├── chapters/                   # Vender, Fiar, Cerrar caja
 │   └── parts/                      # ProductTile, Ticket, MethodPicker, HintBar, SaleReveal
 ├── lib/                            # funciones puras, sin React ni JSX
 │   ├── analytics.ts                # adapter de analytics — único punto que lo demás importa
 │   ├── pricing.ts                  # PLAN_PRICE_ARS, TRIAL_DAYS, formatArs — fuente única del precio
+│   ├── showcase-data.ts            # almacén ficticio compartido por phone-screens/ y demo/
 │   ├── config.ts, contact.ts       # URLs de signup, WhatsApp, mail, redes
 │   └── utils.ts                    # cn()
 └── test/setup.ts                   # setup global de Vitest (jest-dom + cleanup)
@@ -110,11 +123,32 @@ scripts/
 | `lib/` | Funciones puras, formateo, constantes | JSX, side effects, `window`/`document` |
 | `components/ui/` | Primitives visuales reusables | Lógica de negocio, conocer una sección específica |
 | `components/sections/` | Una sección de la landing | Importar de otra sección |
-| `demo/` | El sistema real simulado en memoria | Requests de red, dependencias del resto de la landing |
+| `demo/` | El sistema real simulado en memoria | Requests de red; ser importado desde afuera (excepto por `Hero.tsx`) |
 | `scripts/` | Build-time only (Node, corre con `tsx`) | Nada que dependa de `window` — no hay DOM real, solo lo que Playwright monta |
 
 **Regla dura:** ninguna sección importa de otra sección. Si dos secciones
 necesitan lo mismo, ese algo va a `components/ui/` o `lib/`.
+
+**Regla dura: `src/demo/` es una hoja.** El único archivo del repo que puede
+importar de `@/demo/` es `Hero.tsx` — el `lazy()` del widget y su fallback.
+Nada más. Si `components/ui/` importa de `demo/`, pasan tres cosas a la vez:
+las capas quedan invertidas (un primitive depende del módulo más volátil del
+repo), `demo/` deja de poder borrarse, y los datos del demo salen del chunk
+lazy para viajar en el bundle inicial, contra el §8.
+
+Los datos que el demo y los mocks de `phone-screens/` comparten de verdad
+—catálogo, ticket, ledger, cierre— viven en `@/lib/showcase-data`, que los
+dos importan. `src/demo/data.ts` guarda únicamente lo que nadie de afuera
+usa. Verificación:
+
+```bash
+grep -rn "@/demo/" src/ | grep -v "^src/components/sections/Hero.tsx:"   # debe devolver vacío
+```
+
+Esto se comprobó a mano borrando el módulo: con `rm -rf src/demo`, un
+`tsc -b --force` falla **solo** en las dos líneas de `Hero.tsx` que lo
+importan. Si aparece un tercer archivo en esa lista, la capa se volvió a
+invertir.
 
 **Imports:** alias `@/` para todo lo cross-directory (`@/lib/pricing`,
 `@/components/ui/Button`). Relativos (`./`) solo dentro del mismo
@@ -308,6 +342,18 @@ tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr 
   HTML estático normalmente contiene el demo ya renderizado, no el
   fallback — `DemoFrameFallback` es la red de seguridad si el prerender
   falla, no lo que ve un usuario real.
+- **El prerender no puede degradar en silencio.** Si un componente tira,
+  React no rechaza la promesa: recupera en el boundary de Suspense más
+  cercano, escribe el fallback y `prerenderToNodeStream` resuelve normal.
+  Por eso `scripts/prerender.ts` hace dos cosas que no son opcionales:
+  pasa `onError` para capturar el primer error y lo re-tira después de
+  consumir el stream, y verifica una **postcondición sobre el HTML
+  renderizado** — el centinela `role="tablist"`, que solo existe adentro
+  del boundary del demo. Sin las dos, un demo roto salía con exit 0 y
+  `dist/index.html` servía el esqueleto en `animate-pulse`.
+- **El centinela va adentro del boundary.** Verificar contra el `<h1>` del
+  Hero —o contra cualquier texto de afuera del `<Suspense>`— da verde con un
+  demo que nunca se renderizó: ese copy se emite igual.
 - **Regla de oro:** cero accesos a `window` / `document` fuera de un
   `useEffect` o un handler de evento — el árbol completo se renderiza en
   Node, donde no existen. Verificar con:
@@ -318,9 +364,21 @@ tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr 
 Verificación post-build:
 
 ```bash
-pnpm run build
-grep -o "Probalo acá" dist/index.html | wc -l   # ≥ 1 — hay contenido real, no un shell vacío
+pnpm run build                                        # falla con exit ≠ 0 si el demo no se renderizó
+grep -o 'role="tablist"' dist/index.html | wc -l      # 1 — el demo prerenderizado está en el HTML
 ```
+
+El primero es la verificación real: la postcondición vive en el script, así
+que un demo roto rompe el build. El `grep` es la confirmación manual sobre
+el artefacto.
+
+**La verificación tiene que ser positiva sobre el demo, no negativa sobre el
+fallback.** `DemoFrameFallback` aparece en `dist/index.html` incluso cuando
+todo salió bien: React emite el boundary fuera de orden — deja el fallback
+en el lugar del demo con un marcador `<!--$?-->` y escribe el widget real en
+un `<div hidden>` al final del body. Buscar que el fallback *no esté* falla
+siempre; buscar el centinela del demo es lo único que distingue un HTML
+completo de uno degradado.
 
 Y en el navegador (`pnpm run preview`): sin warnings de hydration mismatch
 en consola.
