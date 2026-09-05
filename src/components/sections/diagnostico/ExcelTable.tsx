@@ -1,7 +1,3 @@
-import { Section } from '@/components/ui/Section';
-import { DisplayHeading } from '@/components/ui/DisplayHeading';
-import { EditorialMicro } from '@/components/ui/EditorialMicro';
-
 type Row = {
   feature: string;
   excel: string;
@@ -41,21 +37,11 @@ const ROWS: Row[] = [
   },
 ];
 
-export function ExcelComparison() {
+export function ExcelTable() {
   return (
-    <Section id="comparativa" tone="paper" width="editorial">
-      <div className="max-w-[720px]">
-        <EditorialMicro>La diferencia</EditorialMicro>
-        <DisplayHeading level={2} className="mt-5 max-w-[20ch]">
-          ¿Por qué <em className="editorial-italic text-teal-500">no alcanza</em> con Excel?
-        </DisplayHeading>
-        <p className="mt-6 text-body-lg text-ink/75 max-w-[56ch] leading-relaxed">
-          Lo mismo que ya hacés a mano, hecho una sola vez y bien — sin discusión, sin recalcular, sin perderte cosas en el camino.
-        </p>
-      </div>
-
+    <>
       {/* DESKTOP TABLE (≥md) */}
-      <table className="hidden md:table mt-16 w-full border-collapse border-t-hard border-b-hard border-ink">
+      <table className="hidden md:table w-full border-collapse border-t-hard border-b-hard border-ink">
         <thead>
           <tr>
             <th className="text-left py-5 pr-6 w-[38%] editorial-micro font-normal border-b border-border-subtle">
@@ -92,7 +78,7 @@ export function ExcelComparison() {
       </table>
 
       {/* MOBILE CARDS (<md) */}
-      <div className="md:hidden mt-12 border-t-hard border-ink">
+      <div className="md:hidden border-t-hard border-ink">
         {ROWS.map((row, i) => {
           const isLast = i === ROWS.length - 1;
           const outerBorder = isLast ? 'border-b-hard border-ink' : 'border-b border-dashed border-border-subtle';
@@ -116,6 +102,6 @@ export function ExcelComparison() {
           );
         })}
       </div>
-    </Section>
+    </>
   );
 }

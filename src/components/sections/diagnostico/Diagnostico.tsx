@@ -3,6 +3,7 @@ import { Eye, LineChart, Receipt, Archive, Wallet } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
+import { ExcelTable } from './ExcelTable';
 
 type Item = {
   icon: LucideIcon;
@@ -57,6 +58,9 @@ export function Diagnostico() {
       <DisplayHeading level={2} italicAccent={<>no te puede decir.</>} className="mt-5 max-w-[16ch]">
         Lo que el Excel
       </DisplayHeading>
+      <p className="mt-6 max-w-[56ch] text-body-lg leading-relaxed text-ink/75">
+        Recién lo viste funcionando. Esto es lo que el sistema te contesta y tu planilla no.
+      </p>
 
       <div className="mt-14 border-t-hard border-ink">
         {ITEMS.map((item, i) => {
@@ -82,6 +86,13 @@ export function Diagnostico() {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-20">
+        <EditorialMicro>Punto por punto</EditorialMicro>
+        <div className="mt-8">
+          <ExcelTable />
+        </div>
       </div>
     </Section>
   );
