@@ -9,7 +9,7 @@ interface MethodPickerProps {
 export function MethodPicker({ onPick, className }: MethodPickerProps) {
   return (
     <div className={cn('px-4 py-5', className)}>
-      <h4 className="editorial-display text-[20px]">¿Cómo te paga?</h4>
+      <p className="editorial-display text-[20px]">¿Cómo te paga?</p>
       <p className="mb-4 mt-0.5 text-body-sm text-text-muted">
         Cada método queda registrado por separado. Al cierre del día sabés exactamente cuánto entró por cada uno.
       </p>

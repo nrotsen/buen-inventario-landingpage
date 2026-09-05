@@ -14,7 +14,7 @@ export function Ticket({ lines, total, onPay, className }: TicketProps) {
 
   return (
     <div className={cn('flex flex-col border-t-hard border-ink bg-cream p-3.5 md:border-l-hard md:border-t-0', className)}>
-      <h4 className="editorial-micro border-b border-dashed border-border-subtle pb-2">Venta en curso</h4>
+      <p className="editorial-micro border-b border-dashed border-border-subtle pb-2">Venta en curso</p>
 
       <div className="flex min-h-[110px] flex-1 flex-col gap-1.5 py-2">
         {isEmpty ? (

@@ -1,9 +1,11 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
-import { Historia } from '@/components/sections/Historia';
+import { TrustStrip } from '@/components/sections/TrustStrip';
 import { Diagnostico } from '@/components/sections/diagnostico/Diagnostico';
+import { Historia } from '@/components/sections/Historia';
 import { Sistema } from '@/components/sections/Sistema';
+import { ComoArrancas } from '@/components/sections/ComoArrancas';
 import { Precio } from '@/components/sections/Precio';
 import { Faq } from '@/components/sections/Faq';
 
@@ -13,9 +15,11 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Historia />
+        <TrustStrip />
         <Diagnostico />
+        <Historia />
         <Sistema />
+        <ComoArrancas />
         <Precio />
         <Faq />
       </main>
