@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { track, __setSink, __resetSink } from './analytics';
+import { track, configureAnalyticsSink } from './analytics';
 
 describe('analytics', () => {
-  beforeEach(() => __resetSink());
+  beforeEach(() => configureAnalyticsSink(null));
 
   it('envía el evento al sink con sus props', () => {
     const sink = vi.fn();
-    __setSink(sink);
+    configureAnalyticsSink(sink);
     track('demo_started', { chapter: 'vender' });
     expect(sink).toHaveBeenCalledWith('demo_started', { chapter: 'vender' });
   });
@@ -16,7 +16,7 @@ describe('analytics', () => {
   });
 
   it('nunca propaga un error del sink', () => {
-    __setSink(() => { throw new Error('proveedor caído'); });
+    configureAnalyticsSink(() => { throw new Error('proveedor caído'); });
     expect(() => track('demo_started')).not.toThrow();
   });
 });

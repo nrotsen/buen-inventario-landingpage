@@ -267,14 +267,14 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
 - [ ] **Step 1: Escribir el test primero — `src/lib/analytics.test.ts`**
   ```ts
   import { describe, it, expect, vi, beforeEach } from 'vitest';
-  import { track, __setSink, __resetSink } from './analytics';
+  import { track, configureAnalyticsSink } from './analytics';
 
   describe('analytics', () => {
-    beforeEach(() => __resetSink());
+    beforeEach(() => configureAnalyticsSink(null));
 
     it('envía el evento al sink con sus props', () => {
       const sink = vi.fn();
-      __setSink(sink);
+      configureAnalyticsSink(sink);
       track('demo_started', { chapter: 'vender' });
       expect(sink).toHaveBeenCalledWith('demo_started', { chapter: 'vender' });
     });
@@ -284,7 +284,7 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
     });
 
     it('nunca propaga un error del sink', () => {
-      __setSink(() => { throw new Error('proveedor caído'); });
+      configureAnalyticsSink(() => { throw new Error('proveedor caído'); });
       expect(() => track('demo_started')).not.toThrow();
     });
   });
@@ -311,14 +311,12 @@ Regla BI: adapters primero. Ningún componente puede importar el proveedor de an
 
   let sink: Sink | null = null;
 
-  /** Lo llama `main.tsx` en el arranque del cliente. */
-  export function __setSink(next: Sink): void {
+  /**
+   * Conecta el proveedor. Lo llama `main.tsx` al arrancar el cliente; los
+   * tests lo usan con un espía, y con `null` para desconectar.
+   */
+  export function configureAnalyticsSink(next: Sink | null): void {
     sink = next;
-  }
-
-  /** Solo para tests. */
-  export function __resetSink(): void {
-    sink = null;
   }
 
   /**
@@ -2350,11 +2348,11 @@ Cierra **F3 del audit SEO 2026-07-31**. Hoy el HTML servido es `<div id="root"><
   import { injectSpeedInsights } from '@vercel/speed-insights';
   import './index.css';
   import App from './App.tsx';
-  import { __setSink } from '@/lib/analytics';
+  import { configureAnalyticsSink } from '@/lib/analytics';
 
   inject();
   injectSpeedInsights();
-  __setSink((event, props) => vercelTrack(event, props));
+  configureAnalyticsSink((event, props) => vercelTrack(event, props));
 
   hydrateRoot(
     document.getElementById('root')!,
@@ -2363,7 +2361,7 @@ Cierra **F3 del audit SEO 2026-07-31**. Hoy el HTML servido es `<div id="root"><
     </StrictMode>,
   );
   ```
-  Las dependencias de Vercel se instalan en la Task 22; si se ejecuta esta task antes, dejar el `__setSink` comentado y descomentarlo ahí.
+  Las dependencias de Vercel se instalan en la Task 22; si se ejecuta esta task antes, dejar el `configureAnalyticsSink` comentado y descomentarlo ahí.
 
 - [ ] **Step 6: Quitar los 3 bloques JSON-LD de `index.html`** (líneas ~52, ~68, ~78). Los inyecta el prerender. Verificar que no queda ningún `application/ld+json` en el archivo fuente.
 

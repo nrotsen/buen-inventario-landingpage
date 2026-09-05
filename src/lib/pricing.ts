@@ -27,17 +27,16 @@ const formatter = new Intl.NumberFormat('es-AR', {
 });
 
 /**
- * `24900` → `"$24.900"`. Sin espacio después del signo, como se escribe en Argentina.
+ * `24900` → `"$24.900"`. Sin espacio entre el signo y el número, como se
+ * escribe en Argentina — `Intl` en es-AR produce `"$ 24.900"`.
  *
- * `Intl.NumberFormat` con `style: 'currency'` en es-AR inserta un separador
- * entre el símbolo `$` y el número que, según la versión de ICU/Node, puede
- * ser un espacio normal (U+0020), un NBSP (U+00A0) o un narrow NBSP (U+202F).
- * Un `.replace(/\s/g, '')` ingenuo es frágil frente a esas variantes en
- * runtimes/ICU distintos. Por eso acá se usa `formatToParts`: se reconstruye
- * el string descartando solo las partes "literal" que son puro espacio en
- * blanco (sin importar qué variante de espacio sea, porque `String.prototype
- * .trim()` las cubre a todas) y conservando el resto de los literales (como
- * el punto separador de miles).
+ * Se filtra por `type === 'literal'` en vez de por clase de caracteres:
+ * un `.replace(/\s/g, '')` daría hoy el mismo resultado (verificado: `\s`
+ * en JS sí matchea NBSP y narrow NBSP), pero borraría cualquier espacio
+ * del string, incluido uno que en otro locale fuera significativo.
+ * Filtrar por rol semántico es más preciso que filtrar por caracter.
+ *
+ * Negativos: `-5000` → `"-$5.000"` (el signo va antes del símbolo).
  */
 export function formatArs(value: number): string {
   return formatter

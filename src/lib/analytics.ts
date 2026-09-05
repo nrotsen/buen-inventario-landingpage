@@ -17,14 +17,16 @@ type Sink = (event: AnalyticsEvent, props?: AnalyticsProps) => void;
 
 let sink: Sink | null = null;
 
-/** Lo llama `main.tsx` en el arranque del cliente. */
-export function __setSink(next: Sink): void {
+/**
+ * Conecta el proveedor de analytics. Lo llama `main.tsx` al arrancar el
+ * cliente; los tests lo usan con un espía, y con `null` para desconectar.
+ *
+ * Es un único entrypoint a propósito: separar "set" de "reset" obligaba a
+ * prefijar ambos con `__` para marcarlos internos, y eso hacía parecer un
+ * hack al cableado real de producción.
+ */
+export function configureAnalyticsSink(next: Sink | null): void {
   sink = next;
-}
-
-/** Solo para tests. */
-export function __resetSink(): void {
-  sink = null;
 }
 
 /**
