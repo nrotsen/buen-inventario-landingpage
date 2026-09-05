@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { DisplayHeading } from '@/components/ui/DisplayHeading';
 import { EditorialMicro } from '@/components/ui/EditorialMicro';
 import { whatsappLink } from '@/lib/contact';
+import { track } from '@/lib/analytics';
 
 type Qa = { q: string; a: string };
 
@@ -29,7 +30,11 @@ const QAS: Qa[] = [
   },
   {
     q: '¿Sirve solo para almacenes y kioscos?',
-    a: 'No. Lo armé para mi almacén pero hoy lo usan también ferreterías, papeleras, químicas, regalerías y cualquier comercio chico que venda productos por unidad. También funciona para multisucursal (feature en desarrollo). Si tu negocio maneja stock, ventas y cuentas, te sirve.',
+    a: 'No. Lo armé para mi almacén pero hoy lo usan también ferreterías, papeleras, químicas, regalerías y cualquier comercio chico que venda productos por unidad. También funciona si tenés más de un local. Si tu negocio maneja stock, ventas y cuentas, te sirve.',
+  },
+  {
+    q: '¿Dónde están mis datos y qué pasa si se rompe algo?',
+    a: 'Tus datos no están en la computadora del local: están en la nube, en servidores de Amazon. Si se te rompe la PC, se te moja o te la roban, tus datos siguen ahí — entrás desde otro equipo y seguís trabajando. Y los exportás a Excel cuando quieras.',
   },
 ];
 
@@ -69,6 +74,7 @@ export function Faq() {
           href={whatsappLink('Hola Néstor, tengo una pregunta sobre Buen Inventario.')}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track('cta_whatsapp_clicked', { section: 'faq' })}
           className="text-teal-700 underline underline-offset-[3px] hover:text-ink transition-colors"
         >
           Escribime por WhatsApp →

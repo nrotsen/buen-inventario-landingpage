@@ -29,7 +29,7 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
   if (!open) return null;
 
   return (
-    <div className="md:hidden fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+    <div className="lg:hidden fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="Menú de navegación">
       <button
         type="button"
         aria-label="Cerrar menú"

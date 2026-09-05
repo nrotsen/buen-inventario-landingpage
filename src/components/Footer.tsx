@@ -1,10 +1,12 @@
 import { whatsappLink, mailtoLink, instagramLink, facebookLink, tiktokLink } from '@/lib/contact';
+import { track } from '@/lib/analytics';
 
 const PRODUCT_LINKS = [
-  { label: 'Cómo funciona',         href: '#sistema'  },
-  { label: 'Precio',                href: '#precio'   },
-  { label: 'Historia',              href: '#historia' },
-  { label: 'Preguntas frecuentes',  href: '#faq'      },
+  { label: 'Probalo',               href: '#demo'       },
+  { label: 'Cómo funciona',         href: '#sistema'    },
+  { label: 'Cómo arrancás',         href: '#arrancar'   },
+  { label: 'Precio',                href: '#precio'     },
+  { label: 'Preguntas frecuentes',  href: '#faq'        },
 ];
 
 export function Footer() {
@@ -49,6 +51,7 @@ export function Footer() {
                   href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('cta_whatsapp_clicked', { section: 'footer' })}
                   className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
                   WhatsApp
@@ -57,7 +60,7 @@ export function Footer() {
               <li>
                 <a
                   href={mailtoLink()}
-                  className="text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
+                  className="break-all text-body-sm text-paper/80 hover:text-paper transition-colors duration-150"
                 >
                   nestorb@bueninventario.com
                 </a>

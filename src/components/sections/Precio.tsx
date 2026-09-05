@@ -26,9 +26,9 @@ export function Precio() {
       <div className="mx-auto mt-11 max-w-[520px] rounded-[3px] border-hard border-ink bg-surface p-8 text-center shadow-offset-lg">
         <EditorialMicro>Plan único · ARS</EditorialMicro>
 
-        <p className="editorial-display mt-2.5 text-[62px] leading-none">
+        <p className="editorial-display mt-2.5 whitespace-nowrap text-[38px] leading-none sm:text-[62px]">
           {formatArs(PLAN_PRICE_ARS)}
-          <span className="font-mono text-[19px] text-text-muted"> / mes</span>
+          <span className="font-mono text-[13px] text-text-muted sm:text-[19px]"> / mes</span>
         </p>
 
         <p className="mt-3 text-body-sm text-text-muted">
