@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
+import { PRODUCTS } from '@/lib/showcase-data';
 import { useSale } from './useSale';
-import { PRODUCTS } from './data';
 
 const coca = PRODUCTS.find((p) => p.id === 'coca')!;   // 2400 / 1750 / stock 24
 const pan  = PRODUCTS.find((p) => p.id === 'pan')!;    // 1850 / 1290 / stock 12

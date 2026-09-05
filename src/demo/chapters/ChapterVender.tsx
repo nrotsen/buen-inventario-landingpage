@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { CreditCard, Check, Hand } from 'lucide-react';
 import { track } from '@/lib/analytics';
-import { PRODUCTS, type PaymentMethod } from '../data';
+import { PRODUCTS } from '@/lib/showcase-data';
+import type { PaymentMethod } from '../data';
 import { useSale } from '../useSale';
 import { HintBar } from '../parts/HintBar';
 import { ProductTile } from '../parts/ProductTile';

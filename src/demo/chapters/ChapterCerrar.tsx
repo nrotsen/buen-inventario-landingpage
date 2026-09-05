@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatArs } from '@/lib/pricing';
-import { CIERRE_DATE, CIERRE_ROWS, CIERRE_PROFIT, CIERRE_UNITS, cierreTotal } from '../data';
+import { CIERRE_ROWS, cierreTotal } from '@/lib/showcase-data';
+import { CIERRE_DATE, CIERRE_PROFIT, CIERRE_UNITS } from '../data';
 import { HintBar } from '../parts/HintBar';
 
 /** Color del swatch por método. Tokens, nunca hex sueltos en el JSX. */

@@ -1,5 +1,5 @@
 import { formatArs } from '@/lib/pricing';
-import { CIERRE_ROWS, cierreTotal } from '@/demo/data';
+import { CIERRE_ROWS, cierreTotal } from '@/lib/showcase-data';
 
 /** El fiado se lista aparte del cierre: no entró plata. */
 const ROWS = CIERRE_ROWS.filter((row) => !row.isCredit);

@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { formatArs } from '@/lib/pricing';
-import type { DemoProduct } from '../data';
+import type { ShowcaseProduct } from '@/lib/showcase-data';
 
 interface ProductTileProps {
-  product: DemoProduct;
+  product: ShowcaseProduct;
   onAdd: (id: string) => void;
   /** Pulsa hasta el primer tap, para que se entienda que es tocable. */
   nudge?: boolean;

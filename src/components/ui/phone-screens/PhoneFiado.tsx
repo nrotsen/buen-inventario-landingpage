@@ -1,5 +1,5 @@
 import { formatArs } from '@/lib/pricing';
-import { CLIENT_NAME, LEDGER_NEW_SALE, LEDGER_MOVES, LEDGER_OPENING_BALANCE } from '@/demo/data';
+import { CLIENT_NAME, LEDGER_NEW_SALE, LEDGER_MOVES, LEDGER_OPENING_BALANCE } from '@/lib/showcase-data';
 
 interface FiadoMove {
   key: string;

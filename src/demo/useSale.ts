@@ -1,16 +1,15 @@
 import { useCallback, useMemo, useState } from 'react';
-import { PRODUCTS, type DemoProduct, type PaymentMethod } from './data';
+import { findProduct, type ShowcaseProduct } from '@/lib/showcase-data';
+import type { PaymentMethod } from './data';
 
 export type SaleView = 'pos' | 'methods' | 'done';
 
 export interface SaleLine {
-  product: DemoProduct;
+  product: ShowcaseProduct;
   qty: number;
   /** Stock que queda después de esta venta. Es lo que muestra el reveal. */
   stockAfter: number;
 }
-
-const byId = new Map(PRODUCTS.map((p) => [p.id, p]));
 
 /**
  * Estado del capítulo 01 del demo. Sin I/O, sin efectos:
@@ -25,9 +24,9 @@ export function useSale() {
   const lines = useMemo<SaleLine[]>(
     () =>
       Object.entries(qtyById).map(([id, qty]) => {
-        // `add` es el único escritor de `qtyById` y valida contra este mismo
-        // Map antes de insertar, así que toda clave presente existe acá.
-        const product = byId.get(id)!;
+        // `add` es el único escritor de `qtyById` y valida contra el mismo
+        // catálogo antes de insertar, así que toda clave presente existe acá.
+        const product = findProduct(id)!;
         return { product, qty, stockAfter: product.stock - qty };
       }),
     [qtyById],
@@ -41,7 +40,7 @@ export function useSale() {
   );
 
   const add = useCallback((id: string) => {
-    if (!byId.has(id)) return;
+    if (!findProduct(id)) return;
     setQtyById((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
   }, []);
 

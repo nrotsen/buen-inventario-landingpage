@@ -3,9 +3,9 @@ import { Receipt } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatArs } from '@/lib/pricing';
 import {
-  CLIENT_NAME, CLIENT_SINCE, CLIENT_MOVE_COUNT,
-  LEDGER_OPENING_BALANCE, LEDGER_MOVES, LEDGER_NEW_SALE, type LedgerMove,
-} from '../data';
+  CLIENT_NAME, LEDGER_OPENING_BALANCE, LEDGER_MOVES, LEDGER_NEW_SALE, type LedgerMove,
+} from '@/lib/showcase-data';
+import { CLIENT_SINCE, CLIENT_MOVE_COUNT } from '../data';
 import { HintBar } from '../parts/HintBar';
 
 function MoveRow({ move, highlight = false }: { move: LedgerMove; highlight?: boolean }) {
