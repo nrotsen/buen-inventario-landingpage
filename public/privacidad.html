@@ -1,14 +1,407 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
-    <title>Privacidad · Buen Inventario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F7F4EC" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preload" href="/fonts/dmserif-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <title>Política de privacidad · Buen Inventario</title>
+    <meta
+      name="description"
+      content="Política de privacidad de Buen Inventario: qué datos recolectamos, para qué los usamos, dónde se almacenan (AWS) y tus derechos bajo la Ley 25.326 de Protección de Datos Personales."
+    />
+    <meta name="author" content="Buen Inventario" />
+    <link rel="canonical" href="https://www.bueninventario.com/privacidad" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.bueninventario.com/privacidad" />
+    <meta property="og:title" content="Política de privacidad · Buen Inventario" />
+    <meta
+      property="og:description"
+      content="Qué datos recolectamos, para qué los usamos, dónde se almacenan y tus derechos bajo la Ley 25.326 de Protección de Datos Personales."
+    />
+    <meta property="og:image" content="https://www.bueninventario.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Buen Inventario" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.bueninventario.com/privacidad" />
+    <meta name="twitter:title" content="Política de privacidad · Buen Inventario" />
+    <meta
+      name="twitter:description"
+      content="Qué datos recolectamos, para qué los usamos, dónde se almacenan y tus derechos bajo la Ley 25.326."
+    />
+    <meta name="twitter:image" content="https://www.bueninventario.com/og-image.png" />
+
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/inter-latin.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'DM Serif Display';
+        src: url('/fonts/dmserif-400-latin.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('/fonts/jetbrainsmono-400-latin.woff2') format('woff2');
+        font-weight: 400 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: #fafaf7;
+        color: #0a0a0a;
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::selection { background: #14b8a6; color: #fafaf7; }
+
+      .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 96px; }
+
+      .back {
+        display: inline-block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0f766e;
+        text-decoration: none;
+      }
+      .back:hover { text-decoration: underline; }
+
+      .eyebrow {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6b6b66;
+        margin: 32px 0 12px;
+      }
+
+      h1 {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 1.15;
+        margin: 0 0 20px;
+      }
+
+      .meta {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 12px;
+        color: #6b6b66;
+        border-bottom: 1.5px solid #0a0a0a;
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+      }
+
+      .lead {
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      nav.toc {
+        background: #f4f1e8;
+        border: 1.5px solid #0a0a0a;
+        padding: 20px 24px;
+        margin-bottom: 48px;
+      }
+      nav.toc p {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6b6b66;
+        margin: 0 0 12px;
+      }
+      nav.toc ol {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        line-height: 1.9;
+        columns: 1;
+      }
+      nav.toc a { color: #0a0a0a; text-decoration: none; }
+      nav.toc a:hover { color: #0f766e; text-decoration: underline; }
+
+      section { margin-bottom: 40px; scroll-margin-top: 24px; }
+      section h2 {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-weight: 400;
+        font-size: 24px;
+        margin: 0 0 16px;
+        padding-top: 24px;
+        border-top: 1.5px solid #e8e6dd;
+      }
+      section:first-of-type h2 { border-top: none; padding-top: 0; }
+
+      p { font-size: 15px; line-height: 1.7; margin: 0 0 16px; overflow-wrap: break-word; }
+      ul, ol.body-list { margin: 0 0 16px; padding-left: 20px; font-size: 15px; line-height: 1.7; }
+      li { margin-bottom: 8px; }
+      strong { font-weight: 600; }
+      a { color: #0f766e; }
+
+      .callout {
+        background: #f4f1e8;
+        border: 1.5px solid #0a0a0a;
+        padding: 20px 24px;
+        margin: 24px 0;
+      }
+      .callout p:last-child { margin-bottom: 0; }
+
+      mark.todo {
+        background: #fff1e6;
+        border: 1.5px solid #c2410c;
+        color: #9a3412;
+        padding: 1px 6px;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 2px;
+        display: inline;
+        line-height: 1.6;
+      }
+
+      footer { border-top: 1.5px solid #0a0a0a; margin-top: 64px; padding-top: 32px; }
+      footer .contact {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 2;
+      }
+      footer .cross { margin-top: 24px; font-size: 13px; }
+
+      @media (max-width: 480px) {
+        h1 { font-size: 30px; }
+        section h2 { font-size: 20px; }
+      }
+    </style>
   </head>
-  <body style="font-family: system-ui; max-width: 720px; margin: 4rem auto; padding: 0 1.5rem; color: #0a0a0a; background: #fafaf7;">
-    <p style="font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b66;">Documento legal</p>
-    <h1 style="font-family: Georgia, serif; font-size: 32px; margin-top: 0.5rem;">Política de privacidad</h1>
-    <p style="margin-top: 2rem; line-height: 1.6;">Este documento se completará antes de la puesta en producción del servicio comercial. Para consultas legales mientras tanto, escribinos a <a href="mailto:hola@bueninventario.com" style="color: #0f766e;">hola@bueninventario.com</a>.</p>
-    <p style="margin-top: 2rem;"><a href="/" style="color: #0f766e;">← Volver al inicio</a></p>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← Volver al inicio</a>
+
+      <p class="eyebrow">Documento legal</p>
+      <h1>Política de privacidad</h1>
+      <p class="meta">Última actualización: 5 de septiembre de 2026</p>
+
+      <p class="lead">
+        Esta política explica qué datos recolecta Buen Inventario cuando usás nuestro sitio y nuestro sistema de
+        gestión, para qué los usamos, dónde se almacenan y qué derechos tenés sobre ellos como titular de tus
+        datos personales, conforme a la Ley 25.326 de Protección de Datos Personales de la República Argentina.
+      </p>
+
+      <nav class="toc" aria-label="Índice">
+        <p>Índice</p>
+        <ol>
+          <li><a href="#quienes-somos">Quiénes somos</a></li>
+          <li><a href="#que-datos">Qué datos recolectamos</a></li>
+          <li><a href="#para-que">Para qué usamos tus datos</a></li>
+          <li><a href="#donde">Dónde se almacenan</a></li>
+          <li><a href="#retencion">Cuánto tiempo los conservamos</a></li>
+          <li><a href="#compartimos">Con quién los compartimos</a></li>
+          <li><a href="#cookies">Cookies y analítica</a></li>
+          <li><a href="#seguridad">Seguridad</a></li>
+          <li><a href="#derechos">Tus derechos (Ley 25.326)</a></li>
+          <li><a href="#ejercer">Cómo ejercer tus derechos</a></li>
+          <li><a href="#menores">Menores de edad</a></li>
+          <li><a href="#cambios">Cambios a esta política</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ol>
+      </nav>
+
+      <section id="quienes-somos">
+        <h2>1. Quiénes somos</h2>
+        <p>
+          Buen Inventario es un sistema de gestión para comercios argentinos (ventas, stock, caja, cuentas
+          corrientes de clientes, facturación electrónica opcional, tienda web e importación de datos), operado
+          por Néstor B. (<mark class="todo">[COMPLETAR: razón social / CUIT del titular]</mark>), con domicilio
+          en <mark class="todo">[COMPLETAR: domicilio legal]</mark> ("nosotros", "Buen Inventario"). Somos el
+          responsable del tratamiento de los datos que recolectamos a través de
+          <strong>www.bueninventario.com</strong> y del sistema.
+        </p>
+        <p>
+          Para los datos operativos que cargás en el sistema sobre <strong>tus propios clientes</strong> (por
+          ejemplo, sus nombres y saldos de cuenta corriente), vos sos el responsable del tratamiento de esos
+          datos frente a tus clientes, y Buen Inventario actúa como <strong>encargado del tratamiento</strong>:
+          los alojamos y procesamos siguiendo tus instrucciones, dentro del sistema que usás para gestionar tu
+          comercio.
+        </p>
+      </section>
+
+      <section id="que-datos">
+        <h2>2. Qué datos recolectamos</h2>
+        <p>Distinguimos tres categorías:</p>
+        <ul>
+          <li>
+            <strong>Datos de cuenta:</strong> nombre, correo electrónico, número de teléfono/WhatsApp y
+            contraseña (almacenada de forma encriptada, nunca en texto plano). Si contratás el plan pago, tu
+            suscripción se gestiona a través de Mercado Pago; nosotros no almacenamos números de tarjeta ni
+            datos financieros — esos los procesa Mercado Pago directamente.
+          </li>
+          <li>
+            <strong>Datos del comercio:</strong> nombre del negocio, rubro, sucursales y, si activás la
+            facturación electrónica, los datos fiscales necesarios para conectar con ARCA (ex AFIP).
+          </li>
+          <li>
+            <strong>Datos operativos que vos cargás:</strong> productos y stock, ventas, movimientos de caja,
+            proveedores, y datos de tus clientes (nombre, contacto, cuenta corriente) que ingresás manualmente o
+            importás desde una planilla Excel. Este es el contenido que generás usando el sistema para llevar
+            tu negocio.
+          </li>
+        </ul>
+        <p>No recolectamos datos sensibles (salud, ideología, religión, orientación sexual, etc.) ni los pedimos.</p>
+      </section>
+
+      <section id="para-que">
+        <h2>3. Para qué usamos tus datos</h2>
+        <ul>
+          <li>Para crear y operar tu cuenta y darte acceso al sistema.</li>
+          <li>Para procesar el pago de tu suscripción a través de Mercado Pago.</li>
+          <li>Para darte soporte cuando nos escribís.</li>
+          <li>Para enviarte comunicaciones de servicio (confirmaciones, avisos de facturación, cambios importantes) — no enviamos publicidad de terceros ni vendemos tu contacto.</li>
+          <li>Para cumplir obligaciones legales o fiscales, incluida la transmisión de datos a ARCA cuando activás la facturación electrónica de una venta.</li>
+          <li>Para mantener y mejorar el producto (por ejemplo, entender qué funciones se usan más, de forma agregada).</li>
+        </ul>
+      </section>
+
+      <section id="donde">
+        <h2>4. Dónde se almacenan</h2>
+        <p>
+          Tus datos se alojan en infraestructura de <strong>Amazon Web Services (AWS)</strong>: los datos
+          estructurados (cuenta, ventas, stock, clientes) en DynamoDB, y los archivos y adjuntos en S3. El sitio
+          y el frontend de la aplicación se sirven desde <strong>Vercel</strong>. Estos proveedores pueden operar
+          servidores fuera de la República Argentina; en ese caso, el tratamiento de tus datos queda sujeto a los
+          estándares de seguridad y confidencialidad que exige la Ley 25.326 para las transferencias
+          internacionales de datos.
+        </p>
+      </section>
+
+      <section id="retencion">
+        <h2>5. Cuánto tiempo los conservamos</h2>
+        <p>
+          Conservamos tus datos mientras tu cuenta esté activa. Si cancelás tu suscripción y pedís la baja de la
+          cuenta, eliminamos o anonimizamos tus datos de cuenta dentro de un plazo razonable, salvo la
+          información que debamos conservar por obligaciones legales, fiscales o contables — por ejemplo,
+          registros vinculados a comprobantes emitidos a través de ARCA, que pueden requerir un plazo de
+          conservación mayor conforme a la normativa impositiva argentina.
+        </p>
+      </section>
+
+      <section id="compartimos">
+        <h2>6. Con quién los compartimos</h2>
+        <p>No vendemos tus datos. Los compartimos únicamente con quienes son necesarios para operar el servicio:</p>
+        <ul>
+          <li><strong>Mercado Pago:</strong> para procesar el cobro de tu suscripción.</li>
+          <li><strong>AWS y Vercel:</strong> como proveedores de infraestructura y alojamiento.</li>
+          <li><strong>ARCA (ex AFIP):</strong> solo si activás la facturación electrónica para una venta puntual, y solo los datos que esa emisión requiere.</li>
+        </ul>
+        <p>No compartimos tus datos con terceros para fines publicitarios.</p>
+      </section>
+
+      <section id="cookies">
+        <h2>7. Cookies y analítica</h2>
+        <p>
+          Usamos <strong>Vercel Analytics</strong> y <strong>Vercel Speed Insights</strong> para entender el uso
+          general del sitio (páginas vistas, tiempos de carga) y detectar problemas de rendimiento. Estas
+          herramientas <strong>no usan cookies</strong> y no recolectan datos que te identifiquen personalmente
+          — trabajan con datos agregados y anónimos. No usamos cookies de rastreo ni de publicidad de terceros.
+        </p>
+      </section>
+
+      <section id="seguridad">
+        <h2>8. Seguridad</h2>
+        <p>
+          Aplicamos medidas técnicas razonables para proteger tus datos: contraseñas encriptadas, conexiones
+          cifradas (HTTPS) y control de acceso a la infraestructura. Ningún sistema es inviolable en un
+          100%, pero trabajamos para mantener tus datos protegidos frente a accesos no autorizados.
+        </p>
+      </section>
+
+      <section id="derechos">
+        <h2>9. Tus derechos (Ley 25.326)</h2>
+        <p>Como titular de tus datos personales, la Ley 25.326 te reconoce los siguientes derechos:</p>
+        <ul>
+          <li><strong>Acceso:</strong> saber qué datos tuyos tenemos y de dónde los obtuvimos.</li>
+          <li><strong>Rectificación y actualización:</strong> corregir datos inexactos o desactualizados.</li>
+          <li><strong>Supresión:</strong> pedir que eliminemos tus datos cuando corresponda.</li>
+          <li><strong>Oposición:</strong> oponerte a un uso determinado de tus datos.</li>
+        </ul>
+        <p>
+          El ejercicio de estos derechos es gratuito. La autoridad de control en Argentina es la
+          <strong>Agencia de Acceso a la Información Pública (AAIP)</strong>, ante quien podés presentar un
+          reclamo si considerás que no respetamos tus derechos.
+        </p>
+      </section>
+
+      <section id="ejercer">
+        <h2>10. Cómo ejercer tus derechos</h2>
+        <div class="callout">
+          <p>
+            Escribinos a <a href="mailto:nestorb@bueninventario.com">nestorb@bueninventario.com</a> indicando qué
+            derecho querés ejercer y los datos necesarios para identificarte. Te vamos a responder por el mismo
+            medio dentro de un plazo razonable.
+          </p>
+        </div>
+      </section>
+
+      <section id="menores">
+        <h2>11. Menores de edad</h2>
+        <p>
+          Buen Inventario está pensado para uso comercial por personas mayores de 18 años. No dirigimos el
+          servicio a menores de edad ni recolectamos deliberadamente datos de menores.
+        </p>
+      </section>
+
+      <section id="cambios">
+        <h2>12. Cambios a esta política</h2>
+        <p>
+          Podemos actualizar esta política cuando cambie el producto o la normativa aplicable. Vamos a publicar
+          la versión vigente en esta misma página, con la fecha de última actualización arriba. Si el cambio es
+          significativo, te lo vamos a avisar por correo electrónico o dentro del sistema.
+        </p>
+      </section>
+
+      <section id="contacto">
+        <h2>13. Contacto</h2>
+        <div class="callout">
+          <p>
+            Néstor B. — <a href="mailto:nestorb@bueninventario.com">nestorb@bueninventario.com</a><br />
+            WhatsApp: <a href="https://wa.me/5491122775850">+54 9 11 2277-5850</a>
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="contact">
+          <a href="/">← Volver al inicio</a>
+        </p>
+        <p class="cross"><a href="/terminos">Ver también los Términos del servicio →</a></p>
+      </footer>
+    </div>
   </body>
 </html>
