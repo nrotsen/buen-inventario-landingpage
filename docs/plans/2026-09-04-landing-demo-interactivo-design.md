@@ -60,7 +60,9 @@ Implicancia estratégica: competir por números de escala es una guerra perdida.
 
 ### Libraries & APIs
 
-- `vite-react-ssg` (Daydreamer-riri) — SSG para React sobre Vite. Ruta de menor fricción para prerender sin migrar a Astro. Astro sería superior para una página puramente estática, pero el demo exige React real con estado, así que SSG sobre Vite gana.
+- **Prerender: `react-dom/static` de React 19** (`prerenderToNodeStream`). API nativa de la plataforma para generar HTML estático. **Cero dependencias nuevas.**
+  - Descartado `vite-react-ssg` (v0.9.2) tras verificar sus peer deps: declara `vite: ^6.4.0 || ^7.3.0 || ^8.0.0` (el repo está en `^7.1.2`) y exige `react-router-dom: ^6.14.1` — una dependencia de routing, en v6, para una landing de una sola página sin rutas, cuando el resto de los repos usa v7. Arrastra además jsdom, react-helmet-async, fs-extra, p-queue y yargs.
+  - Trade-off asumido: `vite-react-ssg` resuelve manejo de `<head>`, multi-ruta y CSS crítico. Con el API nativo eso se escribe a mano — trivial para una página con los meta tags ya estáticos en `index.html`. El único caso dinámico es el JSON-LD, que el script de build genera desde `pricing.ts`.
 - Stack actual (React 19 · Vite 7 · Tailwind 3 · TS 5.8 · lucide-react) está al día. No hace falta cambiar nada más.
 - `playwright` ya está en devDependencies y hay pipeline reproducible en `scripts/generate-assets.ts` — se reusa para renderizar los assets nuevos.
 
@@ -81,7 +83,8 @@ No hay dependencias externas nuevas. Los adapters existentes se preservan sin ca
 - Arcade — SaaS product demos 2026: https://www.arcade.software/post/saas-product-demos-guide
 - Genesys Growth — B2B SaaS landing pages 2026: https://genesysgrowth.com/blog/designing-b2b-saas-landing-pages
 - Xubio (competencia, fetch directo): https://xubio.com/ar/
-- vite-react-ssg: https://github.com/Daydreamer-riri/vite-react-ssg
+- React 19 — prerenderToNodeStream: https://react.dev/reference/react-dom/static/prerenderToNodeStream
+- vite-react-ssg (evaluado y descartado por peer deps): https://github.com/Daydreamer-riri/vite-react-ssg
 - React SSG vs Astro 2026: https://asoasis.tech/articles/2026-04-19-1453-react-static-site-generation-astro-comparison/
 - MP — actualizar plan de suscripción: https://www.mercadopago.com.ar/developers/en/reference/subscriptions/_preapproval_plan_id/put
 
@@ -459,7 +462,7 @@ Se corrige además la pregunta 6, que hoy dice `También funciona para multisucu
 
 Cierra **F3 del audit SEO 2026-07-31**, abierto desde julio.
 
-**Qué:** adoptar `vite-react-ssg` para prerenderizar la landing a HTML estático en build time, manteniendo hidratación de React para el demo.
+**Qué:** prerenderizar la landing a HTML estático en build time con `prerenderToNodeStream` de `react-dom/static` (React 19), manteniendo hidratación para el demo. Sin dependencias nuevas.
 
 **Por qué entra en este scope y no después:**
 - Los crawlers de IA (ClaudeBot, GPTBot, PerplexityBot, OAI-SearchBot) no ejecutan JS y hoy ven `<div id="root"></div>`. El tráfico atribuido a IA convierte 4,4× mejor que el orgánico.
@@ -467,10 +470,12 @@ Cierra **F3 del audit SEO 2026-07-31**, abierto desde julio.
 - Mejora LCP en conexiones malas: el contenido pinta antes de hidratar.
 
 **Cómo:**
-- `vite-react-ssg` con una sola ruta (`/`). Las rutas `/terminos` y `/privacidad` siguen siendo HTML estático en `public/`.
-- El `DemoWidget` se importa con `lazy()` y se envuelve en `<Suspense>` con un fallback que es **el frame vacío con las medidas exactas** del demo — cero layout shift (CLS = 0).
-- Auditar cualquier acceso a `window`/`document` en tiempo de render. El `IntersectionObserver` de `App.tsx` ya está dentro de `useEffect`, así que es SSG-safe; verificar el resto.
-- JSON-LD generado desde `pricing.ts` en vez de hardcodeado en `index.html`.
+- `src/entry-server.tsx` exporta `<App/>`; se compila con `vite build --ssr`.
+- `scripts/prerender.ts` importa el bundle SSR, corre `prerenderToNodeStream`, y sustituye el `<div id="root"></div>` de `dist/index.html` por el HTML generado. Genera además el JSON-LD desde `pricing.ts` y lo inyecta.
+- `src/main.tsx` pasa de `createRoot` a `hydrateRoot`.
+- `/terminos` y `/privacidad` siguen siendo HTML estático en `public/` — no pasan por React.
+- El `DemoWidget` se importa con `lazy()` y se envuelve en `<Suspense>` con un fallback que es **el frame vacío con las medidas exactas** del demo — cero layout shift (CLS = 0). Durante el prerender el fallback es lo que se serializa, así que el HTML estático contiene el frame, no el demo.
+- Auditar cualquier acceso a `window`/`document` en tiempo de render. El `IntersectionObserver` de `App.tsx` ya está dentro de `useEffect`, así que es prerender-safe; verificar el resto.
 
 ---
 
@@ -528,6 +533,20 @@ Reusando `scripts/generate-assets.ts` (Playwright, ya existe):
 - Favicons y app icons: **sin cambios**, se resolvieron el 2026-08-01.
 
 ---
+
+## 15-bis. Testing
+
+El repo **no tiene hoy ninguna dependencia de testing**. El demo introduce lógica real —cálculo de margen, descuento de stock, máquina de estados de tres vistas— que no puede quedar sin cobertura: un error de signo en el margen se publica sin que nadie lo note.
+
+Se agrega infraestructura mínima alineada con el resto de los repos: **Vitest + happy-dom + React Testing Library**.
+
+Cobertura obligatoria:
+- `demo/data.ts` — formateo ARS.
+- `demo/useSale.ts` — agregar al carrito, totales, cálculo de margen, descuento de stock, transiciones de vista, reset. **Escrito TDD-first.**
+- `lib/pricing.ts` — formateo del precio.
+- `DemoWidget` — test de integración: cargar productos, cobrar, llegar al reveal, verificar que el margen mostrado es el correcto; navegación por tabs; que "Fiado" salta al capítulo 02.
+
+No se exige cobertura de los componentes puramente presentacionales (secciones, PhoneFrame): son markup sin lógica y el mockup ya validó su forma.
 
 ## 16. Resumen de decoupling
 
