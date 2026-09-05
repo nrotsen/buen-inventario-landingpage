@@ -879,6 +879,7 @@ Toda la lógica del capítulo 01. **Se escribe el test antes que la implementaci
 - Create: `src/demo/parts/HintBar.tsx`
 - Create: `src/demo/parts/ProductTile.tsx`
 - Create: `src/demo/parts/Ticket.tsx`
+- Modify: `tailwind.config.js` (keyframe `demo-nudge` — ver Step 3)
 
 **Constraints:**
 - Componentes hoja ≤ 150 líneas. Presentacionales puros: reciben props, no tienen estado propio.
